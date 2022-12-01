@@ -1,0 +1,198 @@
+// https://m3.material.io/components/all-buttons/
+button,
+material-button {
+  @extend .label-large;
+
+  display: flex;
+
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+
+  padding: 10px 24px;
+
+  min-width: 58px;
+  width: max-content;
+
+  line-height: 20px;
+
+  border-radius: 100px;
+  border: none;
+
+  cursor: pointer;
+  transition: 0.4s cubic-bezier(0, 1, 1, 1);
+
+  &[icon] {
+    padding: 10px 24px 10px 16px;
+
+    span {
+      padding-right: 8px;
+
+      font-family: "Material Icons";
+      font-size: 18px;
+      text-transform: none;
+    }
+  }
+
+  &#elevated {
+    color: var(--md-sys-color-primary);
+
+    background: var(--md-sys-color-surface);
+
+    box-shadow: var(--md-sys-elevation-level1);
+
+    &:hover {
+      background: change-color($color: $md-sys-color-primary, $alpha: $md-sys-state-hover-state-layer-opacity);
+      box-shadow: var(--md-sys-elevation-level2);
+    }
+
+    &:focus {
+      background: change-color($color: $md-sys-color-primary, $alpha: $md-sys-state-focus-state-layer-opacity);
+    }
+
+    &:active {
+      background: change-color($color: $md-sys-color-primary, $alpha: $md-sys-state-pressed-state-layer-opacity);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      -webkit-filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+
+      &:hover {
+        background: change-color($color: $md-sys-color-surface, $alpha: $md-sys-state-hover-state-layer-opacity);
+        box-shadow: var(--md-sys-elevation-level2);
+      }
+
+      &:focus {
+        background: change-color($color: $md-sys-color-surface, $alpha: $md-sys-state-focus-state-layer-opacity);
+      }
+
+      &:active {
+        background: change-color($color: $md-sys-color-surface, $alpha: $md-sys-state-pressed-state-layer-opacity);
+      }
+    }
+
+    &[disabled] {
+      color: var(--md-sys-color-on-surface);
+
+      background: rgba(31, 31, 31, 0.12);
+
+      @media (prefers-color-scheme: dark) {
+        background: rgba(227, 227, 227, 0.12);
+      }
+    }
+  }
+
+  &#filled {
+    color: var(--md-sys-color-on-primary);
+
+    background: var(--md-sys-color-primary);
+
+    &:hover {
+      opacity: 0.92;
+      box-shadow: var(--md-sys-elevation-level1);
+    }
+
+    &:focus {
+      opacity: 0.88;
+    }
+
+    &:active {
+      opacity: 0.88;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      -webkit-filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+
+      &:hover {
+        box-shadow: var(--md-sys-elevation-level2);
+      }
+    }
+
+    &[disabled] {
+      color: var(--md-sys-color-on-surface);
+
+      background: rgba(31, 31, 31, 0.12);
+
+      @media (prefers-color-scheme: dark) {
+        background: rgba(227, 227, 227, 0.12);
+      }
+    }
+  }
+
+  &#tonal {
+    color: var(--md-sys-color-on-secondary-container);
+
+    background: var(--md-sys-color-secondary-container);
+
+    &[disabled] {
+      color: var(--md-sys-color-on-surface);
+
+      background: change-color($color: $md-sys-color-on-surface, $alpha: 0.12);
+    }
+
+    &:hover {
+      background: change-color($color: $md-sys-color-on-secondary-container, $alpha: $md-sys-state-hover-state-layer-opacity);
+      box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.25);
+    }
+
+    &:focus {
+      background: change-color($color: $md-sys-color-on-secondary-container, $alpha: $md-sys-state-focus-state-layer-opacity);
+    }
+
+    &:active {
+      background: change-color($color: $md-sys-color-on-secondary-container, $alpha: $md-sys-state-pressed-state-layer-opacity);
+    }
+  }
+
+  &#outlined {
+    color: var(--md-sys-color-primary);
+
+    background: none;
+
+    border: 1px solid var(--md-sys-color-outline);
+
+    &[disabled] {
+      color: var(--md-sys-color-on-surface);
+
+      border: 1px solid change-color($color: $md-sys-color-on-surface, $alpha: 0.12);
+    }
+
+    &:hover {
+      background: change-color($color: $md-sys-color-primary, $alpha: $md-sys-state-hover-state-layer-opacity);
+    }
+
+    &:focus {
+      background: change-color($color: $md-sys-color-primary, $alpha: $md-sys-state-focus-state-layer-opacity);
+      border: 1px solid var(--md-sys-color-primary);
+    }
+
+    &:active {
+      background: change-color($color: $md-sys-color-primary, $alpha: $md-sys-state-pressed-state-layer-opacity);
+    }
+  }
+
+  &#text {
+    color: var(--md-sys-color-primary);
+
+    background: none;
+
+    &[disabled] {
+      color: var(--md-sys-color-on-surface);
+    }
+
+    &:hover {
+      background: change-color($color: $md-sys-color-primary, $alpha: $md-sys-state-hover-state-layer-opacity);
+    }
+
+    &:focus {
+      background: change-color($color: $md-sys-color-primary, $alpha: $md-sys-state-focus-state-layer-opacity);
+    }
+
+    &:active {
+      background: change-color($color: $md-sys-color-primary, $alpha: $md-sys-state-pressed-state-layer-opacity);
+    }
+  }
+}

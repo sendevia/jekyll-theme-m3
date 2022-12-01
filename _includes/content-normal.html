@@ -1,0 +1,60 @@
+{%- if page.title & page.description -%}
+<div class="content-header" id="{%- if page.header_image -%} large {%- endif -%}">
+  <div class="header-container">
+    <span id="title">{{ page.title }}</span>
+    {%- if page.description -%}
+    <span id="subtitle">{{ page.description }}</span>
+    {%- endif -%}
+    <!--  -->
+    {%- if page.header_image -%}
+    <img src="{{ page.header_image }}" alt="header_image" />
+    {%- endif -%}
+  </div>
+</div>
+{%- endif -%}
+<!--  -->
+<!--  -->
+<!--  -->
+{%- assign page_words = page.content | number_of_words: "auto" -%}
+<!--  -->
+{%- if page_words == 0 -%}
+<div class="content" id="nothing">
+  <h1>o(=•ェ•=)m</h1>
+  <h6>这里暂时还什么都没有呢</h6>
+</div>
+{%- else -%}
+<!--  -->
+<!--  -->
+{%- if page.notips == true -%}
+<div class="content">{{ content }}</div>
+{%- else -%}
+<!--  -->
+<div class="content-information">
+  {%- if page.date -%}
+  <material-chip class="assist" icon disabled>
+    <span>calendar_month</span>
+    <p class="label-text">{{ page.date | date: "%Y 年 %m 月 %d 日" }}</p>
+  </material-chip>
+  {%- endif -%}
+  <!--  -->
+  {%- if page.author -%}
+  <material-chip class="assist" icon disabled>
+    <span>person</span>
+    <p class="label-text">{{ page.author }}</p>
+  </material-chip>
+  {%- endif -%}
+  <!--  -->
+  <material-chip class="assist" icon disabled>
+    <span>schedule</span>
+    <p class="label-text">
+      {%- assign read_estimate = page_words | divided_by: 120 -%} 估计阅读时间：{%- if read_estimate > 0 -%} {{ read_estimate }} {% else -%} 少于 1 {% endif -%}
+      分钟
+    </p>
+  </material-chip>
+</div>
+<div class="content">{{ content }}</div>
+<!--  -->
+<!--  -->
+{%- endif -%}
+<!--  -->
+{%- endif -%}

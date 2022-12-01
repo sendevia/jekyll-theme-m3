@@ -1,0 +1,29 @@
+---
+author: sendevia
+description: 文章
+excerpt_separator: <!--more-->
+header_image: /assets/images/102772957_p0.webp
+layout: Material3
+notips: true
+title: Posts
+---
+
+{%- assign total_posts = site.posts | size -%}
+<div class="page-posts">
+  {%- if total_posts > 0 -%} {%- for post in site.posts -%}
+  <material-card>
+    <a href="{{ post.url }}">
+      {%- if post.header_image -%}
+      <img src="{{ post.header_image }}" alt="header_image" />
+      {%- endif -%}
+      <p>{{ post.title }}</p>
+      <p>发表于 {{ post.date | date: "%Y/%m/%d" }}</p>
+    </a>
+  </material-card>
+  {%- endfor -%} {%- else -%}
+  <div class="nothing">
+    <h1>≡[。。]≡</h1>
+    <h6>还没有文章发布，待会再来看看吧</h6>
+  </div>
+  {%- endif -%}
+</div>

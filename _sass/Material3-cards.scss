@@ -1,0 +1,149 @@
+// https://m3.material.io/components/cards/
+material-card {
+  display: flex;
+
+  flex-direction: column;
+
+  min-height: 120px;
+  min-width: 240px;
+
+  border-radius: 12px;
+
+  overflow: hidden;
+  transition: 0.4s;
+
+  #title {
+    @extend .body-large;
+  }
+
+  #subhead,
+  #supporting-text {
+    @extend .body-medium;
+  }
+
+  .header {
+    display: flex;
+
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+
+    padding: 13px 16px;
+
+    width: 100%;
+
+    #content {
+      display: flex;
+
+      align-items: center;
+      flex-direction: row;
+      gap: 16px;
+
+      #monogram {
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        -webkit-filter: opacity(1);
+        filter: opacity(1);
+        overflow: hidden;
+
+        #initial {
+          @extend .title-medium;
+
+          position: fixed;
+
+          color: var(--md-sys-color-surface);
+        }
+
+        #background {
+          display: inline-block;
+
+          height: 40px;
+          width: 40px;
+
+          background: var(--md-sys-color-primary);
+
+          border-radius: 100%;
+        }
+      }
+
+      #text {
+        display: flex;
+
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 4px;
+
+        #header {
+          @extend .title-medium;
+        }
+      }
+    }
+  }
+
+  .headline {
+    display: flex;
+
+    flex-direction: column;
+    align-items: flex-start;
+
+    padding: 16px;
+  }
+
+  .supporting-container {
+    padding: 16px;
+  }
+
+  .actions {
+    display: flex;
+
+    align-items: center;
+    flex-direction: row-reverse;
+    gap: 8px;
+    justify-content: flex-start;
+
+    padding: 16px;
+
+    button {
+      &:nth-child(1) {
+        @extend button, #filled;
+      }
+
+      &:nth-child(2) {
+        @extend button, #outlined;
+      }
+
+      &:nth-child(n + 3) {
+        @extend button, #text;
+      }
+    }
+  }
+
+  &[outlined] {
+    color: var(--md-sys-color-on-surface);
+
+    background: var(--md-sys-color-surface);
+
+    border: 1px solid var(--md-sys-color-outline);
+  }
+
+  &[elevated] {
+    color: var(--md-sys-color-on-surface);
+
+    background: var(--md-sys-color-surface);
+
+    box-shadow: var(--md-sys-elevation-level2);
+  }
+
+  &[filled] {
+    color: var(--md-sys-color-on-surface);
+
+    background: var(--md-sys-color-surface-variant);
+  }
+
+  &:hover {
+    border-radius: 6px;
+  }
+}

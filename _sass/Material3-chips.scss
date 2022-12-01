@@ -1,0 +1,80 @@
+// https://m3.material.io/components/chips/
+material-chip {
+  display: flex;
+
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+
+  padding: 6px 16px;
+
+  height: 32px;
+  width: max-content;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+  transition: 0.4s cubic-bezier(0, 1, 1, 1);
+
+  &[icon] {
+    gap: 8px;
+
+    padding: 6px 16px 6px 8px;
+
+    span {
+      color: var(--md-sys-color-primary);
+      font-family: "Material Icons Outlined";
+      font-size: 18px;
+    }
+  }
+
+  &.assist {
+    border: 1px solid var(--md-sys-color-outline);
+
+    p {
+      @extend .label-large;
+
+      color: var(--md-sys-color-on-surface);
+      white-space: nowrap;
+    }
+
+    &[elevated] {
+      background: var(--md-sys-color-surface);
+
+      border: none;
+
+      box-shadow: var(--md-sys-elevation-level1);
+    }
+
+    &:hover {
+      background: change-color($color: $md-sys-color-on-surface, $alpha: $md-sys-state-hover-state-layer-opacity);
+
+      &[elevated] {
+        box-shadow: var(--md-sys-elevation-level2);
+      }
+    }
+
+    &:focus {
+      background: change-color($color: $md-sys-color-on-surface, $alpha: $md-sys-state-focus-state-layer-opacity);
+
+      &[elevated] {
+        box-shadow: var(--md-sys-elevation-level1);
+      }
+    }
+
+    &:active {
+      background: change-color($color: $md-sys-color-on-surface, $alpha: $md-sys-state-pressed-state-layer-opacity);
+
+      &[elevated] {
+        box-shadow: var(--md-sys-elevation-level1);
+      }
+    }
+
+    &[disabled] {
+      &[elevated] {
+        background: rgba(31, 31, 31, 0.12);
+      }
+    }
+  }
+}

@@ -1,0 +1,180 @@
+// https://m3.material.io/components/navigation-rail/
+.material-navigation-rail {
+  display: flex;
+
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: space-between;
+
+  position: fixed;
+
+  top: 0;
+
+  height: 100%;
+  width: 80px;
+
+  background: var(--md-sys-color-surface);
+
+  animation: fade 0.4s;
+  overflow-x: hidden;
+  z-index: 100;
+
+  .destinations {
+    display: flex;
+
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    position: static;
+
+    left: 0;
+    top: calc(50% - 426px / 2 - 45px);
+
+    margin: 20px 0;
+
+    width: 100%;
+
+    a {
+      text-decoration: none;
+    }
+
+    #segment-active {
+      display: flex;
+
+      align-items: center;
+      align-self: stretch;
+      flex-direction: column;
+      flex-grow: 0;
+      flex: none;
+      order: 0;
+
+      margin: 4px 5px;
+      padding: 0;
+
+      position: static;
+
+      left: 5px;
+      top: 5px;
+
+      height: 56px;
+      width: 70px;
+
+      #accent {
+        display: flex;
+
+        align-items: center;
+        flex-grow: 0;
+        flex: none;
+        justify-content: center;
+        order: 0;
+
+        margin: 4px 0;
+
+        position: static;
+
+        bottom: 42.86%;
+        left: 10%;
+        right: 10%;
+        top: 0;
+
+        height: 32px;
+        width: 56px;
+
+        background: var(--md-sys-color-secondary-container);
+
+        border-radius: 100px;
+
+        #segment-primary-icon {
+          position: absolute;
+
+          height: 24px;
+          width: 24px;
+
+          color: var(--md-sys-color-on-secondary-container);
+
+          transition: 0.3s;
+
+          #segment-icon {
+            height: 24px;
+            width: 24px;
+          }
+        }
+      }
+
+      #label {
+        flex-grow: 0;
+        flex: none;
+        order: 1;
+
+        margin: 4px 0;
+
+        position: static;
+
+        bottom: 7.14%;
+        left: 10%;
+        right: 10%;
+        top: 64.29%;
+
+        color: var(--md-sys-color-on-surface);
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        line-height: 16px;
+        text-align: center;
+        text-decoration: none;
+      }
+    }
+
+    #segment-inactive {
+      @extend #segment-active;
+
+      #accent {
+        @extend #accent;
+
+        height: 32px;
+        width: 32px;
+
+        background: none;
+
+        transition: 0.3s cubic-bezier(0.08, 0.82, 0.17, 1);
+
+        #segment-primary-icon {
+          @extend #segment-primary-icon;
+
+          #segment-icon {
+            @extend #segment-icon;
+          }
+        }
+      }
+
+      #label {
+        @extend #label;
+
+        color: #00000000;
+        line-height: 0px;
+        text-decoration: none;
+
+        transition: 0.3s ease-out;
+        visibility: hidden;
+      }
+
+      &:hover {
+        #accent {
+          height: 32px;
+          width: 56px;
+
+          background: var(--md-sys-color-secondary-container);
+        }
+
+        #label {
+          color: var(--md-sys-color-on-secondary-container);
+          line-height: 16px;
+          text-decoration: none;
+
+          visibility: visible;
+        }
+      }
+    }
+  }
+}

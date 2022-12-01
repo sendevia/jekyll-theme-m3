@@ -1,0 +1,43 @@
+<div class="footer-container" id="footer-1">
+  <footer>
+    <section>
+      <a href="/"><img src="/assets/images/avatar.webp" alt="logo" /></a>
+      <h3>{{ page.title }}</h3>
+      <h6>{{ page.description }}</h6>
+      <p>来自 {{ site.title }}</p>
+      <ul>
+        {%- for post in site.posts limit:3 -%}
+        <li>
+          <a href="{{ post.url }}">
+            <material-button id="text">
+              <p>{{ post.title }}</p>
+            </material-button>
+          </a>
+        </li>
+        {%- endfor -%}
+      </ul>
+    </section>
+    <section>
+      <p class="subhead1">Jekyll Theme MaterialYou</p>
+      <p class="subhead1">Designer: sendevia</p>
+      <ul>
+        <li>
+          <a href="mailto:{{ site.email }}" target="_blank">
+            <material-button id="text" icon>
+              <span class="material-icons-outlined">email</span>
+              <p>{{ site.email }}</p>
+            </material-button>
+          </a>
+        </li>
+        <li>
+          <a href="{{ site.twitter }}" target="_blank">
+            <material-button id="text" icon>
+              <span class="material-icons-outlined">share</span>
+              <p>Twitter</p>
+            </material-button>
+          </a>
+        </li>
+      </ul>
+    </section>
+  </footer>
+</div>
