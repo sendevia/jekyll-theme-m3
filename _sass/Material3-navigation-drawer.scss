@@ -1,1 +1,90 @@
 // https://m3.material.io/components/navigation-drawer/
+.mnd {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+
+  position: fixed;
+  left: -360px;
+
+  padding: 12px;
+
+  height: 100%;
+  width: 360px;
+
+  border-radius: 0 16px 16px 0;
+
+  background-color: var(--md-sys-color-surface);
+
+  opacity: 0;
+  transition: left 0.2s, opacity 0.3s;
+  z-index: 999;
+
+  .mnd-section {
+    overflow: auto;
+  }
+
+  &[show] {
+    left: 80px;
+
+    opacity: 1;
+  }
+
+  a,
+  p {
+    display: block;
+
+    margin: 0;
+    padding: 0px 8px 0px 16px;
+
+    width: 100%;
+
+    line-height: 56px;
+  }
+
+  & > ul > li > a {
+    font-weight: bold;
+  }
+
+  ul {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+
+    list-style: none;
+
+    .mnd-entry {
+      width: 100%;
+    }
+
+    .mnd-h1 {
+      a:hover {
+        background: none;
+      }
+    }
+
+    .mnd-h2 {
+      padding: 0px 8px 0px 20px;
+
+      a:hover {
+        padding: 0px 8px 0px 24px;
+
+        background-color: var(--md-sys-color-secondary-container);
+      }
+    }
+
+    & > li > a {
+      position: relative;
+
+      border-radius: 100px;
+
+      overflow: hidden;
+      transition: 0.2s;
+    }
+  }
+}

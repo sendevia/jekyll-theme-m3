@@ -1,1 +1,49 @@
-// place holder
+// https://m3.material.io/components/top-app-bar/
+.mtb {
+  @extend .disable-select;
+
+  position: fixed;
+  top: -64px;
+
+  width: 100%;
+
+  overflow: hidden;
+  transition: 0.4s;
+  visibility: hidden;
+  z-index: 15;
+
+  &[spec="small"] {
+    height: 64px;
+  }
+
+  &[spec="small-centered"] {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+
+    padding: 8px 4px;
+
+    height: 64px;
+
+    background-color: var(--via-color-background);
+
+    h4 {
+      display: flex;
+      align-items: center;
+      flex-grow: 1;
+      justify-content: center;
+
+      margin: auto;
+
+      height: 100%;
+
+      text-align: center;
+    }
+
+    &[scroll="true"] {
+      background-color: var(--md-sys-color-surface);
+    }
+  }
+}

@@ -1,0 +1,89 @@
+input,
+.mip {
+  position: relative;
+
+  &[type="checkbox"],
+  &[type="radio"] {
+    display: grid;
+    align-content: center;
+    justify-content: center;
+
+    margin: 0;
+    padding: 0;
+
+    height: 44px;
+    width: 44px;
+
+    font-family: "Material Symbols Rounded";
+    font-size: 24px;
+
+    border-radius: 50%;
+
+    appearance: none;
+    cursor: pointer;
+    overflow: hidden;
+
+    &::after {
+      color: var(--md-sys-color-on-surface-variant);
+      line-height: 1;
+    }
+
+    &:checked::after {
+      color: var(--md-sys-color-primary);
+    }
+  }
+
+  &[type="checkbox"] {
+    &::after {
+      content: "check_box_outline_blank";
+    }
+
+    &:checked::after {
+      content: "check_box";
+    }
+  }
+
+  &[type="radio"] {
+    &::after {
+      content: "radio_button_unchecked";
+    }
+
+    &:checked::after {
+      content: "radio_button_checked";
+    }
+  }
+
+  &[type="text"] {
+    flex-grow: 1;
+
+    padding: 15px 5px 15px 15px;
+
+    height: 45px;
+    width: 220px;
+
+    caret-color: var(--md-sys-color-surface-tint);
+    color: var(--md-sys-color-on-surface);
+
+    border-radius: 24px 0 0 24px;
+    border: none;
+    outline: none;
+
+    background-color: var(--md-sys-color-surface);
+
+    appearance: none;
+    transition: 0.6s;
+
+    & + span {
+      @extend .disable-select;
+
+      width: 38px;
+
+      line-height: 1.8;
+      font-size: 25px;
+
+      border-radius: 0 24px 24px 0;
+
+      background-color: var(--md-sys-color-surface);
+    }
+  }
+}

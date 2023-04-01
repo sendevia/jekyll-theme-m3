@@ -1,24 +1,31 @@
 <head>
   {%- include meta.html -%}
-  <link rel="stylesheet" href="/assets/css/main.css?v=1.0" charset="utf-8" />
+  <link rel="stylesheet" href="/assets/css/main.css?v=1.0.0" charset="utf-8" />
   <link href="https://fontscdn.sendevia.top/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet" />
   <link href="https://fontscdn.sendevia.top/css2?family=Google+Sans&display=swap" rel="stylesheet" />
   <link href="https://fontscdn.sendevia.top/css2?family=Google+Sans+Text&display=swap" rel="stylesheet" />
   <link href="https://fontscdn.sendevia.top/css2?family=Source+Code+Pro&display=swap" rel="stylesheet" />
-  <link href="https://fontscdn.sendevia.top/icon?family=Material+Icons&display=block" rel="stylesheet" />
-  <link href="https://fontscdn.sendevia.top/icon?family=Material+Icons+Outlined&display=block" rel="stylesheet" />
-  <script type="application/javascript" src="/assets/js/jquery.min.js?v=3.6.0" charset="utf-8"></script>
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+  <link href="https://fontscdn.sendevia.top/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
   <script>
     MathJax = {
       tex: {
-        inlineMath: [["$", "$"]],
-        processEscapes: true,
+        inlineMath: [
+          ["$", "$"],
+          ["$$", "$$"],
+          ["\\(", "\\)"],
+        ],
+      },
+      options: {
+        enableMenu: false,
       },
     };
   </script>
-  <script type="application/javascript" src="/assets/js/main.js?v=0" charset="utf-8"></script>
-
+  <script
+    async
+    crossorigin="anonymous"
+    integrity="sha512-EtUjpk/hY3NXp8vfrPUJWhepp1ZbgSI10DKPzfd+3J/p2Wo89JRBvQIdk3Q83qAEhKOiFOsYfhqFnOEv23L+dA=="
+    referrerpolicy="no-referrer"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js"
+  ></script>
   <title>{{ page.title }} {{ page.description }}</title>
 </head>
