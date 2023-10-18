@@ -1,0 +1,54 @@
+.JTM-S-404NotFound {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  padding: 5vw;
+
+  height: 100%;
+
+  color: var(--md-sys-color-on-error-container);
+
+  background-color: var(--md-sys-color-error-container);
+
+  #JTM-S-404NotFound-Information {
+    margin-inline-start: 5px;
+
+    h1 {
+      margin: 6vh 0;
+
+      font-size: 100rem;
+    }
+
+    h3 {
+      margin-block-start: 1vh;
+
+      font-size: 25rem;
+
+      a {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  #JTM-S-404NotFound-Qrcode {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: flex-start;
+
+    margin-inline-start: 5px;
+
+    span {
+      height: 120px;
+      width: 120px;
+
+      border-radius: 12px;
+      outline: 2px solid var(--md-sys-color-outline);
+
+      background-image: var(--via-svg-qrcode-rickroll);
+      background-repeat: no-repeat;
+    }
+  }
+}

@@ -1,0 +1,54 @@
+// 425px 适配
+
+@media screen and (max-width: 425px) {
+  #JTM-S-UniversalLayout-ContentFlow {
+    .JTM-S-Title {
+      #JTM-S-Title-HeroContainer {
+        padding: 30px;
+      }
+    }
+
+    #JTM-S-UniversalLayout-ContentFiller {
+      [role="doc-endnotes"]ol {
+        margin-inline: 0;
+        padding-inline: 0;
+      }
+    }
+
+    .JTM-S-NoContent {
+      flex-direction: column-reverse;
+
+      h1 {
+        text-align: center;
+      }
+    }
+
+    .JTM-S-QuickJump {
+      padding-inline: 0;
+    }
+
+    footer {
+      padding: 0;
+
+      #JTM-S-Footer-Descriptions {
+        padding-inline: 24px;
+      }
+    }
+  }
+
+  .JTM-P-Index {
+    .timeline {
+      .index-level1 {
+        margin: 0;
+      }
+
+      .posts-card {
+        width: 100%;
+
+        a {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,124 @@
+// https://m3.material.io/components/floating-action-button/overview
+// 浮动行为按钮
+
+button.JTM-C-FAB {
+  @include material-symbols($size: 24px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+
+  letter-spacing: 0;
+  line-height: 0;
+
+  border: none;
+
+  box-shadow: var(--md-sys-elevation-level3);
+  cursor: pointer;
+  overflow: hidden;
+  transition: var(--md-sys-motion-duration-medium4);
+
+  &::after {
+    content: "";
+
+    height: 100%;
+    width: 100%;
+
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    opacity: 0;
+    transition: var(--md-sys-motion-duration-medium4);
+  }
+
+  &:hover {
+    box-shadow: var(--md-sys-elevation-level4);
+
+    &::after {
+      background-color: var(--md-sys-color-on-primary-container);
+
+      opacity: var(--md-sys-state-hover-state-layer-opacity);
+      transition: var(--md-sys-motion-duration-short4);
+    }
+  }
+
+  &:focus {
+    box-shadow: var(--md-sys-elevation-level3);
+
+    &::after {
+      background-color: var(--md-sys-color-on-primary-container);
+
+      opacity: var(--md-sys-state-focus-state-layer-opacity);
+      transition: var(--md-sys-motion-duration-short4);
+    }
+  }
+
+  &:active {
+    box-shadow: var(--md-sys-elevation-level3);
+
+    &::after {
+      background-color: var(--md-sys-color-on-primary-container);
+
+      opacity: var(--md-sys-state-pressed-state-layer-opacity);
+      transition: var(--md-sys-motion-duration-short4);
+    }
+  }
+
+  &,
+  &[size="normal"] {
+    height: 56px;
+    width: 56px;
+
+    padding: 16px;
+
+    border-radius: 16px;
+  }
+
+  &[size="small"] {
+    height: 40px;
+    width: 40px;
+
+    padding: 8px;
+
+    border-radius: 12px;
+  }
+
+  &[size="large"] {
+    height: 96px;
+    width: 96px;
+
+    padding: 32px;
+
+    font-size: 36px;
+
+    border-radius: 28px;
+  }
+
+  &,
+  &[spec="primary"] {
+    color: var(--md-sys-color-on-primary-container);
+
+    background-color: var(--md-sys-color-primary-container);
+  }
+
+  &[spec="surface"] {
+    color: var(--md-sys-color-primary);
+
+    background-color: var(--md-sys-color-surface-container-high);
+  }
+
+  &[spec="secondary"] {
+    color: var(--md-sys-color-on-secondary-container);
+
+    background-color: var(--md-sys-color-secondary-container);
+  }
+
+  &[spec="tertiary"] {
+    color: var(--md-sys-color-on-tertiary-container);
+
+    background-color: var(--md-sys-color-tertiary-container);
+  }
+}

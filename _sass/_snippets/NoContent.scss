@@ -1,0 +1,16 @@
+.JTM-S-NoContent {
+  @extend :disabled;
+
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+
+  h1 {
+    margin: 0;
+  }
+
+  span {
+    @include material-symbols($size: 120px);
+  }
+}

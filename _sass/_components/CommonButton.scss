@@ -1,0 +1,184 @@
+// https://m3.material.io/components/all-buttons/
+// 按钮
+
+button.JTM-C-CommonButton {
+  @include label-large();
+  @extend .disable-select;
+
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+
+  height: 40px;
+  min-width: 58px;
+  width: max-content;
+
+  padding-inline: 24px;
+
+  position: relative;
+
+  color: var(--md-sys-color-primary);
+  letter-spacing: 0;
+  line-height: 20px;
+
+  border-radius: 100px;
+  border: none;
+
+  box-shadow: none;
+  cursor: pointer;
+  overflow: hidden;
+  transition: var(--md-sys-motion-duration-medium4);
+
+  &[icon] {
+    gap: 8px;
+
+    padding-inline-end: 24px;
+    padding-inline-start: 16px;
+
+    span {
+      @include material-symbols($size: 18px);
+
+      height: 20px;
+      width: 20px;
+
+      line-height: 20px;
+    }
+  }
+
+  &::after {
+    content: "";
+
+    height: 100%;
+    width: 100%;
+
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    background-color: var(--md-sys-color-on-primary);
+
+    opacity: 0;
+    transition: var(--md-sys-motion-duration-medium4);
+  }
+
+  &:hover::after {
+    transition: var(--md-sys-motion-duration-short4);
+    opacity: var(--md-sys-state-hover-state-layer-opacity);
+  }
+
+  &:focus::after {
+    transition: var(--md-sys-motion-duration-short4);
+    opacity: var(--md-sys-state-focus-state-layer-opacity);
+  }
+
+  &:active::after {
+    transition: var(--md-sys-motion-duration-short4);
+    opacity: var(--md-sys-state-pressed-state-layer-opacity);
+  }
+
+  &[spec="filled"] {
+    color: var(--md-sys-color-on-primary);
+
+    background-color: var(--md-sys-color-primary);
+
+    &:hover {
+      box-shadow: var(--md-sys-elevation-level1);
+
+      &::after {
+        background-color: var(--md-sys-color-on-primary);
+      }
+    }
+
+    &:focus,
+    &:active {
+      box-shadow: none;
+
+      &::after {
+        background-color: var(--md-sys-color-on-primary);
+      }
+    }
+  }
+
+  &[spec="outlined"] {
+    color: var(--md-sys-color-primary);
+
+    border: 1px solid var(--md-sys-color-outline);
+
+    background: none;
+
+    &:hover::after,
+    &:focus::after,
+    &:active::after {
+      & {
+        background-color: var(--md-sys-color-primary);
+      }
+    }
+  }
+
+  &[spec="text"] {
+    color: var(--md-sys-color-primary);
+
+    background: none;
+
+    &:hover::after,
+    &:focus::after,
+    &:active::after {
+      & {
+        background-color: var(--md-sys-color-primary);
+      }
+    }
+  }
+
+  &[spec="elevated"] {
+    color: var(--md-sys-color-primary);
+
+    background-color: var(--md-sys-color-surface);
+
+    box-shadow: var(--md-sys-elevation-level1);
+
+    &:hover {
+      box-shadow: var(--md-sys-elevation-level2);
+
+      &::after {
+        background-color: var(--md-sys-color-primary);
+      }
+    }
+
+    &:focus::after {
+      box-shadow: var(--md-sys-elevation-level1);
+    }
+
+    &:active {
+      box-shadow: var(--md-sys-elevation-level1);
+
+      &::after {
+        background-color: var(--md-sys-color-primary);
+      }
+    }
+  }
+
+  &[spec="tonal"] {
+    color: var(--md-sys-color-on-secondary-container);
+
+    background-color: var(--md-sys-color-secondary-container);
+
+    &:hover {
+      box-shadow: var(--md-sys-elevation-level1);
+
+      &::after {
+        background-color: var(--md-sys-color-on-secondary-container);
+      }
+    }
+
+    &:focus,
+    &:active {
+      box-shadow: none;
+
+      &::after {
+        background-color: var(--md-sys-color-on-secondary-container);
+      }
+    }
+  }
+}

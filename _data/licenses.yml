@@ -1,0 +1,79 @@
+- name: "jekyll-theme-m3"
+  license: MIT
+  repository: https://github.com/Sendevia/jekyll-theme-m3
+  version: latest
+
+- name: "@material/material-color-utilities"
+  license: Apache-2.0
+  repository: https://github.com/material-foundation/material-color-utilities
+  version: 0.2.7
+
+- name: webpack
+  license: MIT
+  repository: https://github.com/webpack/webpack
+  version: 5.88.1
+
+- name: webpack-cli
+  license: MIT
+  repository: https://github.com/webpack/webpack-cli
+  version: 5.1.4
+
+- name: worker-loader
+  license: MIT
+  repository: https://github.com/webpack-contrib/worker-loader
+  version: 3.0.8
+
+- name: jekyll
+  license: MIT
+  repository: https://github.com/jekyll/jekyll
+  version: 4.3.2
+
+- name: jekyll-feed
+  license: MIT
+  repository: https://github.com/jekyll/jekyll-feed
+  version: 0.17.0
+
+- name: jekyll-paginate
+  license: MIT
+  repository: https://github.com/jekyll/jekyll-paginate
+  version: 1.1.0
+
+- name: jekyll-seo-tag
+  license: MIT
+  repository: https://github.com/jekyll/jekyll-seo-tag
+  version: 2.8.0
+
+- name: jekyll-sitemap
+  license: MIT
+  repository: https://github.com/jekyll/jekyll-sitemap
+  version: 1.4.0
+
+- name: jekyll-toc
+  license: MIT
+  repository: https://github.com/toshimaru/jekyll-toc
+  version: 0.18.0
+
+- name: jemoji
+  license: MIT
+  repository: https://github.com/jekyll/jemoji
+  version: 0.13.0
+
+- name: Google Sans, Google Sans Text
+  license: Unknown
+  repository: https://fonts.google.com/license/googlerestricted
+  version: latest
+
+- name: Source Code Pro
+  license: Open Font License
+  repository: https://github.com/adobe-fonts/source-code-pro
+  version: latest
+
+- name: Noto Sans SC
+  license: Open Font License
+  repository: https://fonts.google.com/noto/specimen/Noto+Sans+SC?query=Noto+Sans+SC
+  version: latest
+
+- name: Material Symbols
+  license: Apache-2.0
+  repository: https://github.com/google/material-design-icons
+  version: latest

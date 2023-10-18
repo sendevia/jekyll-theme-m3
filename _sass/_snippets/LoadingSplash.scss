@@ -1,0 +1,25 @@
+.JTM-S-LoadingSplash {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+
+  height: 100%;
+  width: 100%;
+
+  position: fixed;
+  left: 0;
+  top: 0;
+
+  color: var(--md-sys-color-on-surface);
+
+  background-color: var(--md-sys-color-surface-container-low);
+
+  transition: var(--md-sys-motion-duration-long1);
+  z-index: 20;
+
+  h1 {
+    text-align: center;
+  }
+}

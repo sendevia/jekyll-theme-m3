@@ -1,0 +1,47 @@
+// 操作覆盖层
+
+html,
+body {
+  .JTM-Root {
+    &[hide-top-app-bar="true"] {
+      .JTM-S-WebsiteInformation {
+        width: 40px !important;
+      }
+
+      @media screen and (max-width: 768px) {
+        .JTM-C-AppBar {
+          top: -64px;
+
+          transition: var(--md-sys-motion-duration-medium2);
+        }
+      }
+    }
+
+    &[loaded] {
+      .JTM-S-LoadingSplash {
+        display: none;
+      }
+    }
+
+    &[content-unfocused] {
+      .JTM-S-CornerFAB,
+      #JTM-S-UniversalLayout-ContentFlow {
+        filter: contrast(0.8);
+        pointer-events: none;
+      }
+
+      @media screen and (max-width: 768px) {
+        .JTM-C-Navigation,
+        .JTM-C-AppBar {
+          filter: contrast(0.8);
+          pointer-events: none;
+          transition: var(--md-sys-motion-duration-extra-long1) var(--md-sys-motion-easing-standard);
+        }
+      }
+    }
+
+    &[body-unfocused] {
+      filter: contrast(0.8);
+  }
+  }
+}

@@ -1,0 +1,40 @@
+<head>
+  {%- if include.no_javascript != "true" -%}
+  <script type="application/javascript" src="/assets/js/bundle.js?v={{ site.version }}" defer></script>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [
+          ["$", "$"],
+          ["$$", "$$"],
+          ["\\(", "\\)"],
+        ],
+      },
+      options: {
+        enableMenu: false,
+      },
+    };
+  </script>
+  <script
+    async
+    crossorigin="anonymous"
+    integrity="sha512-EtUjpk/hY3NXp8vfrPUJWhepp1ZbgSI10DKPzfd+3J/p2Wo89JRBvQIdk3Q83qAEhKOiFOsYfhqFnOEv23L+dA=="
+    referrerpolicy="no-referrer"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js"
+  ></script>
+  {%- endif -%}
+  <!--  -->
+  <link rel="stylesheet" href="/assets/css/style.css?v={{ site.version }}" />
+  <meta charset="utf-8" />
+  <meta name="revised" content="sendevia" />
+  <meta name="description" content="一个博客" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="sendevia" />
+  <link href="https://fonts.sendevia.top/css2?family=Google+Sans&display=swap" rel="stylesheet" />
+  <link href="https://fonts.sendevia.top/css2?family=Google+Sans+Text&display=swap" rel="stylesheet" />
+  <link href="https://fonts.sendevia.top/css2?family=Source+Code+Pro&display=swap" rel="stylesheet" />
+  <link href="https://fonts.sendevia.top/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet" />
+  <title>{{ page.title }}</title>
+  <!--  -->
+  {%- seo -%}
+</head>

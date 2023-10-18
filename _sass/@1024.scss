@@ -1,0 +1,34 @@
+// 1024px 适配
+
+@media screen and (max-width: 1024px) {
+  #JTM-S-UniversalLayout-ContentFlow {
+    .JTM-S-Title {
+      flex-direction: column;
+
+      #JTM-S-Title-HeroContainer {
+        width: 100%;
+
+        #JTM-S-Title-HeroHeadline {
+          @include display-medium();
+
+          font-size: 8vw;
+          line-height: 8vw;
+        }
+
+        #JTM-S-Title-HeroSubtitle {
+          font-size: 23rem;
+          line-height: 23rem;
+        }
+      }
+
+      #JTM-S-Title-Impression {
+        height: 100%;
+        width: 100%;
+      }
+    }
+
+    #JTM-S-UniversalLayout-ContentFiller {
+      padding-inline: 6vw;
+    }
+  }
+}

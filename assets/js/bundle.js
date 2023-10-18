@@ -2,6 +2,493 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./webpack/_components/modal.js":
+/*!**************************************!*\
+  !*** ./webpack/_components/modal.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   closeModal: () => (/* binding */ closeModal),
+/* harmony export */   openModal: () => (/* binding */ openModal)
+/* harmony export */ });
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app */ "./webpack/app.js");
+
+const openModal = () => {
+  (0,_app__WEBPACK_IMPORTED_MODULE_0__.toggleDim)(true);
+  _app__WEBPACK_IMPORTED_MODULE_0__.modalTips.style.animation = `JTM-C-Dialog-Show var(--md-sys-motion-duration-long1) var(--md-sys-motion-easing-emphasized) 1 normal both`;
+  _app__WEBPACK_IMPORTED_MODULE_0__.modalTips.showModal();
+};
+const closeModal = () => {
+  (0,_app__WEBPACK_IMPORTED_MODULE_0__.toggleDim)(false);
+  _app__WEBPACK_IMPORTED_MODULE_0__.modalTips.style.animation = `JTM-C-Dialog-Close var(--md-sys-motion-duration-medium1) var(--md-sys-motion-easing-emphasized) 1 normal both`;
+  setTimeout(() => {
+    _app__WEBPACK_IMPORTED_MODULE_0__.modalTips.close();
+    _app__WEBPACK_IMPORTED_MODULE_0__.modalTips.style.animation = "";
+  }, 400);
+};
+
+/***/ }),
+
+/***/ "./webpack/_components/monet.js":
+/*!**************************************!*\
+  !*** ./webpack/_components/monet.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   errorPalette: () => (/* binding */ errorPalette),
+/* harmony export */   generateColorPalette: () => (/* binding */ generateColorPalette),
+/* harmony export */   generateImagePalette: () => (/* binding */ generateImagePalette),
+/* harmony export */   neutralPalette: () => (/* binding */ neutralPalette),
+/* harmony export */   neutralVariantPalette: () => (/* binding */ neutralVariantPalette),
+/* harmony export */   primaryPalette: () => (/* binding */ primaryPalette),
+/* harmony export */   secondaryPalette: () => (/* binding */ secondaryPalette),
+/* harmony export */   setPaletteProperty: () => (/* binding */ setPaletteProperty),
+/* harmony export */   tertiaryPalette: () => (/* binding */ tertiaryPalette)
+/* harmony export */ });
+/* harmony import */ var _material_material_color_utilities__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @material/material-color-utilities */ "./node_modules/@material/material-color-utilities/index.js");
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../app */ "./webpack/app.js");
+
+
+
+/**
+ * 在DOM中设置调色板
+ * @param {*} toneName 一个色调值列表
+ * @param {*} paletteProvider 调色板提供器
+ */
+function setPaletteProperty(toneName, paletteProvider) {
+  for (const [key, palette] of Object.entries(paletteProvider.rawPalette)) {
+    const paletteKey = key.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
+    for (const tone of toneName) {
+      const token = `--md-ref-palette-${paletteKey}${tone}`;
+      const color = (0,_material_material_color_utilities__WEBPACK_IMPORTED_MODULE_0__.hexFromArgb)(palette.tone(tone));
+      _app__WEBPACK_IMPORTED_MODULE_1__.themeRoot.style.setProperty(token, color);
+    }
+  }
+}
+/**
+ * 调色板提供器
+ * @param {*} 生成primary调色板
+ * @returns
+ */
+function primaryPalette(source) {
+  const palette = _material_material_color_utilities__WEBPACK_IMPORTED_MODULE_0__.CorePalette.of(source);
+  return {
+    rawPalette: {
+      primary: palette.a1
+    }
+  };
+}
+/**
+ * 调色板提供器
+ * @param {*} 生成secondary调色板
+ * @returns
+ */
+function secondaryPalette(source) {
+  const palette = _material_material_color_utilities__WEBPACK_IMPORTED_MODULE_0__.CorePalette.of(source);
+  return {
+    rawPalette: {
+      secondary: palette.a2
+    }
+  };
+}
+/**
+ * 调色板提供器
+ * @param {*} 生成tertiary调色板
+ * @returns
+ */
+function tertiaryPalette(source) {
+  const palette = _material_material_color_utilities__WEBPACK_IMPORTED_MODULE_0__.CorePalette.of(source);
+  return {
+    rawPalette: {
+      tertiary: palette.a3
+    }
+  };
+}
+/**
+ * 调色板提供器
+ * @param {*} 生成neutral调色板
+ * @returns
+ */
+function neutralPalette(source) {
+  const palette = _material_material_color_utilities__WEBPACK_IMPORTED_MODULE_0__.CorePalette.of(source);
+  return {
+    rawPalette: {
+      neutral: palette.n1
+    }
+  };
+}
+/**
+ * 调色板提供器
+ * @param {*} 生成neutralVariant调色板
+ * @returns
+ */
+function neutralVariantPalette(source) {
+  const palette = _material_material_color_utilities__WEBPACK_IMPORTED_MODULE_0__.CorePalette.of(source);
+  return {
+    rawPalette: {
+      neutralVariant: palette.n2
+    }
+  };
+}
+/**
+ * 调色板提供器
+ * @param {*} 生成error调色板
+ * @returns
+ */
+function errorPalette(source) {
+  const palette = _material_material_color_utilities__WEBPACK_IMPORTED_MODULE_0__.CorePalette.of(source);
+  return {
+    rawPalette: {
+      error: palette.error
+    }
+  };
+}
+/**
+ * 根据图片生成调色板
+ * @param image 输入一张图片
+ * @returns 返回一个完整的调色板
+ */
+async function generateImagePalette(image) {
+  const source = await (0,_material_material_color_utilities__WEBPACK_IMPORTED_MODULE_0__.sourceColorFromImage)(image);
+  return generateColorPalette(source);
+}
+/**
+ * 根据颜色生成调色板
+ * @param argbColor 输入一个 argb 颜色
+ */
+async function generateColorPalette(argbColor) {
+  const primaryTones = [10, 20, 30, 40, 80, 90, 100];
+  setPaletteProperty(primaryTones, primaryPalette(argbColor));
+  const secondaryTones = [10, 20, 30, 40, 80, 90, 100];
+  setPaletteProperty(secondaryTones, secondaryPalette(argbColor));
+  const tertiaryTones = [10, 20, 30, 40, 80, 90, 100];
+  setPaletteProperty(tertiaryTones, tertiaryPalette(argbColor));
+  const neutralTones = [0, 6, 10, 12, 17, 20, 22, 90, 92, 94, 95, 96, 98];
+  setPaletteProperty(neutralTones, neutralPalette(argbColor));
+  const neutralVariantTones = [30, 50, 60, 80, 90];
+  setPaletteProperty(neutralVariantTones, neutralVariantPalette(argbColor));
+  const errorTones = [10, 20, 30, 40, 80, 90, 100];
+  setPaletteProperty(errorTones, errorPalette(argbColor));
+}
+
+/***/ }),
+
+/***/ "./webpack/_components/ripple.js":
+/*!***************************************!*\
+  !*** ./webpack/_components/ripple.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ripple: () => (/* binding */ ripple)
+/* harmony export */ });
+/**
+ * 添加涟漪效果
+ * @param {selector} element
+ */
+const ripple = element => {
+  element.addEventListener("mousedown", e => {
+    const x = e.offsetX;
+    const y = e.offsetY;
+    const d = Math.max(element.clientWidth, element.clientHeight);
+    const rippleC = document.createElement("ripple-effect");
+    element.appendChild(rippleC);
+    rippleC.style.setProperty("--ripple-effect-x", x);
+    rippleC.style.setProperty("--ripple-effect-y", y);
+    rippleC.style.setProperty("--ripple-effect-d", d);
+  });
+  element.addEventListener("animationend", () => {
+    const rippleR = element.querySelector("ripple-effect");
+    element.removeChild(rippleR);
+  });
+};
+
+/***/ }),
+
+/***/ "./webpack/app.js":
+/*!************************!*\
+  !*** ./webpack/app.js ***!
+  \************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   contentContainer: () => (/* binding */ contentContainer),
+/* harmony export */   contentDrawerEntries: () => (/* binding */ contentDrawerEntries),
+/* harmony export */   contentDrawerMenuBtn: () => (/* binding */ contentDrawerMenuBtn),
+/* harmony export */   contentNavigation: () => (/* binding */ contentNavigation),
+/* harmony export */   contentNavigationDrawer: () => (/* binding */ contentNavigationDrawer),
+/* harmony export */   contentPhotograph: () => (/* binding */ contentPhotograph),
+/* harmony export */   currentPage: () => (/* binding */ currentPage),
+/* harmony export */   cutsomThemeColor: () => (/* binding */ cutsomThemeColor),
+/* harmony export */   handleLinkDelayRedirection: () => (/* binding */ handleLinkDelayRedirection),
+/* harmony export */   handleResize: () => (/* binding */ handleResize),
+/* harmony export */   handleScroll: () => (/* binding */ handleScroll),
+/* harmony export */   initModal: () => (/* binding */ initModal),
+/* harmony export */   linkElements: () => (/* binding */ linkElements),
+/* harmony export */   modalTips: () => (/* binding */ modalTips),
+/* harmony export */   removeLoadScreen: () => (/* binding */ removeLoadScreen),
+/* harmony export */   rippleElements: () => (/* binding */ rippleElements),
+/* harmony export */   scrollTopElements: () => (/* binding */ scrollTopElements),
+/* harmony export */   themeImageProvider: () => (/* binding */ themeImageProvider),
+/* harmony export */   themeRoot: () => (/* binding */ themeRoot),
+/* harmony export */   toggleDim: () => (/* binding */ toggleDim),
+/* harmony export */   toggleNavigationDrawer: () => (/* binding */ toggleNavigationDrawer),
+/* harmony export */   websiteInfomation: () => (/* binding */ websiteInfomation)
+/* harmony export */ });
+/* harmony import */ var _shown__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./shown */ "./webpack/shown.js");
+/* harmony import */ var _loaded__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./loaded */ "./webpack/loaded.js");
+/* harmony import */ var _components_modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./_components/modal */ "./webpack/_components/modal.js");
+
+
+
+
+////////////////////
+//常用常量配置
+///////////////////
+/**
+ * 需要被取色的图片
+ */
+const themeImageProvider = new Image();
+/**
+ * 需要以此生成调色盘的hex颜色
+ */
+const cutsomThemeColor = document.body.getAttribute("color");
+/**
+ * 主题根节点
+ */
+const themeRoot = document.querySelector(".JTM-Root");
+/**
+ * 文章内容流
+ */
+const contentContainer = document.querySelector("#JTM-S-UniversalLayout-ContentFlow");
+/**
+ * 文章头部印象图
+ */
+const contentPhotograph = document.querySelector("#JTM-S-Title-Impression img");
+/**
+ * 页面导航
+ */
+const contentNavigation = document.querySelector(".JTM-C-Navigation");
+/**
+ * 展开的页面导航
+ */
+const contentNavigationDrawer = document.querySelector(".JTM-C-NavigationDrawer");
+/**
+ * 页面导航的目录元素
+ */
+const contentDrawerEntries = contentNavigationDrawer ? contentNavigationDrawer.querySelectorAll(".JTM-C-NavigationDrawer-Entry") : [];
+/**
+ * 选择控制页面导航开关的元素
+ */
+const contentDrawerMenuBtn = contentNavigationDrawer ? document.querySelectorAll("#JTM-C-Navigation-FAB > button, #JTM-C-AppBar-MenuIcon, #JTM-C-NavigationDrawer-MenuCloseIcon") : [];
+/**
+ * 页面加载中的闪屏
+ */
+const contentSplashScreen = document.querySelector(".JTM-S-LoadingSplash");
+/**
+ * 定位当前所在的页面
+ */
+const currentPage = window.location.pathname;
+/**
+ * 选择移动端的标题栏
+ */
+const topAppBar = document.querySelector(".JTM-C-AppBar");
+/**
+ * 选择模态提示框
+ */
+const modalTips = document.querySelector("#JTM-C-Dialog-ModalTips");
+/**
+ * 选择可以开启模态提示框的元素
+ */
+const modalTipsIcon = document.querySelectorAll("body > div.JTM-S-WebsiteInformation, #JTM-C-AppBar-InfoIcon");
+/**
+ * 选择可以关闭模态提示框的元素
+ */
+const dialogBtnClose = document.querySelector("#dialog-close");
+/**
+ * 选择点击后跳转到页面顶端的元素
+ */
+const scrollTopElements = document.querySelectorAll(".JTM-S-CornerFAB");
+/**
+ * 选择需要涟漪效果的元素
+ */
+const rippleElements = document.querySelectorAll(`button, .JTM-C-Card[spec='clear'], .JTM-C-Card[spec='focus'], .JTM-C-NavigationDrawer a, #JTM-C-Navigation-DestinationAccent, .JTM-S-WebsiteInformation, .JTM-S-Carousel-PostItem`);
+/**
+ * 选择页面右上角的网站信息
+ */
+const websiteInfomation = document.querySelector(".JTM-S-WebsiteInformation");
+/**
+ * 选择所有a元素
+ */
+const linkElements = document.querySelectorAll("a");
+////////////////////
+//常用常量配置结束
+///////////////////
+
+/**
+ * 控制元素的状态
+ * @contentNavigationDrawer show
+ * @themeRoot content-unfocused
+ * @param {boolean} state
+ */
+const toggleNavigationDrawer = state => {
+  contentNavigationDrawer.toggleAttribute("show", state);
+  themeRoot.toggleAttribute("content-unfocused", state);
+};
+/**
+ * 控制根元素的状态
+ * @param {boolean} state
+ */
+const toggleDim = state => themeRoot.toggleAttribute("body-unfocused", state);
+let lastScrollY = 0;
+/**
+ * 滚动事件
+ */
+const handleScroll = () => {
+  const scrollY = contentContainer.scrollTop;
+  const scrollThreshold = 64;
+  const scrollDirection = scrollY > lastScrollY ? "down" : "up";
+  topAppBar.setAttribute("scroll", scrollY >= scrollThreshold ? "true" : "false");
+  if (scrollDirection === "up") {
+    themeRoot.setAttribute("hide-top-app-bar", "false");
+  } else if (scrollDirection === "down" && scrollY >= 500) {
+    themeRoot.setAttribute("hide-top-app-bar", "true");
+  }
+  scrollTopElements.forEach(element => {
+    element.style.cssText = `
+      opacity: ${scrollY >= 400 ? "1" : "0"};
+      visibility: ${scrollY >= 400 ? "visible" : "hidden"};
+      animation: ${scrollY >= 400 ? "popOut var(--md-sys-motion-duration-long2) cubic-bezier(0.4, 1, 0.6, 0.6)" : ""}
+    `;
+  });
+  lastScrollY = scrollY;
+};
+
+/**
+ * 缩放事件
+ */
+const handleResize = () => {
+  contentNavigation.setAttribute("spec", window.innerWidth <= 768 ? "bar" : "rail");
+};
+
+/**
+ * 链接跳转事件
+ * @param {selector} link
+ */
+const handleLinkDelayRedirection = link => {
+  link.addEventListener("click", e => {
+    e.preventDefault();
+    const delay = 240;
+    setTimeout(() => {
+      window.location.href = link.getAttribute("href");
+    }, delay);
+  });
+};
+const handleKeyboardEvent = event => {
+  if (event.key === "Escape") {
+    event.preventDefault();
+    (0,_components_modal__WEBPACK_IMPORTED_MODULE_2__.closeModal)();
+  }
+};
+const handleClickOutside = event => {
+  if (event.target === modalTips) {
+    (0,_components_modal__WEBPACK_IMPORTED_MODULE_2__.closeModal)();
+  }
+};
+const initModal = () => {
+  modalTipsIcon.forEach(element => element.addEventListener("click", _components_modal__WEBPACK_IMPORTED_MODULE_2__.openModal));
+  dialogBtnClose.addEventListener("click", _components_modal__WEBPACK_IMPORTED_MODULE_2__.closeModal);
+  modalTips.addEventListener("keydown", handleKeyboardEvent);
+  modalTips.addEventListener("click", handleClickOutside);
+};
+const removeLoadScreen = () => {
+  contentSplashScreen.style.animation = "fadeOut 0.4s forwards";
+  contentSplashScreen.addEventListener("animationend", () => {
+    themeRoot.setAttribute("loaded", true);
+  });
+};
+
+/***/ }),
+
+/***/ "./webpack/loaded.js":
+/*!***************************!*\
+  !*** ./webpack/loaded.js ***!
+  \***************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _material_material_color_utilities__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @material/material-color-utilities */ "./node_modules/@material/material-color-utilities/index.js");
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app */ "./webpack/app.js");
+/* harmony import */ var _components_monet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./_components/monet */ "./webpack/_components/monet.js");
+
+
+
+window.onload = () => {
+  (0,_app__WEBPACK_IMPORTED_MODULE_1__.removeLoadScreen)();
+  if (_app__WEBPACK_IMPORTED_MODULE_1__.cutsomThemeColor) {
+    (0,_components_monet__WEBPACK_IMPORTED_MODULE_2__.generateColorPalette)((0,_material_material_color_utilities__WEBPACK_IMPORTED_MODULE_0__.argbFromHex)(_app__WEBPACK_IMPORTED_MODULE_1__.cutsomThemeColor));
+  } else {
+    _app__WEBPACK_IMPORTED_MODULE_1__.themeImageProvider.src = _app__WEBPACK_IMPORTED_MODULE_1__.contentPhotograph.src;
+    (0,_components_monet__WEBPACK_IMPORTED_MODULE_2__.generateImagePalette)(_app__WEBPACK_IMPORTED_MODULE_1__.themeImageProvider);
+  }
+};
+
+/***/ }),
+
+/***/ "./webpack/shown.js":
+/*!**************************!*\
+  !*** ./webpack/shown.js ***!
+  \**************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app */ "./webpack/app.js");
+/* harmony import */ var _components_ripple__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./_components/ripple */ "./webpack/_components/ripple.js");
+
+
+window.onpageshow = () => {
+  _app__WEBPACK_IMPORTED_MODULE_0__.contentNavigation.setAttribute("spec", window.innerWidth <= 768 ? "bar" : "rail");
+  try {
+    const activatedSegment = document.querySelector(`a[href="${_app__WEBPACK_IMPORTED_MODULE_0__.currentPage}"]`);
+    const inactiveSegment = activatedSegment.querySelector("#JTM-C-Navigation-SegmentInactive");
+    inactiveSegment.id = "JTM-C-Navigation-SegmentActive";
+  } catch (err) {
+    document.querySelector(`a[href="/posts"] #JTM-C-Navigation-SegmentInactive`).id = "JTM-C-Navigation-SegmentActive";
+  }
+  _app__WEBPACK_IMPORTED_MODULE_0__.scrollTopElements.forEach(element => element.addEventListener("click", () => _app__WEBPACK_IMPORTED_MODULE_0__.contentContainer.scrollTo({
+    top: 0
+  })));
+  _app__WEBPACK_IMPORTED_MODULE_0__.rippleElements.forEach(_components_ripple__WEBPACK_IMPORTED_MODULE_1__.ripple);
+  _app__WEBPACK_IMPORTED_MODULE_0__.contentContainer.onscroll = _app__WEBPACK_IMPORTED_MODULE_0__.handleScroll;
+  window.onresize = _app__WEBPACK_IMPORTED_MODULE_0__.handleResize;
+  if (_app__WEBPACK_IMPORTED_MODULE_0__.contentNavigationDrawer) {
+    _app__WEBPACK_IMPORTED_MODULE_0__.contentDrawerMenuBtn.forEach(element => element.addEventListener("click", () => (0,_app__WEBPACK_IMPORTED_MODULE_0__.toggleNavigationDrawer)()));
+    _app__WEBPACK_IMPORTED_MODULE_0__.contentDrawerEntries.forEach(element => element.addEventListener("click", () => (0,_app__WEBPACK_IMPORTED_MODULE_0__.toggleNavigationDrawer)(false)));
+    document.addEventListener("click", event => {
+      const isJTM_C_NavigationDrawer = event.target.closest(".JTM-C-NavigationDrawer");
+      const isJTM_C_AppBar = event.target.closest(".JTM-C-AppBar");
+      const isMAB = event.target.closest("#JTM-C-Navigation-FAB");
+      if (!isJTM_C_NavigationDrawer && (window.matchMedia("(max-width: 768px)").matches ? !isJTM_C_AppBar : !isMAB)) {
+        (0,_app__WEBPACK_IMPORTED_MODULE_0__.toggleNavigationDrawer)(false);
+      }
+    });
+  }
+  (0,_app__WEBPACK_IMPORTED_MODULE_0__.initModal)();
+  if (_app__WEBPACK_IMPORTED_MODULE_0__.websiteInfomation) {
+    const websiteInfomationWidth = _app__WEBPACK_IMPORTED_MODULE_0__.websiteInfomation.clientWidth;
+    _app__WEBPACK_IMPORTED_MODULE_0__.websiteInfomation.style.width = websiteInfomationWidth + "px";
+  }
+  _app__WEBPACK_IMPORTED_MODULE_0__.linkElements.forEach(_app__WEBPACK_IMPORTED_MODULE_0__.handleLinkDelayRedirection);
+};
+
+/***/ }),
+
 /***/ "./node_modules/@material/material-color-utilities/blend/blend.js":
 /*!************************************************************************!*\
   !*** ./node_modules/@material/material-color-utilities/blend/blend.js ***!
@@ -10,7 +497,7 @@
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Blend": () => (/* binding */ Blend)
+/* harmony export */   Blend: () => (/* binding */ Blend)
 /* harmony export */ });
 /* harmony import */ var _hct_cam16_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../hct/cam16.js */ "./node_modules/@material/material-color-utilities/hct/cam16.js");
 /* harmony import */ var _hct_hct_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../hct/hct.js */ "./node_modules/@material/material-color-utilities/hct/hct.js");
@@ -111,6 +598,1331 @@ class Blend {
 
 /***/ }),
 
+/***/ "./node_modules/@material/material-color-utilities/contrast/contrast.js":
+/*!******************************************************************************!*\
+  !*** ./node_modules/@material/material-color-utilities/contrast/contrast.js ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Contrast: () => (/* binding */ Contrast)
+/* harmony export */ });
+/* harmony import */ var _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/color_utils.js */ "./node_modules/@material/material-color-utilities/utils/color_utils.js");
+/* harmony import */ var _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/math_utils.js */ "./node_modules/@material/material-color-utilities/utils/math_utils.js");
+/**
+ * @license
+ * Copyright 2022 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+// material_color_utilities is designed to have a consistent API across
+// platforms and modular components that can be moved around easily. Using a
+// class as a namespace facilitates this.
+//
+// tslint:disable:class-as-namespace
+
+
+/**
+ * Utility methods for calculating contrast given two colors, or calculating a
+ * color given one color and a contrast ratio.
+ *
+ * Contrast ratio is calculated using XYZ's Y. When linearized to match human
+ * perception, Y becomes HCT's tone and L*a*b*'s' L*. Informally, this is the
+ * lightness of a color.
+ *
+ * Methods refer to tone, T in the the HCT color space.
+ * Tone is equivalent to L* in the L*a*b* color space, or L in the LCH color
+ * space.
+ */
+class Contrast {
+    /**
+     * Returns a contrast ratio, which ranges from 1 to 21.
+     *
+     * @param toneA Tone between 0 and 100. Values outside will be clamped.
+     * @param toneB Tone between 0 and 100. Values outside will be clamped.
+     */
+    static ratioOfTones(toneA, toneB) {
+        toneA = _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_1__.clampDouble(0.0, 100.0, toneA);
+        toneB = _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_1__.clampDouble(0.0, 100.0, toneB);
+        return Contrast.ratioOfYs(_utils_color_utils_js__WEBPACK_IMPORTED_MODULE_0__.yFromLstar(toneA), _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_0__.yFromLstar(toneB));
+    }
+    static ratioOfYs(y1, y2) {
+        const lighter = y1 > y2 ? y1 : y2;
+        const darker = (lighter === y2) ? y1 : y2;
+        return (lighter + 5.0) / (darker + 5.0);
+    }
+    /**
+     * Returns a tone >= tone parameter that ensures ratio parameter.
+     * Return value is between 0 and 100.
+     * Returns -1 if ratio cannot be achieved with tone parameter.
+     *
+     * @param tone Tone return value must contrast with.
+     * Range is 0 to 100. Invalid values will result in -1 being returned.
+     * @param ratio Contrast ratio of return value and tone.
+     * Range is 1 to 21, invalid values have undefined behavior.
+     */
+    static lighter(tone, ratio) {
+        if (tone < 0.0 || tone > 100.0) {
+            return -1.0;
+        }
+        const darkY = _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_0__.yFromLstar(tone);
+        const lightY = ratio * (darkY + 5.0) - 5.0;
+        const realContrast = Contrast.ratioOfYs(lightY, darkY);
+        const delta = Math.abs(realContrast - ratio);
+        if (realContrast < ratio && delta > 0.04) {
+            return -1;
+        }
+        // Ensure gamut mapping, which requires a 'range' on tone, will still result
+        // the correct ratio by darkening slightly.
+        const returnValue = _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_0__.lstarFromY(lightY) + 0.4;
+        if (returnValue < 0 || returnValue > 100) {
+            return -1;
+        }
+        return returnValue;
+    }
+    /**
+     * Returns a tone <= tone parameter that ensures ratio parameter.
+     * Return value is between 0 and 100.
+     * Returns -1 if ratio cannot be achieved with tone parameter.
+     *
+     * @param tone Tone return value must contrast with.
+     * Range is 0 to 100. Invalid values will result in -1 being returned.
+     * @param ratio Contrast ratio of return value and tone.
+     * Range is 1 to 21, invalid values have undefined behavior.
+     */
+    static darker(tone, ratio) {
+        if (tone < 0.0 || tone > 100.0) {
+            return -1.0;
+        }
+        const lightY = _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_0__.yFromLstar(tone);
+        const darkY = ((lightY + 5.0) / ratio) - 5.0;
+        const realContrast = Contrast.ratioOfYs(lightY, darkY);
+        const delta = Math.abs(realContrast - ratio);
+        if (realContrast < ratio && delta > 0.04) {
+            return -1;
+        }
+        // Ensure gamut mapping, which requires a 'range' on tone, will still result
+        // the correct ratio by darkening slightly.
+        const returnValue = _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_0__.lstarFromY(darkY) - 0.4;
+        if (returnValue < 0 || returnValue > 100) {
+            return -1;
+        }
+        return returnValue;
+    }
+    /**
+     * Returns a tone >= tone parameter that ensures ratio parameter.
+     * Return value is between 0 and 100.
+     * Returns 100 if ratio cannot be achieved with tone parameter.
+     *
+     * This method is unsafe because the returned value is guaranteed to be in
+     * bounds for tone, i.e. between 0 and 100. However, that value may not reach
+     * the ratio with tone. For example, there is no color lighter than T100.
+     *
+     * @param tone Tone return value must contrast with.
+     * Range is 0 to 100. Invalid values will result in 100 being returned.
+     * @param ratio Desired contrast ratio of return value and tone parameter.
+     * Range is 1 to 21, invalid values have undefined behavior.
+     */
+    static lighterUnsafe(tone, ratio) {
+        const lighterSafe = Contrast.lighter(tone, ratio);
+        return (lighterSafe < 0.0) ? 100.0 : lighterSafe;
+    }
+    /**
+     * Returns a tone >= tone parameter that ensures ratio parameter.
+     * Return value is between 0 and 100.
+     * Returns 100 if ratio cannot be achieved with tone parameter.
+     *
+     * This method is unsafe because the returned value is guaranteed to be in
+     * bounds for tone, i.e. between 0 and 100. However, that value may not reach
+     * the [ratio with [tone]. For example, there is no color darker than T0.
+     *
+     * @param tone Tone return value must contrast with.
+     * Range is 0 to 100. Invalid values will result in 0 being returned.
+     * @param ratio Desired contrast ratio of return value and tone parameter.
+     * Range is 1 to 21, invalid values have undefined behavior.
+     */
+    static darkerUnsafe(tone, ratio) {
+        const darkerSafe = Contrast.darker(tone, ratio);
+        return (darkerSafe < 0.0) ? 0.0 : darkerSafe;
+    }
+}
+//# sourceMappingURL=contrast.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@material/material-color-utilities/dislike/dislike_analyzer.js":
+/*!*************************************************************************************!*\
+  !*** ./node_modules/@material/material-color-utilities/dislike/dislike_analyzer.js ***!
+  \*************************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DislikeAnalyzer: () => (/* binding */ DislikeAnalyzer)
+/* harmony export */ });
+/* harmony import */ var _hct_hct_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../hct/hct.js */ "./node_modules/@material/material-color-utilities/hct/hct.js");
+/**
+ * @license
+ * Copyright 2023 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// material_color_utilities is designed to have a consistent API across
+// platforms and modular components that can be moved around easily. Using a
+// class as a namespace facilitates this.
+//
+// tslint:disable:class-as-namespace
+/**
+ * Check and/or fix universally disliked colors.
+ * Color science studies of color preference indicate universal distaste for
+ * dark yellow-greens, and also show this is correlated to distate for
+ * biological waste and rotting food.
+ *
+ * See Palmer and Schloss, 2010 or Schloss and Palmer's Chapter 21 in Handbook
+ * of Color Psychology (2015).
+ */
+class DislikeAnalyzer {
+    /**
+     * Returns true if a color is disliked.
+     *
+     * @param hct A color to be judged.
+     * @return Whether the color is disliked.
+     *
+     * Disliked is defined as a dark yellow-green that is not neutral.
+     */
+    static isDisliked(hct) {
+        const huePasses = Math.round(hct.hue) >= 90.0 && Math.round(hct.hue) <= 111.0;
+        const chromaPasses = Math.round(hct.chroma) > 16.0;
+        const tonePasses = Math.round(hct.tone) < 65.0;
+        return huePasses && chromaPasses && tonePasses;
+    }
+    /**
+     * If a color is disliked, lighten it to make it likable.
+     *
+     * @param hct A color to be judged.
+     * @return A new color if the original color is disliked, or the original
+     *   color if it is acceptable.
+     */
+    static fixIfDisliked(hct) {
+        if (DislikeAnalyzer.isDisliked(hct)) {
+            return _hct_hct_js__WEBPACK_IMPORTED_MODULE_0__.Hct.from(hct.hue, hct.chroma, 70.0);
+        }
+        return hct;
+    }
+}
+//# sourceMappingURL=dislike_analyzer.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@material/material-color-utilities/dynamiccolor/contrast_curve.js":
+/*!****************************************************************************************!*\
+  !*** ./node_modules/@material/material-color-utilities/dynamiccolor/contrast_curve.js ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ContrastCurve: () => (/* binding */ ContrastCurve)
+/* harmony export */ });
+/* harmony import */ var _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/math_utils.js */ "./node_modules/@material/material-color-utilities/utils/math_utils.js");
+/**
+ * @license
+ * Copyright 2023 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * A class containing the contrast curve for a dynamic color on its background.
+ *
+ * The four values correspond to contrast requirements for contrast levels
+ * -1.0, 0.0, 0.5, and 1.0, respectively.
+ */
+class ContrastCurve {
+    /**
+     * Creates a `ContrastCurve` object.
+     *
+     * @param low Contrast requirement for contrast level -1.0
+     * @param normal Contrast requirement for contrast level 0.0
+     * @param medium Contrast requirement for contrast level 0.5
+     * @param high Contrast requirement for contrast level 1.0
+     */
+    constructor(low, normal, medium, high) {
+        this.low = low;
+        this.normal = normal;
+        this.medium = medium;
+        this.high = high;
+    }
+    /**
+     * Returns the contrast ratio at a given contrast level.
+     *
+     * @param contrastLevel The contrast level. 0.0 is the default (normal);
+     * -1.0 is the lowest; 1.0 is the highest.
+     * @return The contrast ratio, a number between 1.0 and 21.0.
+     */
+    getContrast(contrastLevel) {
+        if (contrastLevel <= -1.0) {
+            return this.low;
+        }
+        else if (contrastLevel < 0.0) {
+            return _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_0__.lerp(this.low, this.normal, (contrastLevel - (-1)) / 1);
+        }
+        else if (contrastLevel < 0.5) {
+            return _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_0__.lerp(this.normal, this.medium, (contrastLevel - 0) / 0.5);
+        }
+        else if (contrastLevel < 1.0) {
+            return _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_0__.lerp(this.medium, this.high, (contrastLevel - 0.5) / 0.5);
+        }
+        else {
+            return this.high;
+        }
+    }
+}
+//# sourceMappingURL=contrast_curve.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@material/material-color-utilities/dynamiccolor/dynamic_color.js":
+/*!***************************************************************************************!*\
+  !*** ./node_modules/@material/material-color-utilities/dynamiccolor/dynamic_color.js ***!
+  \***************************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DynamicColor: () => (/* binding */ DynamicColor)
+/* harmony export */ });
+/* harmony import */ var _contrast_contrast_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../contrast/contrast.js */ "./node_modules/@material/material-color-utilities/contrast/contrast.js");
+/* harmony import */ var _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/math_utils.js */ "./node_modules/@material/material-color-utilities/utils/math_utils.js");
+/**
+ * @license
+ * Copyright 2022 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
+/**
+ * A color that adjusts itself based on UI state provided by DynamicScheme.
+ *
+ * Colors without backgrounds do not change tone when contrast changes. Colors
+ * with backgrounds become closer to their background as contrast lowers, and
+ * further when contrast increases.
+ *
+ * Prefer static constructors. They require either a hexcode, a palette and
+ * tone, or a hue and chroma. Optionally, they can provide a background
+ * DynamicColor.
+ */
+class DynamicColor {
+    /**
+     * Create a DynamicColor defined by a TonalPalette and HCT tone.
+     *
+     * @param args Functions with DynamicScheme as input. Must provide a palette
+     * and tone. May provide a background DynamicColor and ToneDeltaConstraint.
+     */
+    static fromPalette(args) {
+        return new DynamicColor(args.name ?? '', args.palette, args.tone, args.isBackground ?? false, args.background, args.secondBackground, args.contrastCurve, args.toneDeltaPair);
+    }
+    /**
+     * The base constructor for DynamicColor.
+     *
+     * _Strongly_ prefer using one of the convenience constructors. This class is
+     * arguably too flexible to ensure it can support any scenario. Functional
+     * arguments allow  overriding without risks that come with subclasses.
+     *
+     * For example, the default behavior of adjust tone at max contrast
+     * to be at a 7.0 ratio with its background is principled and
+     * matches accessibility guidance. That does not mean it's the desired
+     * approach for _every_ design system, and every color pairing,
+     * always, in every case.
+     *
+     * @param name The name of the dynamic color. Defaults to empty.
+     * @param palette Function that provides a TonalPalette given
+     * DynamicScheme. A TonalPalette is defined by a hue and chroma, so this
+     * replaces the need to specify hue/chroma. By providing a tonal palette, when
+     * contrast adjustments are made, intended chroma can be preserved.
+     * @param tone Function that provides a tone, given a DynamicScheme.
+     * @param isBackground Whether this dynamic color is a background, with
+     * some other color as the foreground. Defaults to false.
+     * @param background The background of the dynamic color (as a function of a
+     *     `DynamicScheme`), if it exists.
+     * @param secondBackground A second background of the dynamic color (as a
+     *     function of a `DynamicScheme`), if it
+     * exists.
+     * @param contrastCurve A `ContrastCurve` object specifying how its contrast
+     * against its background should behave in various contrast levels options.
+     * @param toneDeltaPair A `ToneDeltaPair` object specifying a tone delta
+     * constraint between two colors. One of them must be the color being
+     * constructed.
+     */
+    constructor(name, palette, tone, isBackground, background, secondBackground, contrastCurve, toneDeltaPair) {
+        this.name = name;
+        this.palette = palette;
+        this.tone = tone;
+        this.isBackground = isBackground;
+        this.background = background;
+        this.secondBackground = secondBackground;
+        this.contrastCurve = contrastCurve;
+        this.toneDeltaPair = toneDeltaPair;
+        this.hctCache = new Map();
+        if ((!background) && secondBackground) {
+            throw new Error(`Color ${name} has secondBackground` +
+                `defined, but background is not defined.`);
+        }
+        if ((!background) && contrastCurve) {
+            throw new Error(`Color ${name} has contrastCurve` +
+                `defined, but background is not defined.`);
+        }
+        if (background && !contrastCurve) {
+            throw new Error(`Color ${name} has background` +
+                `defined, but contrastCurve is not defined.`);
+        }
+    }
+    /**
+     * Return a ARGB integer (i.e. a hex code).
+     *
+     * @param scheme Defines the conditions of the user interface, for example,
+     * whether or not it is dark mode or light mode, and what the desired
+     * contrast level is.
+     */
+    getArgb(scheme) {
+        return this.getHct(scheme).toInt();
+    }
+    /**
+     * Return a color, expressed in the HCT color space, that this
+     * DynamicColor is under the conditions in scheme.
+     *
+     * @param scheme Defines the conditions of the user interface, for example,
+     * whether or not it is dark mode or light mode, and what the desired
+     * contrast level is.
+     */
+    getHct(scheme) {
+        const cachedAnswer = this.hctCache.get(scheme);
+        if (cachedAnswer != null) {
+            return cachedAnswer;
+        }
+        const tone = this.getTone(scheme);
+        const answer = this.palette(scheme).getHct(tone);
+        if (this.hctCache.size > 4) {
+            this.hctCache.clear();
+        }
+        this.hctCache.set(scheme, answer);
+        return answer;
+    }
+    /**
+     * Return a tone, T in the HCT color space, that this DynamicColor is under
+     * the conditions in scheme.
+     *
+     * @param scheme Defines the conditions of the user interface, for example,
+     * whether or not it is dark mode or light mode, and what the desired
+     * contrast level is.
+     */
+    getTone(scheme) {
+        const decreasingContrast = scheme.contrastLevel < 0;
+        // Case 1: dual foreground, pair of colors with delta constraint.
+        if (this.toneDeltaPair) {
+            const toneDeltaPair = this.toneDeltaPair(scheme);
+            const roleA = toneDeltaPair.roleA;
+            const roleB = toneDeltaPair.roleB;
+            const delta = toneDeltaPair.delta;
+            const polarity = toneDeltaPair.polarity;
+            const stayTogether = toneDeltaPair.stayTogether;
+            const bg = this.background(scheme);
+            const bgTone = bg.getTone(scheme);
+            const aIsNearer = (polarity === 'nearer' ||
+                (polarity === 'lighter' && !scheme.isDark) ||
+                (polarity === 'darker' && scheme.isDark));
+            const nearer = aIsNearer ? roleA : roleB;
+            const farther = aIsNearer ? roleB : roleA;
+            const amNearer = this.name === nearer.name;
+            const expansionDir = scheme.isDark ? 1 : -1;
+            // 1st round: solve to min, each
+            const nContrast = nearer.contrastCurve.getContrast(scheme.contrastLevel);
+            const fContrast = farther.contrastCurve.getContrast(scheme.contrastLevel);
+            // If a color is good enough, it is not adjusted.
+            // Initial and adjusted tones for `nearer`
+            const nInitialTone = nearer.tone(scheme);
+            let nTone = _contrast_contrast_js__WEBPACK_IMPORTED_MODULE_0__.Contrast.ratioOfTones(bgTone, nInitialTone) >= nContrast ?
+                nInitialTone :
+                DynamicColor.foregroundTone(bgTone, nContrast);
+            // Initial and adjusted tones for `farther`
+            const fInitialTone = farther.tone(scheme);
+            let fTone = _contrast_contrast_js__WEBPACK_IMPORTED_MODULE_0__.Contrast.ratioOfTones(bgTone, fInitialTone) >= fContrast ?
+                fInitialTone :
+                DynamicColor.foregroundTone(bgTone, fContrast);
+            if (decreasingContrast) {
+                // If decreasing contrast, adjust color to the "bare minimum"
+                // that satisfies contrast.
+                nTone = DynamicColor.foregroundTone(bgTone, nContrast);
+                fTone = DynamicColor.foregroundTone(bgTone, fContrast);
+            }
+            if ((fTone - nTone) * expansionDir >= delta) {
+                // Good! Tones satisfy the constraint; no change needed.
+            }
+            else {
+                // 2nd round: expand farther to match delta.
+                fTone = _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_1__.clampDouble(0, 100, nTone + delta * expansionDir);
+                if ((fTone - nTone) * expansionDir >= delta) {
+                    // Good! Tones now satisfy the constraint; no change needed.
+                }
+                else {
+                    // 3rd round: contract nearer to match delta.
+                    nTone = _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_1__.clampDouble(0, 100, fTone - delta * expansionDir);
+                }
+            }
+            // Avoids the 50-59 awkward zone.
+            if (50 <= nTone && nTone < 60) {
+                // If `nearer` is in the awkward zone, move it away, together with
+                // `farther`.
+                if (expansionDir > 0) {
+                    nTone = 60;
+                    fTone = Math.max(fTone, nTone + delta * expansionDir);
+                }
+                else {
+                    nTone = 49;
+                    fTone = Math.min(fTone, nTone + delta * expansionDir);
+                }
+            }
+            else if (50 <= fTone && fTone < 60) {
+                if (stayTogether) {
+                    // Fixes both, to avoid two colors on opposite sides of the "awkward
+                    // zone".
+                    if (expansionDir > 0) {
+                        nTone = 60;
+                        fTone = Math.max(fTone, nTone + delta * expansionDir);
+                    }
+                    else {
+                        nTone = 49;
+                        fTone = Math.min(fTone, nTone + delta * expansionDir);
+                    }
+                }
+                else {
+                    // Not required to stay together; fixes just one.
+                    if (expansionDir > 0) {
+                        fTone = 60;
+                    }
+                    else {
+                        fTone = 49;
+                    }
+                }
+            }
+            // Returns `nTone` if this color is `nearer`, otherwise `fTone`.
+            return amNearer ? nTone : fTone;
+        }
+        else {
+            // Case 2: No contrast pair; just solve for itself.
+            let answer = this.tone(scheme);
+            if (this.background == null) {
+                return answer; // No adjustment for colors with no background.
+            }
+            const bgTone = this.background(scheme).getTone(scheme);
+            const desiredRatio = this.contrastCurve.getContrast(scheme.contrastLevel);
+            if (_contrast_contrast_js__WEBPACK_IMPORTED_MODULE_0__.Contrast.ratioOfTones(bgTone, answer) >= desiredRatio) {
+                // Don't "improve" what's good enough.
+            }
+            else {
+                // Rough improvement.
+                answer = DynamicColor.foregroundTone(bgTone, desiredRatio);
+            }
+            if (decreasingContrast) {
+                answer = DynamicColor.foregroundTone(bgTone, desiredRatio);
+            }
+            if (this.isBackground && 50 <= answer && answer < 60) {
+                // Must adjust
+                if (_contrast_contrast_js__WEBPACK_IMPORTED_MODULE_0__.Contrast.ratioOfTones(49, bgTone) >= desiredRatio) {
+                    answer = 49;
+                }
+                else {
+                    answer = 60;
+                }
+            }
+            if (this.secondBackground) {
+                // Case 3: Adjust for dual backgrounds.
+                const [bg1, bg2] = [this.background, this.secondBackground];
+                const [bgTone1, bgTone2] = [bg1(scheme).getTone(scheme), bg2(scheme).getTone(scheme)];
+                const [upper, lower] = [Math.max(bgTone1, bgTone2), Math.min(bgTone1, bgTone2)];
+                if (_contrast_contrast_js__WEBPACK_IMPORTED_MODULE_0__.Contrast.ratioOfTones(upper, answer) >= desiredRatio &&
+                    _contrast_contrast_js__WEBPACK_IMPORTED_MODULE_0__.Contrast.ratioOfTones(lower, answer) >= desiredRatio) {
+                    return answer;
+                }
+                // The darkest light tone that satisfies the desired ratio,
+                // or -1 if such ratio cannot be reached.
+                const lightOption = _contrast_contrast_js__WEBPACK_IMPORTED_MODULE_0__.Contrast.lighter(upper, desiredRatio);
+                // The lightest dark tone that satisfies the desired ratio,
+                // or -1 if such ratio cannot be reached.
+                const darkOption = _contrast_contrast_js__WEBPACK_IMPORTED_MODULE_0__.Contrast.darker(lower, desiredRatio);
+                // Tones suitable for the foreground.
+                const availables = [];
+                if (lightOption !== -1)
+                    availables.push(lightOption);
+                if (darkOption !== -1)
+                    availables.push(darkOption);
+                const prefersLight = DynamicColor.tonePrefersLightForeground(bgTone1) ||
+                    DynamicColor.tonePrefersLightForeground(bgTone2);
+                if (prefersLight) {
+                    return (lightOption < 0) ? 100 : lightOption;
+                }
+                if (availables.length === 1) {
+                    return availables[0];
+                }
+                return (darkOption < 0) ? 0 : darkOption;
+            }
+            return answer;
+        }
+    }
+    /**
+     * Given a background tone, find a foreground tone, while ensuring they reach
+     * a contrast ratio that is as close to [ratio] as possible.
+     *
+     * @param bgTone Tone in HCT. Range is 0 to 100, undefined behavior when it
+     *     falls outside that range.
+     * @param ratio The contrast ratio desired between bgTone and the return
+     *     value.
+     */
+    static foregroundTone(bgTone, ratio) {
+        const lighterTone = _contrast_contrast_js__WEBPACK_IMPORTED_MODULE_0__.Contrast.lighterUnsafe(bgTone, ratio);
+        const darkerTone = _contrast_contrast_js__WEBPACK_IMPORTED_MODULE_0__.Contrast.darkerUnsafe(bgTone, ratio);
+        const lighterRatio = _contrast_contrast_js__WEBPACK_IMPORTED_MODULE_0__.Contrast.ratioOfTones(lighterTone, bgTone);
+        const darkerRatio = _contrast_contrast_js__WEBPACK_IMPORTED_MODULE_0__.Contrast.ratioOfTones(darkerTone, bgTone);
+        const preferLighter = DynamicColor.tonePrefersLightForeground(bgTone);
+        if (preferLighter) {
+            // This handles an edge case where the initial contrast ratio is high
+            // (ex. 13.0), and the ratio passed to the function is that high
+            // ratio, and both the lighter and darker ratio fails to pass that
+            // ratio.
+            //
+            // This was observed with Tonal Spot's On Primary Container turning
+            // black momentarily between high and max contrast in light mode. PC's
+            // standard tone was T90, OPC's was T10, it was light mode, and the
+            // contrast value was 0.6568521221032331.
+            const negligibleDifference = Math.abs(lighterRatio - darkerRatio) < 0.1 &&
+                lighterRatio < ratio && darkerRatio < ratio;
+            return lighterRatio >= ratio || lighterRatio >= darkerRatio ||
+                negligibleDifference ?
+                lighterTone :
+                darkerTone;
+        }
+        else {
+            return darkerRatio >= ratio || darkerRatio >= lighterRatio ? darkerTone :
+                lighterTone;
+        }
+    }
+    /**
+     * Returns whether [tone] prefers a light foreground.
+     *
+     * People prefer white foregrounds on ~T60-70. Observed over time, and also
+     * by Andrew Somers during research for APCA.
+     *
+     * T60 used as to create the smallest discontinuity possible when skipping
+     * down to T49 in order to ensure light foregrounds.
+     * Since `tertiaryContainer` in dark monochrome scheme requires a tone of
+     * 60, it should not be adjusted. Therefore, 60 is excluded here.
+     */
+    static tonePrefersLightForeground(tone) {
+        return Math.round(tone) < 60.0;
+    }
+    /**
+     * Returns whether [tone] can reach a contrast ratio of 4.5 with a lighter
+     * color.
+     */
+    static toneAllowsLightForeground(tone) {
+        return Math.round(tone) <= 49.0;
+    }
+    /**
+     * Adjust a tone such that white has 4.5 contrast, if the tone is
+     * reasonably close to supporting it.
+     */
+    static enableLightForeground(tone) {
+        if (DynamicColor.tonePrefersLightForeground(tone) &&
+            !DynamicColor.toneAllowsLightForeground(tone)) {
+            return 49.0;
+        }
+        return tone;
+    }
+}
+//# sourceMappingURL=dynamic_color.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@material/material-color-utilities/dynamiccolor/material_dynamic_colors.js":
+/*!*************************************************************************************************!*\
+  !*** ./node_modules/@material/material-color-utilities/dynamiccolor/material_dynamic_colors.js ***!
+  \*************************************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   MaterialDynamicColors: () => (/* binding */ MaterialDynamicColors)
+/* harmony export */ });
+/* harmony import */ var _dislike_dislike_analyzer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../dislike/dislike_analyzer.js */ "./node_modules/@material/material-color-utilities/dislike/dislike_analyzer.js");
+/* harmony import */ var _hct_hct_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../hct/hct.js */ "./node_modules/@material/material-color-utilities/hct/hct.js");
+/* harmony import */ var _hct_viewing_conditions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../hct/viewing_conditions.js */ "./node_modules/@material/material-color-utilities/hct/viewing_conditions.js");
+/* harmony import */ var _scheme_variant_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../scheme/variant.js */ "./node_modules/@material/material-color-utilities/scheme/variant.js");
+/* harmony import */ var _contrast_curve_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./contrast_curve.js */ "./node_modules/@material/material-color-utilities/dynamiccolor/contrast_curve.js");
+/* harmony import */ var _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./dynamic_color.js */ "./node_modules/@material/material-color-utilities/dynamiccolor/dynamic_color.js");
+/* harmony import */ var _tone_delta_pair_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./tone_delta_pair.js */ "./node_modules/@material/material-color-utilities/dynamiccolor/tone_delta_pair.js");
+/**
+ * @license
+ * Copyright 2022 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
+
+
+
+
+
+function isFidelity(scheme) {
+    return scheme.variant === _scheme_variant_js__WEBPACK_IMPORTED_MODULE_3__.Variant.FIDELITY ||
+        scheme.variant === _scheme_variant_js__WEBPACK_IMPORTED_MODULE_3__.Variant.CONTENT;
+}
+function isMonochrome(scheme) {
+    return scheme.variant === _scheme_variant_js__WEBPACK_IMPORTED_MODULE_3__.Variant.MONOCHROME;
+}
+function findDesiredChromaByTone(hue, chroma, tone, byDecreasingTone) {
+    let answer = tone;
+    let closestToChroma = _hct_hct_js__WEBPACK_IMPORTED_MODULE_1__.Hct.from(hue, chroma, tone);
+    if (closestToChroma.chroma < chroma) {
+        let chromaPeak = closestToChroma.chroma;
+        while (closestToChroma.chroma < chroma) {
+            answer += byDecreasingTone ? -1.0 : 1.0;
+            const potentialSolution = _hct_hct_js__WEBPACK_IMPORTED_MODULE_1__.Hct.from(hue, chroma, answer);
+            if (chromaPeak > potentialSolution.chroma) {
+                break;
+            }
+            if (Math.abs(potentialSolution.chroma - chroma) < 0.4) {
+                break;
+            }
+            const potentialDelta = Math.abs(potentialSolution.chroma - chroma);
+            const currentDelta = Math.abs(closestToChroma.chroma - chroma);
+            if (potentialDelta < currentDelta) {
+                closestToChroma = potentialSolution;
+            }
+            chromaPeak = Math.max(chromaPeak, potentialSolution.chroma);
+        }
+    }
+    return answer;
+}
+function viewingConditionsForAlbers(scheme) {
+    return _hct_viewing_conditions_js__WEBPACK_IMPORTED_MODULE_2__.ViewingConditions.make(
+    /*whitePoint=*/ undefined, 
+    /*adaptingLuminance=*/ undefined, 
+    /*backgroundLstar=*/ scheme.isDark ? 30 : 80, 
+    /*surround=*/ undefined, 
+    /*discountingIlluminant=*/ undefined);
+}
+function performAlbers(prealbers, scheme) {
+    const albersd = prealbers.inViewingConditions(viewingConditionsForAlbers(scheme));
+    if (_dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.tonePrefersLightForeground(prealbers.tone) &&
+        !_dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.toneAllowsLightForeground(albersd.tone)) {
+        return _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.enableLightForeground(prealbers.tone);
+    }
+    else {
+        return _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.enableLightForeground(albersd.tone);
+    }
+}
+/**
+ * DynamicColors for the colors in the Material Design system.
+ */
+// Material Color Utilities namespaces the various utilities it provides.
+// tslint:disable-next-line:class-as-namespace
+class MaterialDynamicColors {
+    static highestSurface(s) {
+        return s.isDark ? MaterialDynamicColors.surfaceBright :
+            MaterialDynamicColors.surfaceDim;
+    }
+}
+MaterialDynamicColors.contentAccentToneDelta = 15.0;
+MaterialDynamicColors.primaryPaletteKeyColor = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'primary_palette_key_color',
+    palette: (s) => s.primaryPalette,
+    tone: (s) => s.primaryPalette.keyColor.tone,
+});
+MaterialDynamicColors.secondaryPaletteKeyColor = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'secondary_palette_key_color',
+    palette: (s) => s.secondaryPalette,
+    tone: (s) => s.secondaryPalette.keyColor.tone,
+});
+MaterialDynamicColors.tertiaryPaletteKeyColor = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'tertiary_palette_key_color',
+    palette: (s) => s.tertiaryPalette,
+    tone: (s) => s.tertiaryPalette.keyColor.tone,
+});
+MaterialDynamicColors.neutralPaletteKeyColor = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'neutral_palette_key_color',
+    palette: (s) => s.neutralPalette,
+    tone: (s) => s.neutralPalette.keyColor.tone,
+});
+MaterialDynamicColors.neutralVariantPaletteKeyColor = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'neutral_variant_palette_key_color',
+    palette: (s) => s.neutralVariantPalette,
+    tone: (s) => s.neutralVariantPalette.keyColor.tone,
+});
+MaterialDynamicColors.background = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'background',
+    palette: (s) => s.neutralPalette,
+    tone: (s) => s.isDark ? 6 : 98,
+    isBackground: true,
+});
+MaterialDynamicColors.onBackground = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'on_background',
+    palette: (s) => s.neutralPalette,
+    tone: (s) => s.isDark ? 90 : 10,
+    background: (s) => MaterialDynamicColors.background,
+    contrastCurve: new _contrast_curve_js__WEBPACK_IMPORTED_MODULE_4__.ContrastCurve(3, 3, 4.5, 7),
+});
+MaterialDynamicColors.surface = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'surface',
+    palette: (s) => s.neutralPalette,
+    tone: (s) => s.isDark ? 6 : 98,
+    isBackground: true,
+});
+MaterialDynamicColors.surfaceDim = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'surface_dim',
+    palette: (s) => s.neutralPalette,
+    tone: (s) => s.isDark ? 6 : 87,
+    isBackground: true,
+});
+MaterialDynamicColors.surfaceBright = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'surface_bright',
+    palette: (s) => s.neutralPalette,
+    tone: (s) => s.isDark ? 24 : 98,
+    isBackground: true,
+});
+MaterialDynamicColors.surfaceContainerLowest = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'surface_container_lowest',
+    palette: (s) => s.neutralPalette,
+    tone: (s) => s.isDark ? 4 : 100,
+    isBackground: true,
+});
+MaterialDynamicColors.surfaceContainerLow = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'surface_container_low',
+    palette: (s) => s.neutralPalette,
+    tone: (s) => s.isDark ? 10 : 96,
+    isBackground: true,
+});
+MaterialDynamicColors.surfaceContainer = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'surface_container',
+    palette: (s) => s.neutralPalette,
+    tone: (s) => s.isDark ? 12 : 94,
+    isBackground: true,
+});
+MaterialDynamicColors.surfaceContainerHigh = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'surface_container_high',
+    palette: (s) => s.neutralPalette,
+    tone: (s) => s.isDark ? 17 : 92,
+    isBackground: true,
+});
+MaterialDynamicColors.surfaceContainerHighest = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'surface_container_highest',
+    palette: (s) => s.neutralPalette,
+    tone: (s) => s.isDark ? 22 : 90,
+    isBackground: true,
+});
+MaterialDynamicColors.onSurface = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'on_surface',
+    palette: (s) => s.neutralPalette,
+    tone: (s) => s.isDark ? 90 : 10,
+    background: (s) => MaterialDynamicColors.highestSurface(s),
+    contrastCurve: new _contrast_curve_js__WEBPACK_IMPORTED_MODULE_4__.ContrastCurve(4.5, 7, 11, 21),
+});
+MaterialDynamicColors.surfaceVariant = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'surface_variant',
+    palette: (s) => s.neutralVariantPalette,
+    tone: (s) => s.isDark ? 30 : 90,
+    isBackground: true,
+});
+MaterialDynamicColors.onSurfaceVariant = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'on_surface_variant',
+    palette: (s) => s.neutralVariantPalette,
+    tone: (s) => s.isDark ? 80 : 30,
+    background: (s) => MaterialDynamicColors.highestSurface(s),
+    contrastCurve: new _contrast_curve_js__WEBPACK_IMPORTED_MODULE_4__.ContrastCurve(3, 4.5, 7, 11),
+});
+MaterialDynamicColors.inverseSurface = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'inverse_surface',
+    palette: (s) => s.neutralPalette,
+    tone: (s) => s.isDark ? 90 : 20,
+});
+MaterialDynamicColors.inverseOnSurface = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'inverse_on_surface',
+    palette: (s) => s.neutralPalette,
+    tone: (s) => s.isDark ? 20 : 95,
+    background: (s) => MaterialDynamicColors.inverseSurface,
+    contrastCurve: new _contrast_curve_js__WEBPACK_IMPORTED_MODULE_4__.ContrastCurve(4.5, 7, 11, 21),
+});
+MaterialDynamicColors.outline = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'outline',
+    palette: (s) => s.neutralVariantPalette,
+    tone: (s) => s.isDark ? 60 : 50,
+    background: (s) => MaterialDynamicColors.highestSurface(s),
+    contrastCurve: new _contrast_curve_js__WEBPACK_IMPORTED_MODULE_4__.ContrastCurve(1.5, 3, 4.5, 7),
+});
+MaterialDynamicColors.outlineVariant = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'outline_variant',
+    palette: (s) => s.neutralVariantPalette,
+    tone: (s) => s.isDark ? 30 : 80,
+    background: (s) => MaterialDynamicColors.highestSurface(s),
+    contrastCurve: new _contrast_curve_js__WEBPACK_IMPORTED_MODULE_4__.ContrastCurve(1, 1, 3, 7),
+});
+MaterialDynamicColors.shadow = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'shadow',
+    palette: (s) => s.neutralPalette,
+    tone: (s) => 0,
+});
+MaterialDynamicColors.scrim = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'scrim',
+    palette: (s) => s.neutralPalette,
+    tone: (s) => 0,
+});
+MaterialDynamicColors.surfaceTint = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'surface_tint',
+    palette: (s) => s.primaryPalette,
+    tone: (s) => s.isDark ? 80 : 40,
+    isBackground: true,
+});
+MaterialDynamicColors.primary = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'primary',
+    palette: (s) => s.primaryPalette,
+    tone: (s) => {
+        if (isMonochrome(s)) {
+            return s.isDark ? 100 : 0;
+        }
+        return s.isDark ? 80 : 40;
+    },
+    isBackground: true,
+    background: (s) => MaterialDynamicColors.highestSurface(s),
+    contrastCurve: new _contrast_curve_js__WEBPACK_IMPORTED_MODULE_4__.ContrastCurve(3, 4.5, 7, 11),
+    toneDeltaPair: (s) => new _tone_delta_pair_js__WEBPACK_IMPORTED_MODULE_6__.ToneDeltaPair(MaterialDynamicColors.primaryContainer, MaterialDynamicColors.primary, 15, 'nearer', false),
+});
+MaterialDynamicColors.onPrimary = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'on_primary',
+    palette: (s) => s.primaryPalette,
+    tone: (s) => {
+        if (isMonochrome(s)) {
+            return s.isDark ? 10 : 90;
+        }
+        return s.isDark ? 20 : 100;
+    },
+    background: (s) => MaterialDynamicColors.primary,
+    contrastCurve: new _contrast_curve_js__WEBPACK_IMPORTED_MODULE_4__.ContrastCurve(4.5, 7, 11, 21),
+});
+MaterialDynamicColors.primaryContainer = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'primary_container',
+    palette: (s) => s.primaryPalette,
+    tone: (s) => {
+        if (isFidelity(s)) {
+            return performAlbers(s.sourceColorHct, s);
+        }
+        if (isMonochrome(s)) {
+            return s.isDark ? 85 : 25;
+        }
+        return s.isDark ? 30 : 90;
+    },
+    isBackground: true,
+    background: (s) => MaterialDynamicColors.highestSurface(s),
+    contrastCurve: new _contrast_curve_js__WEBPACK_IMPORTED_MODULE_4__.ContrastCurve(1, 1, 3, 7),
+    toneDeltaPair: (s) => new _tone_delta_pair_js__WEBPACK_IMPORTED_MODULE_6__.ToneDeltaPair(MaterialDynamicColors.primaryContainer, MaterialDynamicColors.primary, 15, 'nearer', false),
+});
+MaterialDynamicColors.onPrimaryContainer = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'on_primary_container',
+    palette: (s) => s.primaryPalette,
+    tone: (s) => {
+        if (isFidelity(s)) {
+            return _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.foregroundTone(MaterialDynamicColors.primaryContainer.tone(s), 4.5);
+        }
+        if (isMonochrome(s)) {
+            return s.isDark ? 0 : 100;
+        }
+        return s.isDark ? 90 : 10;
+    },
+    background: (s) => MaterialDynamicColors.primaryContainer,
+    contrastCurve: new _contrast_curve_js__WEBPACK_IMPORTED_MODULE_4__.ContrastCurve(4.5, 7, 11, 21),
+});
+MaterialDynamicColors.inversePrimary = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'inverse_primary',
+    palette: (s) => s.primaryPalette,
+    tone: (s) => s.isDark ? 40 : 80,
+    background: (s) => MaterialDynamicColors.inverseSurface,
+    contrastCurve: new _contrast_curve_js__WEBPACK_IMPORTED_MODULE_4__.ContrastCurve(3, 4.5, 7, 11),
+});
+MaterialDynamicColors.secondary = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'secondary',
+    palette: (s) => s.secondaryPalette,
+    tone: (s) => s.isDark ? 80 : 40,
+    isBackground: true,
+    background: (s) => MaterialDynamicColors.highestSurface(s),
+    contrastCurve: new _contrast_curve_js__WEBPACK_IMPORTED_MODULE_4__.ContrastCurve(3, 4.5, 7, 11),
+    toneDeltaPair: (s) => new _tone_delta_pair_js__WEBPACK_IMPORTED_MODULE_6__.ToneDeltaPair(MaterialDynamicColors.secondaryContainer, MaterialDynamicColors.secondary, 15, 'nearer', false),
+});
+MaterialDynamicColors.onSecondary = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'on_secondary',
+    palette: (s) => s.secondaryPalette,
+    tone: (s) => {
+        if (isMonochrome(s)) {
+            return s.isDark ? 10 : 100;
+        }
+        else {
+            return s.isDark ? 20 : 100;
+        }
+    },
+    background: (s) => MaterialDynamicColors.secondary,
+    contrastCurve: new _contrast_curve_js__WEBPACK_IMPORTED_MODULE_4__.ContrastCurve(4.5, 7, 11, 21),
+});
+MaterialDynamicColors.secondaryContainer = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'secondary_container',
+    palette: (s) => s.secondaryPalette,
+    tone: (s) => {
+        const initialTone = s.isDark ? 30 : 90;
+        if (isMonochrome(s)) {
+            return s.isDark ? 30 : 85;
+        }
+        if (!isFidelity(s)) {
+            return initialTone;
+        }
+        let answer = findDesiredChromaByTone(s.secondaryPalette.hue, s.secondaryPalette.chroma, initialTone, s.isDark ? false : true);
+        answer = performAlbers(s.secondaryPalette.getHct(answer), s);
+        return answer;
+    },
+    isBackground: true,
+    background: (s) => MaterialDynamicColors.highestSurface(s),
+    contrastCurve: new _contrast_curve_js__WEBPACK_IMPORTED_MODULE_4__.ContrastCurve(1, 1, 3, 7),
+    toneDeltaPair: (s) => new _tone_delta_pair_js__WEBPACK_IMPORTED_MODULE_6__.ToneDeltaPair(MaterialDynamicColors.secondaryContainer, MaterialDynamicColors.secondary, 15, 'nearer', false),
+});
+MaterialDynamicColors.onSecondaryContainer = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'on_secondary_container',
+    palette: (s) => s.secondaryPalette,
+    tone: (s) => {
+        if (!isFidelity(s)) {
+            return s.isDark ? 90 : 10;
+        }
+        return _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.foregroundTone(MaterialDynamicColors.secondaryContainer.tone(s), 4.5);
+    },
+    background: (s) => MaterialDynamicColors.secondaryContainer,
+    contrastCurve: new _contrast_curve_js__WEBPACK_IMPORTED_MODULE_4__.ContrastCurve(4.5, 7, 11, 21),
+});
+MaterialDynamicColors.tertiary = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'tertiary',
+    palette: (s) => s.tertiaryPalette,
+    tone: (s) => {
+        if (isMonochrome(s)) {
+            return s.isDark ? 90 : 25;
+        }
+        return s.isDark ? 80 : 40;
+    },
+    isBackground: true,
+    background: (s) => MaterialDynamicColors.highestSurface(s),
+    contrastCurve: new _contrast_curve_js__WEBPACK_IMPORTED_MODULE_4__.ContrastCurve(3, 4.5, 7, 11),
+    toneDeltaPair: (s) => new _tone_delta_pair_js__WEBPACK_IMPORTED_MODULE_6__.ToneDeltaPair(MaterialDynamicColors.tertiaryContainer, MaterialDynamicColors.tertiary, 15, 'nearer', false),
+});
+MaterialDynamicColors.onTertiary = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'on_tertiary',
+    palette: (s) => s.tertiaryPalette,
+    tone: (s) => {
+        if (isMonochrome(s)) {
+            return s.isDark ? 10 : 90;
+        }
+        return s.isDark ? 20 : 100;
+    },
+    background: (s) => MaterialDynamicColors.tertiary,
+    contrastCurve: new _contrast_curve_js__WEBPACK_IMPORTED_MODULE_4__.ContrastCurve(4.5, 7, 11, 21),
+});
+MaterialDynamicColors.tertiaryContainer = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'tertiary_container',
+    palette: (s) => s.tertiaryPalette,
+    tone: (s) => {
+        if (isMonochrome(s)) {
+            return s.isDark ? 60 : 49;
+        }
+        if (!isFidelity(s)) {
+            return s.isDark ? 30 : 90;
+        }
+        const albersTone = performAlbers(s.tertiaryPalette.getHct(s.sourceColorHct.tone), s);
+        const proposedHct = s.tertiaryPalette.getHct(albersTone);
+        return _dislike_dislike_analyzer_js__WEBPACK_IMPORTED_MODULE_0__.DislikeAnalyzer.fixIfDisliked(proposedHct).tone;
+    },
+    isBackground: true,
+    background: (s) => MaterialDynamicColors.highestSurface(s),
+    contrastCurve: new _contrast_curve_js__WEBPACK_IMPORTED_MODULE_4__.ContrastCurve(1, 1, 3, 7),
+    toneDeltaPair: (s) => new _tone_delta_pair_js__WEBPACK_IMPORTED_MODULE_6__.ToneDeltaPair(MaterialDynamicColors.tertiaryContainer, MaterialDynamicColors.tertiary, 15, 'nearer', false),
+});
+MaterialDynamicColors.onTertiaryContainer = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'on_tertiary_container',
+    palette: (s) => s.tertiaryPalette,
+    tone: (s) => {
+        if (isMonochrome(s)) {
+            return s.isDark ? 0 : 100;
+        }
+        if (!isFidelity(s)) {
+            return s.isDark ? 90 : 10;
+        }
+        return _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.foregroundTone(MaterialDynamicColors.tertiaryContainer.tone(s), 4.5);
+    },
+    background: (s) => MaterialDynamicColors.tertiaryContainer,
+    contrastCurve: new _contrast_curve_js__WEBPACK_IMPORTED_MODULE_4__.ContrastCurve(4.5, 7, 11, 21),
+});
+MaterialDynamicColors.error = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'error',
+    palette: (s) => s.errorPalette,
+    tone: (s) => s.isDark ? 80 : 40,
+    isBackground: true,
+    background: (s) => MaterialDynamicColors.highestSurface(s),
+    contrastCurve: new _contrast_curve_js__WEBPACK_IMPORTED_MODULE_4__.ContrastCurve(3, 4.5, 7, 11),
+    toneDeltaPair: (s) => new _tone_delta_pair_js__WEBPACK_IMPORTED_MODULE_6__.ToneDeltaPair(MaterialDynamicColors.errorContainer, MaterialDynamicColors.error, 15, 'nearer', false),
+});
+MaterialDynamicColors.onError = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'on_error',
+    palette: (s) => s.errorPalette,
+    tone: (s) => s.isDark ? 20 : 100,
+    background: (s) => MaterialDynamicColors.error,
+    contrastCurve: new _contrast_curve_js__WEBPACK_IMPORTED_MODULE_4__.ContrastCurve(4.5, 7, 11, 21),
+});
+MaterialDynamicColors.errorContainer = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'error_container',
+    palette: (s) => s.errorPalette,
+    tone: (s) => s.isDark ? 30 : 90,
+    isBackground: true,
+    background: (s) => MaterialDynamicColors.highestSurface(s),
+    contrastCurve: new _contrast_curve_js__WEBPACK_IMPORTED_MODULE_4__.ContrastCurve(1, 1, 3, 7),
+    toneDeltaPair: (s) => new _tone_delta_pair_js__WEBPACK_IMPORTED_MODULE_6__.ToneDeltaPair(MaterialDynamicColors.errorContainer, MaterialDynamicColors.error, 15, 'nearer', false),
+});
+MaterialDynamicColors.onErrorContainer = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'on_error_container',
+    palette: (s) => s.errorPalette,
+    tone: (s) => s.isDark ? 90 : 10,
+    background: (s) => MaterialDynamicColors.errorContainer,
+    contrastCurve: new _contrast_curve_js__WEBPACK_IMPORTED_MODULE_4__.ContrastCurve(4.5, 7, 11, 21),
+});
+MaterialDynamicColors.primaryFixed = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'primary_fixed',
+    palette: (s) => s.primaryPalette,
+    tone: (s) => isMonochrome(s) ? 40.0 : 90.0,
+    isBackground: true,
+    background: (s) => MaterialDynamicColors.highestSurface(s),
+    contrastCurve: new _contrast_curve_js__WEBPACK_IMPORTED_MODULE_4__.ContrastCurve(1, 1, 3, 7),
+    toneDeltaPair: (s) => new _tone_delta_pair_js__WEBPACK_IMPORTED_MODULE_6__.ToneDeltaPair(MaterialDynamicColors.primaryFixed, MaterialDynamicColors.primaryFixedDim, 10, 'lighter', true),
+});
+MaterialDynamicColors.primaryFixedDim = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'primary_fixed_dim',
+    palette: (s) => s.primaryPalette,
+    tone: (s) => isMonochrome(s) ? 30.0 : 80.0,
+    isBackground: true,
+    background: (s) => MaterialDynamicColors.highestSurface(s),
+    contrastCurve: new _contrast_curve_js__WEBPACK_IMPORTED_MODULE_4__.ContrastCurve(1, 1, 3, 7),
+    toneDeltaPair: (s) => new _tone_delta_pair_js__WEBPACK_IMPORTED_MODULE_6__.ToneDeltaPair(MaterialDynamicColors.primaryFixed, MaterialDynamicColors.primaryFixedDim, 10, 'lighter', true),
+});
+MaterialDynamicColors.onPrimaryFixed = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'on_primary_fixed',
+    palette: (s) => s.primaryPalette,
+    tone: (s) => isMonochrome(s) ? 100.0 : 10.0,
+    background: (s) => MaterialDynamicColors.primaryFixedDim,
+    secondBackground: (s) => MaterialDynamicColors.primaryFixed,
+    contrastCurve: new _contrast_curve_js__WEBPACK_IMPORTED_MODULE_4__.ContrastCurve(4.5, 7, 11, 21),
+});
+MaterialDynamicColors.onPrimaryFixedVariant = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'on_primary_fixed_variant',
+    palette: (s) => s.primaryPalette,
+    tone: (s) => isMonochrome(s) ? 90.0 : 30.0,
+    background: (s) => MaterialDynamicColors.primaryFixedDim,
+    secondBackground: (s) => MaterialDynamicColors.primaryFixed,
+    contrastCurve: new _contrast_curve_js__WEBPACK_IMPORTED_MODULE_4__.ContrastCurve(3, 4.5, 7, 11),
+});
+MaterialDynamicColors.secondaryFixed = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'secondary_fixed',
+    palette: (s) => s.secondaryPalette,
+    tone: (s) => isMonochrome(s) ? 80.0 : 90.0,
+    isBackground: true,
+    background: (s) => MaterialDynamicColors.highestSurface(s),
+    contrastCurve: new _contrast_curve_js__WEBPACK_IMPORTED_MODULE_4__.ContrastCurve(1, 1, 3, 7),
+    toneDeltaPair: (s) => new _tone_delta_pair_js__WEBPACK_IMPORTED_MODULE_6__.ToneDeltaPair(MaterialDynamicColors.secondaryFixed, MaterialDynamicColors.secondaryFixedDim, 10, 'lighter', true),
+});
+MaterialDynamicColors.secondaryFixedDim = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'secondary_fixed_dim',
+    palette: (s) => s.secondaryPalette,
+    tone: (s) => isMonochrome(s) ? 70.0 : 80.0,
+    isBackground: true,
+    background: (s) => MaterialDynamicColors.highestSurface(s),
+    contrastCurve: new _contrast_curve_js__WEBPACK_IMPORTED_MODULE_4__.ContrastCurve(1, 1, 3, 7),
+    toneDeltaPair: (s) => new _tone_delta_pair_js__WEBPACK_IMPORTED_MODULE_6__.ToneDeltaPair(MaterialDynamicColors.secondaryFixed, MaterialDynamicColors.secondaryFixedDim, 10, 'lighter', true),
+});
+MaterialDynamicColors.onSecondaryFixed = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'on_secondary_fixed',
+    palette: (s) => s.secondaryPalette,
+    tone: (s) => 10.0,
+    background: (s) => MaterialDynamicColors.secondaryFixedDim,
+    secondBackground: (s) => MaterialDynamicColors.secondaryFixed,
+    contrastCurve: new _contrast_curve_js__WEBPACK_IMPORTED_MODULE_4__.ContrastCurve(4.5, 7, 11, 21),
+});
+MaterialDynamicColors.onSecondaryFixedVariant = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'on_secondary_fixed_variant',
+    palette: (s) => s.secondaryPalette,
+    tone: (s) => isMonochrome(s) ? 25.0 : 30.0,
+    background: (s) => MaterialDynamicColors.secondaryFixedDim,
+    secondBackground: (s) => MaterialDynamicColors.secondaryFixed,
+    contrastCurve: new _contrast_curve_js__WEBPACK_IMPORTED_MODULE_4__.ContrastCurve(3, 4.5, 7, 11),
+});
+MaterialDynamicColors.tertiaryFixed = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'tertiary_fixed',
+    palette: (s) => s.tertiaryPalette,
+    tone: (s) => isMonochrome(s) ? 40.0 : 90.0,
+    isBackground: true,
+    background: (s) => MaterialDynamicColors.highestSurface(s),
+    contrastCurve: new _contrast_curve_js__WEBPACK_IMPORTED_MODULE_4__.ContrastCurve(1, 1, 3, 7),
+    toneDeltaPair: (s) => new _tone_delta_pair_js__WEBPACK_IMPORTED_MODULE_6__.ToneDeltaPair(MaterialDynamicColors.tertiaryFixed, MaterialDynamicColors.tertiaryFixedDim, 10, 'lighter', true),
+});
+MaterialDynamicColors.tertiaryFixedDim = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'tertiary_fixed_dim',
+    palette: (s) => s.tertiaryPalette,
+    tone: (s) => isMonochrome(s) ? 30.0 : 80.0,
+    isBackground: true,
+    background: (s) => MaterialDynamicColors.highestSurface(s),
+    contrastCurve: new _contrast_curve_js__WEBPACK_IMPORTED_MODULE_4__.ContrastCurve(1, 1, 3, 7),
+    toneDeltaPair: (s) => new _tone_delta_pair_js__WEBPACK_IMPORTED_MODULE_6__.ToneDeltaPair(MaterialDynamicColors.tertiaryFixed, MaterialDynamicColors.tertiaryFixedDim, 10, 'lighter', true),
+});
+MaterialDynamicColors.onTertiaryFixed = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'on_tertiary_fixed',
+    palette: (s) => s.tertiaryPalette,
+    tone: (s) => isMonochrome(s) ? 100.0 : 10.0,
+    background: (s) => MaterialDynamicColors.tertiaryFixedDim,
+    secondBackground: (s) => MaterialDynamicColors.tertiaryFixed,
+    contrastCurve: new _contrast_curve_js__WEBPACK_IMPORTED_MODULE_4__.ContrastCurve(4.5, 7, 11, 21),
+});
+MaterialDynamicColors.onTertiaryFixedVariant = _dynamic_color_js__WEBPACK_IMPORTED_MODULE_5__.DynamicColor.fromPalette({
+    name: 'on_tertiary_fixed_variant',
+    palette: (s) => s.tertiaryPalette,
+    tone: (s) => isMonochrome(s) ? 90.0 : 30.0,
+    background: (s) => MaterialDynamicColors.tertiaryFixedDim,
+    secondBackground: (s) => MaterialDynamicColors.tertiaryFixed,
+    contrastCurve: new _contrast_curve_js__WEBPACK_IMPORTED_MODULE_4__.ContrastCurve(3, 4.5, 7, 11),
+});
+//# sourceMappingURL=material_dynamic_colors.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@material/material-color-utilities/dynamiccolor/tone_delta_pair.js":
+/*!*****************************************************************************************!*\
+  !*** ./node_modules/@material/material-color-utilities/dynamiccolor/tone_delta_pair.js ***!
+  \*****************************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ToneDeltaPair: () => (/* binding */ ToneDeltaPair)
+/* harmony export */ });
+/**
+ * @license
+ * Copyright 2023 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Documents a constraint between two DynamicColors, in which their tones must
+ * have a certain distance from each other.
+ *
+ * Prefer a DynamicColor with a background, this is for special cases when
+ * designers want tonal distance, literally contrast, between two colors that
+ * don't have a background / foreground relationship or a contrast guarantee.
+ */
+class ToneDeltaPair {
+    /**
+     * Documents a constraint in tone distance between two DynamicColors.
+     *
+     * The polarity is an adjective that describes "A", compared to "B".
+     *
+     * For instance, ToneDeltaPair(A, B, 15, 'darker', stayTogether) states that
+     * A's tone should be at least 15 darker than B's.
+     *
+     * 'nearer' and 'farther' describes closeness to the surface roles. For
+     * instance, ToneDeltaPair(A, B, 10, 'nearer', stayTogether) states that A
+     * should be 10 lighter than B in light mode, and 10 darker than B in dark
+     * mode.
+     *
+     * @param roleA The first role in a pair.
+     * @param roleB The second role in a pair.
+     * @param delta Required difference between tones. Absolute value, negative
+     * values have undefined behavior.
+     * @param polarity The relative relation between tones of roleA and roleB,
+     * as described above.
+     * @param stayTogether Whether these two roles should stay on the same side of
+     * the "awkward zone" (T50-59). This is necessary for certain cases where
+     * one role has two backgrounds.
+     */
+    constructor(roleA, roleB, delta, polarity, stayTogether) {
+        this.roleA = roleA;
+        this.roleB = roleB;
+        this.delta = delta;
+        this.polarity = polarity;
+        this.stayTogether = stayTogether;
+    }
+}
+//# sourceMappingURL=tone_delta_pair.js.map
+
+/***/ }),
+
 /***/ "./node_modules/@material/material-color-utilities/hct/cam16.js":
 /*!**********************************************************************!*\
   !*** ./node_modules/@material/material-color-utilities/hct/cam16.js ***!
@@ -119,7 +1931,7 @@ class Blend {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Cam16": () => (/* binding */ Cam16)
+/* harmony export */   Cam16: () => (/* binding */ Cam16)
 /* harmony export */ });
 /* harmony import */ var _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/color_utils.js */ "./node_modules/@material/material-color-utilities/utils/color_utils.js");
 /* harmony import */ var _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/math_utils.js */ "./node_modules/@material/material-color-utilities/utils/math_utils.js");
@@ -384,6 +2196,101 @@ class Cam16 {
         const argb = _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_0__.argbFromXyz(x, y, z);
         return argb;
     }
+    /// Given color expressed in XYZ and viewed in [viewingConditions], convert to
+    /// CAM16.
+    static fromXyzInViewingConditions(x, y, z, viewingConditions) {
+        // Transform XYZ to 'cone'/'rgb' responses
+        const rC = 0.401288 * x + 0.650173 * y - 0.051461 * z;
+        const gC = -0.250268 * x + 1.204414 * y + 0.045854 * z;
+        const bC = -0.002079 * x + 0.048952 * y + 0.953127 * z;
+        // Discount illuminant
+        const rD = viewingConditions.rgbD[0] * rC;
+        const gD = viewingConditions.rgbD[1] * gC;
+        const bD = viewingConditions.rgbD[2] * bC;
+        // chromatic adaptation
+        const rAF = Math.pow(viewingConditions.fl * Math.abs(rD) / 100.0, 0.42);
+        const gAF = Math.pow(viewingConditions.fl * Math.abs(gD) / 100.0, 0.42);
+        const bAF = Math.pow(viewingConditions.fl * Math.abs(bD) / 100.0, 0.42);
+        const rA = _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_1__.signum(rD) * 400.0 * rAF / (rAF + 27.13);
+        const gA = _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_1__.signum(gD) * 400.0 * gAF / (gAF + 27.13);
+        const bA = _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_1__.signum(bD) * 400.0 * bAF / (bAF + 27.13);
+        // redness-greenness
+        const a = (11.0 * rA + -12.0 * gA + bA) / 11.0;
+        // yellowness-blueness
+        const b = (rA + gA - 2.0 * bA) / 9.0;
+        // auxiliary components
+        const u = (20.0 * rA + 20.0 * gA + 21.0 * bA) / 20.0;
+        const p2 = (40.0 * rA + 20.0 * gA + bA) / 20.0;
+        // hue
+        const atan2 = Math.atan2(b, a);
+        const atanDegrees = atan2 * 180.0 / Math.PI;
+        const hue = atanDegrees < 0 ? atanDegrees + 360.0 :
+            atanDegrees >= 360 ? atanDegrees - 360 :
+                atanDegrees;
+        const hueRadians = hue * Math.PI / 180.0;
+        // achromatic response to color
+        const ac = p2 * viewingConditions.nbb;
+        // CAM16 lightness and brightness
+        const J = 100.0 *
+            Math.pow(ac / viewingConditions.aw, viewingConditions.c * viewingConditions.z);
+        const Q = (4.0 / viewingConditions.c) * Math.sqrt(J / 100.0) *
+            (viewingConditions.aw + 4.0) * (viewingConditions.fLRoot);
+        const huePrime = (hue < 20.14) ? hue + 360 : hue;
+        const eHue = (1.0 / 4.0) * (Math.cos(huePrime * Math.PI / 180.0 + 2.0) + 3.8);
+        const p1 = 50000.0 / 13.0 * eHue * viewingConditions.nc * viewingConditions.ncb;
+        const t = p1 * Math.sqrt(a * a + b * b) / (u + 0.305);
+        const alpha = Math.pow(t, 0.9) *
+            Math.pow(1.64 - Math.pow(0.29, viewingConditions.n), 0.73);
+        // CAM16 chroma, colorfulness, chroma
+        const C = alpha * Math.sqrt(J / 100.0);
+        const M = C * viewingConditions.fLRoot;
+        const s = 50.0 *
+            Math.sqrt((alpha * viewingConditions.c) / (viewingConditions.aw + 4.0));
+        // CAM16-UCS components
+        const jstar = (1.0 + 100.0 * 0.007) * J / (1.0 + 0.007 * J);
+        const mstar = Math.log(1.0 + 0.0228 * M) / 0.0228;
+        const astar = mstar * Math.cos(hueRadians);
+        const bstar = mstar * Math.sin(hueRadians);
+        return new Cam16(hue, C, J, Q, M, s, jstar, astar, bstar);
+    }
+    /// XYZ representation of CAM16 seen in [viewingConditions].
+    xyzInViewingConditions(viewingConditions) {
+        const alpha = (this.chroma === 0.0 || this.j === 0.0) ?
+            0.0 :
+            this.chroma / Math.sqrt(this.j / 100.0);
+        const t = Math.pow(alpha / Math.pow(1.64 - Math.pow(0.29, viewingConditions.n), 0.73), 1.0 / 0.9);
+        const hRad = this.hue * Math.PI / 180.0;
+        const eHue = 0.25 * (Math.cos(hRad + 2.0) + 3.8);
+        const ac = viewingConditions.aw *
+            Math.pow(this.j / 100.0, 1.0 / viewingConditions.c / viewingConditions.z);
+        const p1 = eHue * (50000.0 / 13.0) * viewingConditions.nc * viewingConditions.ncb;
+        const p2 = (ac / viewingConditions.nbb);
+        const hSin = Math.sin(hRad);
+        const hCos = Math.cos(hRad);
+        const gamma = 23.0 * (p2 + 0.305) * t /
+            (23.0 * p1 + 11 * t * hCos + 108.0 * t * hSin);
+        const a = gamma * hCos;
+        const b = gamma * hSin;
+        const rA = (460.0 * p2 + 451.0 * a + 288.0 * b) / 1403.0;
+        const gA = (460.0 * p2 - 891.0 * a - 261.0 * b) / 1403.0;
+        const bA = (460.0 * p2 - 220.0 * a - 6300.0 * b) / 1403.0;
+        const rCBase = Math.max(0, (27.13 * Math.abs(rA)) / (400.0 - Math.abs(rA)));
+        const rC = _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_1__.signum(rA) * (100.0 / viewingConditions.fl) *
+            Math.pow(rCBase, 1.0 / 0.42);
+        const gCBase = Math.max(0, (27.13 * Math.abs(gA)) / (400.0 - Math.abs(gA)));
+        const gC = _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_1__.signum(gA) * (100.0 / viewingConditions.fl) *
+            Math.pow(gCBase, 1.0 / 0.42);
+        const bCBase = Math.max(0, (27.13 * Math.abs(bA)) / (400.0 - Math.abs(bA)));
+        const bC = _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_1__.signum(bA) * (100.0 / viewingConditions.fl) *
+            Math.pow(bCBase, 1.0 / 0.42);
+        const rF = rC / viewingConditions.rgbD[0];
+        const gF = gC / viewingConditions.rgbD[1];
+        const bF = bC / viewingConditions.rgbD[2];
+        const x = 1.86206786 * rF - 1.01125463 * gF + 0.14918677 * bF;
+        const y = 0.38752654 * rF + 0.62144744 * gF - 0.00897398 * bF;
+        const z = -0.01584150 * rF - 0.03412294 * gF + 1.04996444 * bF;
+        return [x, y, z];
+    }
 }
 //# sourceMappingURL=cam16.js.map
 
@@ -397,11 +2304,12 @@ class Cam16 {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Hct": () => (/* binding */ Hct)
+/* harmony export */   Hct: () => (/* binding */ Hct)
 /* harmony export */ });
 /* harmony import */ var _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/color_utils.js */ "./node_modules/@material/material-color-utilities/utils/color_utils.js");
 /* harmony import */ var _cam16_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cam16.js */ "./node_modules/@material/material-color-utilities/hct/cam16.js");
 /* harmony import */ var _hct_solver_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./hct_solver.js */ "./node_modules/@material/material-color-utilities/hct/hct_solver.js");
+/* harmony import */ var _viewing_conditions_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./viewing_conditions.js */ "./node_modules/@material/material-color-utilities/hct/viewing_conditions.js");
 /**
  * @license
  * Copyright 2021 Google LLC
@@ -433,6 +2341,7 @@ __webpack_require__.r(__webpack_exports__);
  * calculate. A difference of 40 in HCT tone guarantees a contrast ratio >= 3.0,
  * and a difference of 50 guarantees a contrast ratio >= 4.5.
  */
+
 
 
 
@@ -508,6 +2417,32 @@ class Hct {
         this.internalTone = _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_0__.lstarFromArgb(argb);
         this.argb = argb;
     }
+    /**
+     * Translates a color into different [ViewingConditions].
+     *
+     * Colors change appearance. They look different with lights on versus off,
+     * the same color, as in hex code, on white looks different when on black.
+     * This is called color relativity, most famously explicated by Josef Albers
+     * in Interaction of Color.
+     *
+     * In color science, color appearance models can account for this and
+     * calculate the appearance of a color in different settings. HCT is based on
+     * CAM16, a color appearance model, and uses it to make these calculations.
+     *
+     * See [ViewingConditions.make] for parameters affecting color appearance.
+     */
+    inViewingConditions(vc) {
+        // 1. Use CAM16 to find XYZ coordinates of color in specified VC.
+        const cam = _cam16_js__WEBPACK_IMPORTED_MODULE_1__.Cam16.fromInt(this.toInt());
+        const viewedInVc = cam.xyzInViewingConditions(vc);
+        // 2. Create CAM16 of those XYZ coordinates in default VC.
+        const recastInVc = _cam16_js__WEBPACK_IMPORTED_MODULE_1__.Cam16.fromXyzInViewingConditions(viewedInVc[0], viewedInVc[1], viewedInVc[2], _viewing_conditions_js__WEBPACK_IMPORTED_MODULE_3__.ViewingConditions.make());
+        // 3. Create HCT from:
+        // - CAM16 using default VC with XYZ coordinates in specified VC.
+        // - L* converted from Y in XYZ coordinates in specified VC.
+        const recastHct = Hct.from(recastInVc.hue, recastInVc.chroma, _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_0__.lstarFromY(viewedInVc[1]));
+        return recastHct;
+    }
 }
 //# sourceMappingURL=hct.js.map
 
@@ -521,7 +2456,7 @@ class Hct {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "HctSolver": () => (/* binding */ HctSolver)
+/* harmony export */   HctSolver: () => (/* binding */ HctSolver)
 /* harmony export */ });
 /* harmony import */ var _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/color_utils.js */ "./node_modules/@material/material-color-utilities/utils/color_utils.js");
 /* harmony import */ var _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/math_utils.js */ "./node_modules/@material/material-color-utilities/utils/math_utils.js");
@@ -1053,7 +2988,7 @@ HctSolver.CRITICAL_PLANES = [
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ViewingConditions": () => (/* binding */ ViewingConditions)
+/* harmony export */   ViewingConditions: () => (/* binding */ ViewingConditions)
 /* harmony export */ });
 /* harmony import */ var _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/color_utils.js */ "./node_modules/@material/material-color-utilities/utils/color_utils.js");
 /* harmony import */ var _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/math_utils.js */ "./node_modules/@material/material-color-utilities/utils/math_utils.js");
@@ -1185,74 +3120,100 @@ ViewingConditions.DEFAULT = ViewingConditions.make();
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Blend": () => (/* reexport safe */ _blend_blend_js__WEBPACK_IMPORTED_MODULE_0__.Blend),
-/* harmony export */   "Cam16": () => (/* reexport safe */ _hct_cam16_js__WEBPACK_IMPORTED_MODULE_1__.Cam16),
-/* harmony export */   "CorePalette": () => (/* reexport safe */ _palettes_core_palette_js__WEBPACK_IMPORTED_MODULE_4__.CorePalette),
-/* harmony export */   "Hct": () => (/* reexport safe */ _hct_hct_js__WEBPACK_IMPORTED_MODULE_2__.Hct),
-/* harmony export */   "QuantizerCelebi": () => (/* reexport safe */ _quantize_quantizer_celebi_js__WEBPACK_IMPORTED_MODULE_6__.QuantizerCelebi),
-/* harmony export */   "QuantizerMap": () => (/* reexport safe */ _quantize_quantizer_map_js__WEBPACK_IMPORTED_MODULE_7__.QuantizerMap),
-/* harmony export */   "QuantizerWsmeans": () => (/* reexport safe */ _quantize_quantizer_wsmeans_js__WEBPACK_IMPORTED_MODULE_8__.QuantizerWsmeans),
-/* harmony export */   "QuantizerWu": () => (/* reexport safe */ _quantize_quantizer_wu_js__WEBPACK_IMPORTED_MODULE_9__.QuantizerWu),
-/* harmony export */   "Scheme": () => (/* reexport safe */ _scheme_scheme_js__WEBPACK_IMPORTED_MODULE_10__.Scheme),
-/* harmony export */   "SchemeAndroid": () => (/* reexport safe */ _scheme_scheme_android_js__WEBPACK_IMPORTED_MODULE_11__.SchemeAndroid),
-/* harmony export */   "Score": () => (/* reexport safe */ _score_score_js__WEBPACK_IMPORTED_MODULE_12__.Score),
-/* harmony export */   "TonalPalette": () => (/* reexport safe */ _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_5__.TonalPalette),
-/* harmony export */   "ViewingConditions": () => (/* reexport safe */ _hct_viewing_conditions_js__WEBPACK_IMPORTED_MODULE_3__.ViewingConditions),
-/* harmony export */   "alphaFromArgb": () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_13__.alphaFromArgb),
-/* harmony export */   "applyTheme": () => (/* reexport safe */ _utils_theme_utils_js__WEBPACK_IMPORTED_MODULE_17__.applyTheme),
-/* harmony export */   "argbFromHex": () => (/* reexport safe */ _utils_string_utils_js__WEBPACK_IMPORTED_MODULE_15__.argbFromHex),
-/* harmony export */   "argbFromLab": () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_13__.argbFromLab),
-/* harmony export */   "argbFromLinrgb": () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_13__.argbFromLinrgb),
-/* harmony export */   "argbFromLstar": () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_13__.argbFromLstar),
-/* harmony export */   "argbFromRgb": () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_13__.argbFromRgb),
-/* harmony export */   "argbFromRgba": () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_13__.argbFromRgba),
-/* harmony export */   "argbFromXyz": () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_13__.argbFromXyz),
-/* harmony export */   "blueFromArgb": () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_13__.blueFromArgb),
-/* harmony export */   "clampDouble": () => (/* reexport safe */ _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_14__.clampDouble),
-/* harmony export */   "clampInt": () => (/* reexport safe */ _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_14__.clampInt),
-/* harmony export */   "customColor": () => (/* reexport safe */ _utils_theme_utils_js__WEBPACK_IMPORTED_MODULE_17__.customColor),
-/* harmony export */   "delinearized": () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_13__.delinearized),
-/* harmony export */   "differenceDegrees": () => (/* reexport safe */ _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_14__.differenceDegrees),
-/* harmony export */   "greenFromArgb": () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_13__.greenFromArgb),
-/* harmony export */   "hexFromArgb": () => (/* reexport safe */ _utils_string_utils_js__WEBPACK_IMPORTED_MODULE_15__.hexFromArgb),
-/* harmony export */   "isOpaque": () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_13__.isOpaque),
-/* harmony export */   "labFromArgb": () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_13__.labFromArgb),
-/* harmony export */   "lerp": () => (/* reexport safe */ _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_14__.lerp),
-/* harmony export */   "linearized": () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_13__.linearized),
-/* harmony export */   "lstarFromArgb": () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_13__.lstarFromArgb),
-/* harmony export */   "lstarFromY": () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_13__.lstarFromY),
-/* harmony export */   "matrixMultiply": () => (/* reexport safe */ _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_14__.matrixMultiply),
-/* harmony export */   "redFromArgb": () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_13__.redFromArgb),
-/* harmony export */   "rgbaFromArgb": () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_13__.rgbaFromArgb),
-/* harmony export */   "rotationDirection": () => (/* reexport safe */ _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_14__.rotationDirection),
-/* harmony export */   "sanitizeDegreesDouble": () => (/* reexport safe */ _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_14__.sanitizeDegreesDouble),
-/* harmony export */   "sanitizeDegreesInt": () => (/* reexport safe */ _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_14__.sanitizeDegreesInt),
-/* harmony export */   "signum": () => (/* reexport safe */ _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_14__.signum),
-/* harmony export */   "sourceColorFromImage": () => (/* reexport safe */ _utils_image_utils_js__WEBPACK_IMPORTED_MODULE_16__.sourceColorFromImage),
-/* harmony export */   "themeFromImage": () => (/* reexport safe */ _utils_theme_utils_js__WEBPACK_IMPORTED_MODULE_17__.themeFromImage),
-/* harmony export */   "themeFromSourceColor": () => (/* reexport safe */ _utils_theme_utils_js__WEBPACK_IMPORTED_MODULE_17__.themeFromSourceColor),
-/* harmony export */   "whitePointD65": () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_13__.whitePointD65),
-/* harmony export */   "xyzFromArgb": () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_13__.xyzFromArgb),
-/* harmony export */   "yFromLstar": () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_13__.yFromLstar)
+/* harmony export */   Blend: () => (/* reexport safe */ _blend_blend_js__WEBPACK_IMPORTED_MODULE_0__.Blend),
+/* harmony export */   Cam16: () => (/* reexport safe */ _hct_cam16_js__WEBPACK_IMPORTED_MODULE_5__.Cam16),
+/* harmony export */   Contrast: () => (/* reexport safe */ _contrast_contrast_js__WEBPACK_IMPORTED_MODULE_1__.Contrast),
+/* harmony export */   CorePalette: () => (/* reexport safe */ _palettes_core_palette_js__WEBPACK_IMPORTED_MODULE_8__.CorePalette),
+/* harmony export */   DislikeAnalyzer: () => (/* reexport safe */ _dislike_dislike_analyzer_js__WEBPACK_IMPORTED_MODULE_2__.DislikeAnalyzer),
+/* harmony export */   DynamicColor: () => (/* reexport safe */ _dynamiccolor_dynamic_color_js__WEBPACK_IMPORTED_MODULE_3__.DynamicColor),
+/* harmony export */   DynamicScheme: () => (/* reexport safe */ _scheme_dynamic_scheme_js__WEBPACK_IMPORTED_MODULE_14__.DynamicScheme),
+/* harmony export */   Hct: () => (/* reexport safe */ _hct_hct_js__WEBPACK_IMPORTED_MODULE_6__.Hct),
+/* harmony export */   MaterialDynamicColors: () => (/* reexport safe */ _dynamiccolor_material_dynamic_colors_js__WEBPACK_IMPORTED_MODULE_4__.MaterialDynamicColors),
+/* harmony export */   QuantizerCelebi: () => (/* reexport safe */ _quantize_quantizer_celebi_js__WEBPACK_IMPORTED_MODULE_10__.QuantizerCelebi),
+/* harmony export */   QuantizerMap: () => (/* reexport safe */ _quantize_quantizer_map_js__WEBPACK_IMPORTED_MODULE_11__.QuantizerMap),
+/* harmony export */   QuantizerWsmeans: () => (/* reexport safe */ _quantize_quantizer_wsmeans_js__WEBPACK_IMPORTED_MODULE_12__.QuantizerWsmeans),
+/* harmony export */   QuantizerWu: () => (/* reexport safe */ _quantize_quantizer_wu_js__WEBPACK_IMPORTED_MODULE_13__.QuantizerWu),
+/* harmony export */   Scheme: () => (/* reexport safe */ _scheme_scheme_js__WEBPACK_IMPORTED_MODULE_15__.Scheme),
+/* harmony export */   SchemeAndroid: () => (/* reexport safe */ _scheme_scheme_android_js__WEBPACK_IMPORTED_MODULE_16__.SchemeAndroid),
+/* harmony export */   SchemeContent: () => (/* reexport safe */ _scheme_scheme_content_js__WEBPACK_IMPORTED_MODULE_17__.SchemeContent),
+/* harmony export */   SchemeExpressive: () => (/* reexport safe */ _scheme_scheme_expressive_js__WEBPACK_IMPORTED_MODULE_18__.SchemeExpressive),
+/* harmony export */   SchemeFidelity: () => (/* reexport safe */ _scheme_scheme_fidelity_js__WEBPACK_IMPORTED_MODULE_19__.SchemeFidelity),
+/* harmony export */   SchemeMonochrome: () => (/* reexport safe */ _scheme_scheme_monochrome_js__WEBPACK_IMPORTED_MODULE_20__.SchemeMonochrome),
+/* harmony export */   SchemeNeutral: () => (/* reexport safe */ _scheme_scheme_neutral_js__WEBPACK_IMPORTED_MODULE_21__.SchemeNeutral),
+/* harmony export */   SchemeTonalSpot: () => (/* reexport safe */ _scheme_scheme_tonal_spot_js__WEBPACK_IMPORTED_MODULE_22__.SchemeTonalSpot),
+/* harmony export */   SchemeVibrant: () => (/* reexport safe */ _scheme_scheme_vibrant_js__WEBPACK_IMPORTED_MODULE_23__.SchemeVibrant),
+/* harmony export */   Score: () => (/* reexport safe */ _score_score_js__WEBPACK_IMPORTED_MODULE_24__.Score),
+/* harmony export */   TemperatureCache: () => (/* reexport safe */ _temperature_temperature_cache_js__WEBPACK_IMPORTED_MODULE_25__.TemperatureCache),
+/* harmony export */   TonalPalette: () => (/* reexport safe */ _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_9__.TonalPalette),
+/* harmony export */   ViewingConditions: () => (/* reexport safe */ _hct_viewing_conditions_js__WEBPACK_IMPORTED_MODULE_7__.ViewingConditions),
+/* harmony export */   alphaFromArgb: () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_26__.alphaFromArgb),
+/* harmony export */   applyTheme: () => (/* reexport safe */ _utils_theme_utils_js__WEBPACK_IMPORTED_MODULE_30__.applyTheme),
+/* harmony export */   argbFromHex: () => (/* reexport safe */ _utils_string_utils_js__WEBPACK_IMPORTED_MODULE_28__.argbFromHex),
+/* harmony export */   argbFromLab: () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_26__.argbFromLab),
+/* harmony export */   argbFromLinrgb: () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_26__.argbFromLinrgb),
+/* harmony export */   argbFromLstar: () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_26__.argbFromLstar),
+/* harmony export */   argbFromRgb: () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_26__.argbFromRgb),
+/* harmony export */   argbFromRgba: () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_26__.argbFromRgba),
+/* harmony export */   argbFromXyz: () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_26__.argbFromXyz),
+/* harmony export */   blueFromArgb: () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_26__.blueFromArgb),
+/* harmony export */   clampDouble: () => (/* reexport safe */ _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_27__.clampDouble),
+/* harmony export */   clampInt: () => (/* reexport safe */ _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_27__.clampInt),
+/* harmony export */   customColor: () => (/* reexport safe */ _utils_theme_utils_js__WEBPACK_IMPORTED_MODULE_30__.customColor),
+/* harmony export */   delinearized: () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_26__.delinearized),
+/* harmony export */   differenceDegrees: () => (/* reexport safe */ _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_27__.differenceDegrees),
+/* harmony export */   greenFromArgb: () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_26__.greenFromArgb),
+/* harmony export */   hexFromArgb: () => (/* reexport safe */ _utils_string_utils_js__WEBPACK_IMPORTED_MODULE_28__.hexFromArgb),
+/* harmony export */   isOpaque: () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_26__.isOpaque),
+/* harmony export */   labFromArgb: () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_26__.labFromArgb),
+/* harmony export */   lerp: () => (/* reexport safe */ _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_27__.lerp),
+/* harmony export */   linearized: () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_26__.linearized),
+/* harmony export */   lstarFromArgb: () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_26__.lstarFromArgb),
+/* harmony export */   lstarFromY: () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_26__.lstarFromY),
+/* harmony export */   matrixMultiply: () => (/* reexport safe */ _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_27__.matrixMultiply),
+/* harmony export */   redFromArgb: () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_26__.redFromArgb),
+/* harmony export */   rgbaFromArgb: () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_26__.rgbaFromArgb),
+/* harmony export */   rotationDirection: () => (/* reexport safe */ _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_27__.rotationDirection),
+/* harmony export */   sanitizeDegreesDouble: () => (/* reexport safe */ _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_27__.sanitizeDegreesDouble),
+/* harmony export */   sanitizeDegreesInt: () => (/* reexport safe */ _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_27__.sanitizeDegreesInt),
+/* harmony export */   signum: () => (/* reexport safe */ _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_27__.signum),
+/* harmony export */   sourceColorFromImage: () => (/* reexport safe */ _utils_image_utils_js__WEBPACK_IMPORTED_MODULE_29__.sourceColorFromImage),
+/* harmony export */   themeFromImage: () => (/* reexport safe */ _utils_theme_utils_js__WEBPACK_IMPORTED_MODULE_30__.themeFromImage),
+/* harmony export */   themeFromSourceColor: () => (/* reexport safe */ _utils_theme_utils_js__WEBPACK_IMPORTED_MODULE_30__.themeFromSourceColor),
+/* harmony export */   whitePointD65: () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_26__.whitePointD65),
+/* harmony export */   xyzFromArgb: () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_26__.xyzFromArgb),
+/* harmony export */   yFromLstar: () => (/* reexport safe */ _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_26__.yFromLstar)
 /* harmony export */ });
 /* harmony import */ var _blend_blend_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./blend/blend.js */ "./node_modules/@material/material-color-utilities/blend/blend.js");
-/* harmony import */ var _hct_cam16_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./hct/cam16.js */ "./node_modules/@material/material-color-utilities/hct/cam16.js");
-/* harmony import */ var _hct_hct_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./hct/hct.js */ "./node_modules/@material/material-color-utilities/hct/hct.js");
-/* harmony import */ var _hct_viewing_conditions_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./hct/viewing_conditions.js */ "./node_modules/@material/material-color-utilities/hct/viewing_conditions.js");
-/* harmony import */ var _palettes_core_palette_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./palettes/core_palette.js */ "./node_modules/@material/material-color-utilities/palettes/core_palette.js");
-/* harmony import */ var _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./palettes/tonal_palette.js */ "./node_modules/@material/material-color-utilities/palettes/tonal_palette.js");
-/* harmony import */ var _quantize_quantizer_celebi_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./quantize/quantizer_celebi.js */ "./node_modules/@material/material-color-utilities/quantize/quantizer_celebi.js");
-/* harmony import */ var _quantize_quantizer_map_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./quantize/quantizer_map.js */ "./node_modules/@material/material-color-utilities/quantize/quantizer_map.js");
-/* harmony import */ var _quantize_quantizer_wsmeans_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./quantize/quantizer_wsmeans.js */ "./node_modules/@material/material-color-utilities/quantize/quantizer_wsmeans.js");
-/* harmony import */ var _quantize_quantizer_wu_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./quantize/quantizer_wu.js */ "./node_modules/@material/material-color-utilities/quantize/quantizer_wu.js");
-/* harmony import */ var _scheme_scheme_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./scheme/scheme.js */ "./node_modules/@material/material-color-utilities/scheme/scheme.js");
-/* harmony import */ var _scheme_scheme_android_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./scheme/scheme_android.js */ "./node_modules/@material/material-color-utilities/scheme/scheme_android.js");
-/* harmony import */ var _score_score_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./score/score.js */ "./node_modules/@material/material-color-utilities/score/score.js");
-/* harmony import */ var _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./utils/color_utils.js */ "./node_modules/@material/material-color-utilities/utils/color_utils.js");
-/* harmony import */ var _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./utils/math_utils.js */ "./node_modules/@material/material-color-utilities/utils/math_utils.js");
-/* harmony import */ var _utils_string_utils_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./utils/string_utils.js */ "./node_modules/@material/material-color-utilities/utils/string_utils.js");
-/* harmony import */ var _utils_image_utils_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./utils/image_utils.js */ "./node_modules/@material/material-color-utilities/utils/image_utils.js");
-/* harmony import */ var _utils_theme_utils_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./utils/theme_utils.js */ "./node_modules/@material/material-color-utilities/utils/theme_utils.js");
+/* harmony import */ var _contrast_contrast_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./contrast/contrast.js */ "./node_modules/@material/material-color-utilities/contrast/contrast.js");
+/* harmony import */ var _dislike_dislike_analyzer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dislike/dislike_analyzer.js */ "./node_modules/@material/material-color-utilities/dislike/dislike_analyzer.js");
+/* harmony import */ var _dynamiccolor_dynamic_color_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./dynamiccolor/dynamic_color.js */ "./node_modules/@material/material-color-utilities/dynamiccolor/dynamic_color.js");
+/* harmony import */ var _dynamiccolor_material_dynamic_colors_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./dynamiccolor/material_dynamic_colors.js */ "./node_modules/@material/material-color-utilities/dynamiccolor/material_dynamic_colors.js");
+/* harmony import */ var _hct_cam16_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./hct/cam16.js */ "./node_modules/@material/material-color-utilities/hct/cam16.js");
+/* harmony import */ var _hct_hct_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./hct/hct.js */ "./node_modules/@material/material-color-utilities/hct/hct.js");
+/* harmony import */ var _hct_viewing_conditions_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./hct/viewing_conditions.js */ "./node_modules/@material/material-color-utilities/hct/viewing_conditions.js");
+/* harmony import */ var _palettes_core_palette_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./palettes/core_palette.js */ "./node_modules/@material/material-color-utilities/palettes/core_palette.js");
+/* harmony import */ var _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./palettes/tonal_palette.js */ "./node_modules/@material/material-color-utilities/palettes/tonal_palette.js");
+/* harmony import */ var _quantize_quantizer_celebi_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./quantize/quantizer_celebi.js */ "./node_modules/@material/material-color-utilities/quantize/quantizer_celebi.js");
+/* harmony import */ var _quantize_quantizer_map_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./quantize/quantizer_map.js */ "./node_modules/@material/material-color-utilities/quantize/quantizer_map.js");
+/* harmony import */ var _quantize_quantizer_wsmeans_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./quantize/quantizer_wsmeans.js */ "./node_modules/@material/material-color-utilities/quantize/quantizer_wsmeans.js");
+/* harmony import */ var _quantize_quantizer_wu_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./quantize/quantizer_wu.js */ "./node_modules/@material/material-color-utilities/quantize/quantizer_wu.js");
+/* harmony import */ var _scheme_dynamic_scheme_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./scheme/dynamic_scheme.js */ "./node_modules/@material/material-color-utilities/scheme/dynamic_scheme.js");
+/* harmony import */ var _scheme_scheme_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./scheme/scheme.js */ "./node_modules/@material/material-color-utilities/scheme/scheme.js");
+/* harmony import */ var _scheme_scheme_android_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./scheme/scheme_android.js */ "./node_modules/@material/material-color-utilities/scheme/scheme_android.js");
+/* harmony import */ var _scheme_scheme_content_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./scheme/scheme_content.js */ "./node_modules/@material/material-color-utilities/scheme/scheme_content.js");
+/* harmony import */ var _scheme_scheme_expressive_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./scheme/scheme_expressive.js */ "./node_modules/@material/material-color-utilities/scheme/scheme_expressive.js");
+/* harmony import */ var _scheme_scheme_fidelity_js__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./scheme/scheme_fidelity.js */ "./node_modules/@material/material-color-utilities/scheme/scheme_fidelity.js");
+/* harmony import */ var _scheme_scheme_monochrome_js__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./scheme/scheme_monochrome.js */ "./node_modules/@material/material-color-utilities/scheme/scheme_monochrome.js");
+/* harmony import */ var _scheme_scheme_neutral_js__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./scheme/scheme_neutral.js */ "./node_modules/@material/material-color-utilities/scheme/scheme_neutral.js");
+/* harmony import */ var _scheme_scheme_tonal_spot_js__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./scheme/scheme_tonal_spot.js */ "./node_modules/@material/material-color-utilities/scheme/scheme_tonal_spot.js");
+/* harmony import */ var _scheme_scheme_vibrant_js__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./scheme/scheme_vibrant.js */ "./node_modules/@material/material-color-utilities/scheme/scheme_vibrant.js");
+/* harmony import */ var _score_score_js__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./score/score.js */ "./node_modules/@material/material-color-utilities/score/score.js");
+/* harmony import */ var _temperature_temperature_cache_js__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./temperature/temperature_cache.js */ "./node_modules/@material/material-color-utilities/temperature/temperature_cache.js");
+/* harmony import */ var _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./utils/color_utils.js */ "./node_modules/@material/material-color-utilities/utils/color_utils.js");
+/* harmony import */ var _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./utils/math_utils.js */ "./node_modules/@material/material-color-utilities/utils/math_utils.js");
+/* harmony import */ var _utils_string_utils_js__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./utils/string_utils.js */ "./node_modules/@material/material-color-utilities/utils/string_utils.js");
+/* harmony import */ var _utils_image_utils_js__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./utils/image_utils.js */ "./node_modules/@material/material-color-utilities/utils/image_utils.js");
+/* harmony import */ var _utils_theme_utils_js__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./utils/theme_utils.js */ "./node_modules/@material/material-color-utilities/utils/theme_utils.js");
 /**
  * @license
  * Copyright 2021 Google LLC
@@ -1287,6 +3248,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 //# sourceMappingURL=index.js.map
 
 /***/ }),
@@ -1299,7 +3273,7 @@ __webpack_require__.r(__webpack_exports__);
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "CorePalette": () => (/* binding */ CorePalette)
+/* harmony export */   CorePalette: () => (/* binding */ CorePalette)
 /* harmony export */ });
 /* harmony import */ var _hct_hct_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../hct/hct.js */ "./node_modules/@material/material-color-utilities/hct/hct.js");
 /* harmony import */ var _tonal_palette_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tonal_palette.js */ "./node_modules/@material/material-color-utilities/palettes/tonal_palette.js");
@@ -1408,7 +3382,7 @@ class CorePalette {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "TonalPalette": () => (/* binding */ TonalPalette)
+/* harmony export */   TonalPalette: () => (/* binding */ TonalPalette)
 /* harmony export */ });
 /* harmony import */ var _hct_hct_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../hct/hct.js */ "./node_modules/@material/material-color-utilities/hct/hct.js");
 /**
@@ -1439,7 +3413,14 @@ class TonalPalette {
      */
     static fromInt(argb) {
         const hct = _hct_hct_js__WEBPACK_IMPORTED_MODULE_0__.Hct.fromInt(argb);
-        return TonalPalette.fromHueAndChroma(hct.hue, hct.chroma);
+        return TonalPalette.fromHct(hct);
+    }
+    /**
+     * @param hct Hct
+     * @return Tones matching that color's hue and chroma.
+     */
+    static fromHct(hct) {
+        return new TonalPalette(hct.hue, hct.chroma, hct);
     }
     /**
      * @param hue HCT hue
@@ -1447,12 +3428,46 @@ class TonalPalette {
      * @return Tones matching hue and chroma.
      */
     static fromHueAndChroma(hue, chroma) {
-        return new TonalPalette(hue, chroma);
+        return new TonalPalette(hue, chroma, TonalPalette.createKeyColor(hue, chroma));
     }
-    constructor(hue, chroma) {
+    constructor(hue, chroma, keyColor) {
         this.hue = hue;
         this.chroma = chroma;
+        this.keyColor = keyColor;
         this.cache = new Map();
+    }
+    static createKeyColor(hue, chroma) {
+        const startTone = 50.0;
+        let smallestDeltaHct = _hct_hct_js__WEBPACK_IMPORTED_MODULE_0__.Hct.from(hue, chroma, startTone);
+        let smallestDelta = Math.abs(smallestDeltaHct.chroma - chroma);
+        // Starting from T50, check T+/-delta to see if they match the requested
+        // chroma.
+        //
+        // Starts from T50 because T50 has the most chroma available, on
+        // average. Thus it is most likely to have a direct answer and minimize
+        // iteration.
+        for (let delta = 1.0; delta < 50.0; delta += 1.0) {
+            // Termination condition rounding instead of minimizing delta to avoid
+            // case where requested chroma is 16.51, and the closest chroma is 16.49.
+            // Error is minimized, but when rounded and displayed, requested chroma
+            // is 17, key color's chroma is 16.
+            if (Math.round(chroma) === Math.round(smallestDeltaHct.chroma)) {
+                return smallestDeltaHct;
+            }
+            const hctAdd = _hct_hct_js__WEBPACK_IMPORTED_MODULE_0__.Hct.from(hue, chroma, startTone + delta);
+            const hctAddDelta = Math.abs(hctAdd.chroma - chroma);
+            if (hctAddDelta < smallestDelta) {
+                smallestDelta = hctAddDelta;
+                smallestDeltaHct = hctAdd;
+            }
+            const hctSubtract = _hct_hct_js__WEBPACK_IMPORTED_MODULE_0__.Hct.from(hue, chroma, startTone - delta);
+            const hctSubtractDelta = Math.abs(hctSubtract.chroma - chroma);
+            if (hctSubtractDelta < smallestDelta) {
+                smallestDelta = hctSubtractDelta;
+                smallestDeltaHct = hctSubtract;
+            }
+        }
+        return smallestDeltaHct;
     }
     /**
      * @param tone HCT tone, measured from 0 to 100.
@@ -1465,6 +3480,13 @@ class TonalPalette {
             this.cache.set(tone, argb);
         }
         return argb;
+    }
+    /**
+     * @param tone HCT tone.
+     * @return HCT representation of a color with that tone.
+     */
+    getHct(tone) {
+        return _hct_hct_js__WEBPACK_IMPORTED_MODULE_0__.Hct.fromInt(this.tone(tone));
     }
 }
 //# sourceMappingURL=tonal_palette.js.map
@@ -1479,7 +3501,7 @@ class TonalPalette {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "LabPointProvider": () => (/* binding */ LabPointProvider)
+/* harmony export */   LabPointProvider: () => (/* binding */ LabPointProvider)
 /* harmony export */ });
 /* harmony import */ var _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/color_utils.js */ "./node_modules/@material/material-color-utilities/utils/color_utils.js");
 /**
@@ -1544,7 +3566,7 @@ class LabPointProvider {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "QuantizerCelebi": () => (/* binding */ QuantizerCelebi)
+/* harmony export */   QuantizerCelebi: () => (/* binding */ QuantizerCelebi)
 /* harmony export */ });
 /* harmony import */ var _quantizer_wsmeans_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./quantizer_wsmeans.js */ "./node_modules/@material/material-color-utilities/quantize/quantizer_wsmeans.js");
 /* harmony import */ var _quantizer_wu_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./quantizer_wu.js */ "./node_modules/@material/material-color-utilities/quantize/quantizer_wu.js");
@@ -1609,7 +3631,7 @@ class QuantizerCelebi {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "QuantizerMap": () => (/* binding */ QuantizerMap)
+/* harmony export */   QuantizerMap: () => (/* binding */ QuantizerMap)
 /* harmony export */ });
 /* harmony import */ var _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/color_utils.js */ "./node_modules/@material/material-color-utilities/utils/color_utils.js");
 /**
@@ -1669,7 +3691,7 @@ class QuantizerMap {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "QuantizerWsmeans": () => (/* binding */ QuantizerWsmeans)
+/* harmony export */   QuantizerWsmeans: () => (/* binding */ QuantizerWsmeans)
 /* harmony export */ });
 /* harmony import */ var _lab_point_provider_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lab_point_provider.js */ "./node_modules/@material/material-color-utilities/quantize/lab_point_provider.js");
 /**
@@ -1893,7 +3915,7 @@ class DistanceAndIndex {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "QuantizerWu": () => (/* binding */ QuantizerWu)
+/* harmony export */   QuantizerWu: () => (/* binding */ QuantizerWu)
 /* harmony export */ });
 /* harmony import */ var _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/color_utils.js */ "./node_modules/@material/material-color-utilities/utils/color_utils.js");
 /* harmony import */ var _quantizer_map_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./quantizer_map.js */ "./node_modules/@material/material-color-utilities/quantize/quantizer_map.js");
@@ -2274,6 +4296,93 @@ class MaximizeResult {
 
 /***/ }),
 
+/***/ "./node_modules/@material/material-color-utilities/scheme/dynamic_scheme.js":
+/*!**********************************************************************************!*\
+  !*** ./node_modules/@material/material-color-utilities/scheme/dynamic_scheme.js ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DynamicScheme: () => (/* binding */ DynamicScheme)
+/* harmony export */ });
+/* harmony import */ var _hct_hct_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../hct/hct.js */ "./node_modules/@material/material-color-utilities/hct/hct.js");
+/* harmony import */ var _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../palettes/tonal_palette.js */ "./node_modules/@material/material-color-utilities/palettes/tonal_palette.js");
+/* harmony import */ var _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/math_utils.js */ "./node_modules/@material/material-color-utilities/utils/math_utils.js");
+/**
+ * @license
+ * Copyright 2022 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
+
+/**
+ * Constructed by a set of values representing the current UI state (such as
+ * whether or not its dark theme, what the theme style is, etc.), and
+ * provides a set of TonalPalettes that can create colors that fit in
+ * with the theme style. Used by DynamicColor to resolve into a color.
+ */
+class DynamicScheme {
+    constructor(args) {
+        this.sourceColorArgb = args.sourceColorArgb;
+        this.variant = args.variant;
+        this.contrastLevel = args.contrastLevel;
+        this.isDark = args.isDark;
+        this.sourceColorHct = _hct_hct_js__WEBPACK_IMPORTED_MODULE_0__.Hct.fromInt(args.sourceColorArgb);
+        this.primaryPalette = args.primaryPalette;
+        this.secondaryPalette = args.secondaryPalette;
+        this.tertiaryPalette = args.tertiaryPalette;
+        this.neutralPalette = args.neutralPalette;
+        this.neutralVariantPalette = args.neutralVariantPalette;
+        this.errorPalette = _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_1__.TonalPalette.fromHueAndChroma(25.0, 84.0);
+    }
+    /**
+     * Support design spec'ing Dynamic Color by schemes that specify hue
+     * rotations that should be applied at certain breakpoints.
+     * @param sourceColor the source color of the theme, in HCT.
+     * @param hues The "breakpoints", i.e. the hues at which a rotation should
+     * be apply.
+     * @param rotations The rotation that should be applied when source color's
+     * hue is >= the same index in hues array, and <= the hue at the next index
+     * in hues array.
+     */
+    static getRotatedHue(sourceColor, hues, rotations) {
+        const sourceHue = sourceColor.hue;
+        if (hues.length !== rotations.length) {
+            throw new Error(`mismatch between hue length ${hues.length} & rotations ${rotations.length}`);
+        }
+        if (rotations.length === 1) {
+            return _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_2__.sanitizeDegreesDouble(sourceColor.hue + rotations[0]);
+        }
+        const size = hues.length;
+        for (let i = 0; i <= size - 2; i++) {
+            const thisHue = hues[i];
+            const nextHue = hues[i + 1];
+            if (thisHue < sourceHue && sourceHue < nextHue) {
+                return _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_2__.sanitizeDegreesDouble(sourceHue + rotations[i]);
+            }
+        }
+        // If this statement executes, something is wrong, there should have been a
+        // rotation found using the arrays.
+        return sourceHue;
+    }
+}
+//# sourceMappingURL=dynamic_scheme.js.map
+
+/***/ }),
+
 /***/ "./node_modules/@material/material-color-utilities/scheme/scheme.js":
 /*!**************************************************************************!*\
   !*** ./node_modules/@material/material-color-utilities/scheme/scheme.js ***!
@@ -2282,7 +4391,7 @@ class MaximizeResult {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Scheme": () => (/* binding */ Scheme)
+/* harmony export */   Scheme: () => (/* binding */ Scheme)
 /* harmony export */ });
 /* harmony import */ var _palettes_core_palette_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../palettes/core_palette.js */ "./node_modules/@material/material-color-utilities/palettes/core_palette.js");
 /**
@@ -2515,7 +4624,7 @@ class Scheme {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "SchemeAndroid": () => (/* binding */ SchemeAndroid)
+/* harmony export */   SchemeAndroid: () => (/* binding */ SchemeAndroid)
 /* harmony export */ });
 /* harmony import */ var _palettes_core_palette_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../palettes/core_palette.js */ "./node_modules/@material/material-color-utilities/palettes/core_palette.js");
 /**
@@ -2721,6 +4830,549 @@ class SchemeAndroid {
 
 /***/ }),
 
+/***/ "./node_modules/@material/material-color-utilities/scheme/scheme_content.js":
+/*!**********************************************************************************!*\
+  !*** ./node_modules/@material/material-color-utilities/scheme/scheme_content.js ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   SchemeContent: () => (/* binding */ SchemeContent)
+/* harmony export */ });
+/* harmony import */ var _dislike_dislike_analyzer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../dislike/dislike_analyzer.js */ "./node_modules/@material/material-color-utilities/dislike/dislike_analyzer.js");
+/* harmony import */ var _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../palettes/tonal_palette.js */ "./node_modules/@material/material-color-utilities/palettes/tonal_palette.js");
+/* harmony import */ var _temperature_temperature_cache_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../temperature/temperature_cache.js */ "./node_modules/@material/material-color-utilities/temperature/temperature_cache.js");
+/* harmony import */ var _dynamic_scheme_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./dynamic_scheme.js */ "./node_modules/@material/material-color-utilities/scheme/dynamic_scheme.js");
+/* harmony import */ var _variant_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./variant.js */ "./node_modules/@material/material-color-utilities/scheme/variant.js");
+/**
+ * @license
+ * Copyright 2023 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
+
+
+
+/**
+ * A scheme that places the source color in `Scheme.primaryContainer`.
+ *
+ * Primary Container is the source color, adjusted for color relativity.
+ * It maintains constant appearance in light mode and dark mode.
+ * This adds ~5 tone in light mode, and subtracts ~5 tone in dark mode.
+ * Tertiary Container is the complement to the source color, using
+ * `TemperatureCache`. It also maintains constant appearance.
+ */
+class SchemeContent extends _dynamic_scheme_js__WEBPACK_IMPORTED_MODULE_3__.DynamicScheme {
+    constructor(sourceColorHct, isDark, contrastLevel) {
+        super({
+            sourceColorArgb: sourceColorHct.toInt(),
+            variant: _variant_js__WEBPACK_IMPORTED_MODULE_4__.Variant.CONTENT,
+            contrastLevel,
+            isDark,
+            primaryPalette: _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_1__.TonalPalette.fromHueAndChroma(sourceColorHct.hue, sourceColorHct.chroma),
+            secondaryPalette: _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_1__.TonalPalette.fromHueAndChroma(sourceColorHct.hue, Math.max(sourceColorHct.chroma - 32.0, sourceColorHct.chroma * 0.5)),
+            tertiaryPalette: _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_1__.TonalPalette.fromInt(_dislike_dislike_analyzer_js__WEBPACK_IMPORTED_MODULE_0__.DislikeAnalyzer
+                .fixIfDisliked(new _temperature_temperature_cache_js__WEBPACK_IMPORTED_MODULE_2__.TemperatureCache(sourceColorHct).analogous(3, 6)[2])
+                .toInt()),
+            neutralPalette: _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_1__.TonalPalette.fromHueAndChroma(sourceColorHct.hue, sourceColorHct.chroma / 8.0),
+            neutralVariantPalette: _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_1__.TonalPalette.fromHueAndChroma(sourceColorHct.hue, sourceColorHct.chroma / 8.0 + 4.0),
+        });
+    }
+}
+//# sourceMappingURL=scheme_content.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@material/material-color-utilities/scheme/scheme_expressive.js":
+/*!*************************************************************************************!*\
+  !*** ./node_modules/@material/material-color-utilities/scheme/scheme_expressive.js ***!
+  \*************************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   SchemeExpressive: () => (/* binding */ SchemeExpressive)
+/* harmony export */ });
+/* harmony import */ var _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../palettes/tonal_palette.js */ "./node_modules/@material/material-color-utilities/palettes/tonal_palette.js");
+/* harmony import */ var _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/math_utils.js */ "./node_modules/@material/material-color-utilities/utils/math_utils.js");
+/* harmony import */ var _dynamic_scheme_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dynamic_scheme.js */ "./node_modules/@material/material-color-utilities/scheme/dynamic_scheme.js");
+/* harmony import */ var _variant_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./variant.js */ "./node_modules/@material/material-color-utilities/scheme/variant.js");
+/**
+ * @license
+ * Copyright 2022 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
+
+
+/**
+ * A Dynamic Color theme that is intentionally detached from the source color.
+ */
+class SchemeExpressive extends _dynamic_scheme_js__WEBPACK_IMPORTED_MODULE_2__.DynamicScheme {
+    constructor(sourceColorHct, isDark, contrastLevel) {
+        super({
+            sourceColorArgb: sourceColorHct.toInt(),
+            variant: _variant_js__WEBPACK_IMPORTED_MODULE_3__.Variant.EXPRESSIVE,
+            contrastLevel,
+            isDark,
+            primaryPalette: _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_0__.TonalPalette.fromHueAndChroma(_utils_math_utils_js__WEBPACK_IMPORTED_MODULE_1__.sanitizeDegreesDouble(sourceColorHct.hue + 240.0), 40.0),
+            secondaryPalette: _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_0__.TonalPalette.fromHueAndChroma(_dynamic_scheme_js__WEBPACK_IMPORTED_MODULE_2__.DynamicScheme.getRotatedHue(sourceColorHct, SchemeExpressive.hues, SchemeExpressive.secondaryRotations), 24.0),
+            tertiaryPalette: _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_0__.TonalPalette.fromHueAndChroma(_dynamic_scheme_js__WEBPACK_IMPORTED_MODULE_2__.DynamicScheme.getRotatedHue(sourceColorHct, SchemeExpressive.hues, SchemeExpressive.tertiaryRotations), 32.0),
+            neutralPalette: _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_0__.TonalPalette.fromHueAndChroma(sourceColorHct.hue + 15, 8.0),
+            neutralVariantPalette: _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_0__.TonalPalette.fromHueAndChroma(sourceColorHct.hue + 15, 12.0),
+        });
+    }
+}
+/**
+ * Hues (in degrees) used at breakpoints such that designers can specify a
+ * hue rotation that occurs at a given break point.
+ */
+SchemeExpressive.hues = [
+    0.0,
+    21.0,
+    51.0,
+    121.0,
+    151.0,
+    191.0,
+    271.0,
+    321.0,
+    360.0,
+];
+/**
+ * Hue rotations (in degrees) of the Secondary [TonalPalette],
+ * corresponding to the breakpoints in [hues].
+ */
+SchemeExpressive.secondaryRotations = [
+    45.0,
+    95.0,
+    45.0,
+    20.0,
+    45.0,
+    90.0,
+    45.0,
+    45.0,
+    45.0,
+];
+/**
+ * Hue rotations (in degrees) of the Tertiary [TonalPalette],
+ * corresponding to the breakpoints in [hues].
+ */
+SchemeExpressive.tertiaryRotations = [
+    120.0,
+    120.0,
+    20.0,
+    45.0,
+    20.0,
+    15.0,
+    20.0,
+    120.0,
+    120.0,
+];
+//# sourceMappingURL=scheme_expressive.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@material/material-color-utilities/scheme/scheme_fidelity.js":
+/*!***********************************************************************************!*\
+  !*** ./node_modules/@material/material-color-utilities/scheme/scheme_fidelity.js ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   SchemeFidelity: () => (/* binding */ SchemeFidelity)
+/* harmony export */ });
+/* harmony import */ var _dislike_dislike_analyzer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../dislike/dislike_analyzer.js */ "./node_modules/@material/material-color-utilities/dislike/dislike_analyzer.js");
+/* harmony import */ var _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../palettes/tonal_palette.js */ "./node_modules/@material/material-color-utilities/palettes/tonal_palette.js");
+/* harmony import */ var _temperature_temperature_cache_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../temperature/temperature_cache.js */ "./node_modules/@material/material-color-utilities/temperature/temperature_cache.js");
+/* harmony import */ var _dynamic_scheme_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./dynamic_scheme.js */ "./node_modules/@material/material-color-utilities/scheme/dynamic_scheme.js");
+/* harmony import */ var _variant_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./variant.js */ "./node_modules/@material/material-color-utilities/scheme/variant.js");
+/**
+ * @license
+ * Copyright 2023 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
+
+
+
+/**
+ * A scheme that places the source color in `Scheme.primaryContainer`.
+ *
+ * Primary Container is the source color, adjusted for color relativity.
+ * It maintains constant appearance in light mode and dark mode.
+ * This adds ~5 tone in light mode, and subtracts ~5 tone in dark mode.
+ * Tertiary Container is the complement to the source color, using
+ * `TemperatureCache`. It also maintains constant appearance.
+ */
+class SchemeFidelity extends _dynamic_scheme_js__WEBPACK_IMPORTED_MODULE_3__.DynamicScheme {
+    constructor(sourceColorHct, isDark, contrastLevel) {
+        super({
+            sourceColorArgb: sourceColorHct.toInt(),
+            variant: _variant_js__WEBPACK_IMPORTED_MODULE_4__.Variant.FIDELITY,
+            contrastLevel,
+            isDark,
+            primaryPalette: _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_1__.TonalPalette.fromHueAndChroma(sourceColorHct.hue, sourceColorHct.chroma),
+            secondaryPalette: _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_1__.TonalPalette.fromHueAndChroma(sourceColorHct.hue, Math.max(sourceColorHct.chroma - 32.0, sourceColorHct.chroma * 0.5)),
+            tertiaryPalette: _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_1__.TonalPalette.fromInt(_dislike_dislike_analyzer_js__WEBPACK_IMPORTED_MODULE_0__.DislikeAnalyzer
+                .fixIfDisliked(new _temperature_temperature_cache_js__WEBPACK_IMPORTED_MODULE_2__.TemperatureCache(sourceColorHct).complement)
+                .toInt()),
+            neutralPalette: _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_1__.TonalPalette.fromHueAndChroma(sourceColorHct.hue, sourceColorHct.chroma / 8.0),
+            neutralVariantPalette: _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_1__.TonalPalette.fromHueAndChroma(sourceColorHct.hue, sourceColorHct.chroma / 8.0 + 4.0),
+        });
+    }
+}
+//# sourceMappingURL=scheme_fidelity.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@material/material-color-utilities/scheme/scheme_monochrome.js":
+/*!*************************************************************************************!*\
+  !*** ./node_modules/@material/material-color-utilities/scheme/scheme_monochrome.js ***!
+  \*************************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   SchemeMonochrome: () => (/* binding */ SchemeMonochrome)
+/* harmony export */ });
+/* harmony import */ var _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../palettes/tonal_palette.js */ "./node_modules/@material/material-color-utilities/palettes/tonal_palette.js");
+/* harmony import */ var _dynamic_scheme_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dynamic_scheme.js */ "./node_modules/@material/material-color-utilities/scheme/dynamic_scheme.js");
+/* harmony import */ var _variant_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./variant.js */ "./node_modules/@material/material-color-utilities/scheme/variant.js");
+/**
+ * @license
+ * Copyright 2022 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
+
+/** A Dynamic Color theme that is grayscale. */
+class SchemeMonochrome extends _dynamic_scheme_js__WEBPACK_IMPORTED_MODULE_1__.DynamicScheme {
+    constructor(sourceColorHct, isDark, contrastLevel) {
+        super({
+            sourceColorArgb: sourceColorHct.toInt(),
+            variant: _variant_js__WEBPACK_IMPORTED_MODULE_2__.Variant.MONOCHROME,
+            contrastLevel,
+            isDark,
+            primaryPalette: _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_0__.TonalPalette.fromHueAndChroma(sourceColorHct.hue, 0.0),
+            secondaryPalette: _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_0__.TonalPalette.fromHueAndChroma(sourceColorHct.hue, 0.0),
+            tertiaryPalette: _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_0__.TonalPalette.fromHueAndChroma(sourceColorHct.hue, 0.0),
+            neutralPalette: _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_0__.TonalPalette.fromHueAndChroma(sourceColorHct.hue, 0.0),
+            neutralVariantPalette: _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_0__.TonalPalette.fromHueAndChroma(sourceColorHct.hue, 0.0),
+        });
+    }
+}
+//# sourceMappingURL=scheme_monochrome.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@material/material-color-utilities/scheme/scheme_neutral.js":
+/*!**********************************************************************************!*\
+  !*** ./node_modules/@material/material-color-utilities/scheme/scheme_neutral.js ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   SchemeNeutral: () => (/* binding */ SchemeNeutral)
+/* harmony export */ });
+/* harmony import */ var _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../palettes/tonal_palette.js */ "./node_modules/@material/material-color-utilities/palettes/tonal_palette.js");
+/* harmony import */ var _dynamic_scheme_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dynamic_scheme.js */ "./node_modules/@material/material-color-utilities/scheme/dynamic_scheme.js");
+/* harmony import */ var _variant_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./variant.js */ "./node_modules/@material/material-color-utilities/scheme/variant.js");
+/**
+ * @license
+ * Copyright 2022 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
+
+/** A Dynamic Color theme that is near grayscale. */
+class SchemeNeutral extends _dynamic_scheme_js__WEBPACK_IMPORTED_MODULE_1__.DynamicScheme {
+    constructor(sourceColorHct, isDark, contrastLevel) {
+        super({
+            sourceColorArgb: sourceColorHct.toInt(),
+            variant: _variant_js__WEBPACK_IMPORTED_MODULE_2__.Variant.NEUTRAL,
+            contrastLevel,
+            isDark,
+            primaryPalette: _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_0__.TonalPalette.fromHueAndChroma(sourceColorHct.hue, 12.0),
+            secondaryPalette: _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_0__.TonalPalette.fromHueAndChroma(sourceColorHct.hue, 8.0),
+            tertiaryPalette: _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_0__.TonalPalette.fromHueAndChroma(sourceColorHct.hue, 16.0),
+            neutralPalette: _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_0__.TonalPalette.fromHueAndChroma(sourceColorHct.hue, 2.0),
+            neutralVariantPalette: _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_0__.TonalPalette.fromHueAndChroma(sourceColorHct.hue, 2.0),
+        });
+    }
+}
+//# sourceMappingURL=scheme_neutral.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@material/material-color-utilities/scheme/scheme_tonal_spot.js":
+/*!*************************************************************************************!*\
+  !*** ./node_modules/@material/material-color-utilities/scheme/scheme_tonal_spot.js ***!
+  \*************************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   SchemeTonalSpot: () => (/* binding */ SchemeTonalSpot)
+/* harmony export */ });
+/* harmony import */ var _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../palettes/tonal_palette.js */ "./node_modules/@material/material-color-utilities/palettes/tonal_palette.js");
+/* harmony import */ var _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/math_utils.js */ "./node_modules/@material/material-color-utilities/utils/math_utils.js");
+/* harmony import */ var _dynamic_scheme_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dynamic_scheme.js */ "./node_modules/@material/material-color-utilities/scheme/dynamic_scheme.js");
+/* harmony import */ var _variant_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./variant.js */ "./node_modules/@material/material-color-utilities/scheme/variant.js");
+/**
+ * @license
+ * Copyright 2022 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
+
+
+/**
+ * A Dynamic Color theme with low to medium colorfulness and a Tertiary
+ * TonalPalette with a hue related to the source color.
+ *
+ * The default Material You theme on Android 12 and 13.
+ */
+class SchemeTonalSpot extends _dynamic_scheme_js__WEBPACK_IMPORTED_MODULE_2__.DynamicScheme {
+    constructor(sourceColorHct, isDark, contrastLevel) {
+        super({
+            sourceColorArgb: sourceColorHct.toInt(),
+            variant: _variant_js__WEBPACK_IMPORTED_MODULE_3__.Variant.TONAL_SPOT,
+            contrastLevel,
+            isDark,
+            primaryPalette: _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_0__.TonalPalette.fromHueAndChroma(sourceColorHct.hue, 36.0),
+            secondaryPalette: _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_0__.TonalPalette.fromHueAndChroma(sourceColorHct.hue, 16.0),
+            tertiaryPalette: _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_0__.TonalPalette.fromHueAndChroma(_utils_math_utils_js__WEBPACK_IMPORTED_MODULE_1__.sanitizeDegreesDouble(sourceColorHct.hue + 60.0), 24.0),
+            neutralPalette: _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_0__.TonalPalette.fromHueAndChroma(sourceColorHct.hue, 6.0),
+            neutralVariantPalette: _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_0__.TonalPalette.fromHueAndChroma(sourceColorHct.hue, 8.0),
+        });
+    }
+}
+//# sourceMappingURL=scheme_tonal_spot.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@material/material-color-utilities/scheme/scheme_vibrant.js":
+/*!**********************************************************************************!*\
+  !*** ./node_modules/@material/material-color-utilities/scheme/scheme_vibrant.js ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   SchemeVibrant: () => (/* binding */ SchemeVibrant)
+/* harmony export */ });
+/* harmony import */ var _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../palettes/tonal_palette.js */ "./node_modules/@material/material-color-utilities/palettes/tonal_palette.js");
+/* harmony import */ var _dynamic_scheme_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dynamic_scheme.js */ "./node_modules/@material/material-color-utilities/scheme/dynamic_scheme.js");
+/* harmony import */ var _variant_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./variant.js */ "./node_modules/@material/material-color-utilities/scheme/variant.js");
+/**
+ * @license
+ * Copyright 2022 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
+
+/**
+ * A Dynamic Color theme that maxes out colorfulness at each position in the
+ * Primary Tonal Palette.
+ */
+class SchemeVibrant extends _dynamic_scheme_js__WEBPACK_IMPORTED_MODULE_1__.DynamicScheme {
+    constructor(sourceColorHct, isDark, contrastLevel) {
+        super({
+            sourceColorArgb: sourceColorHct.toInt(),
+            variant: _variant_js__WEBPACK_IMPORTED_MODULE_2__.Variant.VIBRANT,
+            contrastLevel,
+            isDark,
+            primaryPalette: _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_0__.TonalPalette.fromHueAndChroma(sourceColorHct.hue, 200.0),
+            secondaryPalette: _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_0__.TonalPalette.fromHueAndChroma(_dynamic_scheme_js__WEBPACK_IMPORTED_MODULE_1__.DynamicScheme.getRotatedHue(sourceColorHct, SchemeVibrant.hues, SchemeVibrant.secondaryRotations), 24.0),
+            tertiaryPalette: _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_0__.TonalPalette.fromHueAndChroma(_dynamic_scheme_js__WEBPACK_IMPORTED_MODULE_1__.DynamicScheme.getRotatedHue(sourceColorHct, SchemeVibrant.hues, SchemeVibrant.tertiaryRotations), 32.0),
+            neutralPalette: _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_0__.TonalPalette.fromHueAndChroma(sourceColorHct.hue, 10.0),
+            neutralVariantPalette: _palettes_tonal_palette_js__WEBPACK_IMPORTED_MODULE_0__.TonalPalette.fromHueAndChroma(sourceColorHct.hue, 12.0),
+        });
+    }
+}
+/**
+ * Hues (in degrees) used at breakpoints such that designers can specify a
+ * hue rotation that occurs at a given break point.
+ */
+SchemeVibrant.hues = [
+    0.0,
+    41.0,
+    61.0,
+    101.0,
+    131.0,
+    181.0,
+    251.0,
+    301.0,
+    360.0,
+];
+/**
+ * Hue rotations (in degrees) of the Secondary [TonalPalette],
+ * corresponding to the breakpoints in [hues].
+ */
+SchemeVibrant.secondaryRotations = [
+    18.0,
+    15.0,
+    10.0,
+    12.0,
+    15.0,
+    18.0,
+    15.0,
+    12.0,
+    12.0,
+];
+/**
+ * Hue rotations (in degrees) of the Tertiary [TonalPalette],
+ * corresponding to the breakpoints in [hues].
+ */
+SchemeVibrant.tertiaryRotations = [
+    35.0,
+    30.0,
+    20.0,
+    25.0,
+    30.0,
+    35.0,
+    30.0,
+    25.0,
+    25.0,
+];
+//# sourceMappingURL=scheme_vibrant.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@material/material-color-utilities/scheme/variant.js":
+/*!***************************************************************************!*\
+  !*** ./node_modules/@material/material-color-utilities/scheme/variant.js ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Variant: () => (/* binding */ Variant)
+/* harmony export */ });
+/**
+ * @license
+ * Copyright 2022 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Set of themes supported by Dynamic Color.
+ * Instantiate the corresponding subclass, ex. SchemeTonalSpot, to create
+ * colors corresponding to the theme.
+ */
+var Variant;
+(function (Variant) {
+    Variant[Variant["MONOCHROME"] = 0] = "MONOCHROME";
+    Variant[Variant["NEUTRAL"] = 1] = "NEUTRAL";
+    Variant[Variant["TONAL_SPOT"] = 2] = "TONAL_SPOT";
+    Variant[Variant["VIBRANT"] = 3] = "VIBRANT";
+    Variant[Variant["EXPRESSIVE"] = 4] = "EXPRESSIVE";
+    Variant[Variant["FIDELITY"] = 5] = "FIDELITY";
+    Variant[Variant["CONTENT"] = 6] = "CONTENT";
+    Variant[Variant["RAINBOW"] = 7] = "RAINBOW";
+    Variant[Variant["FRUIT_SALAD"] = 8] = "FRUIT_SALAD";
+})(Variant || (Variant = {}));
+//# sourceMappingURL=variant.js.map
+
+/***/ }),
+
 /***/ "./node_modules/@material/material-color-utilities/score/score.js":
 /*!************************************************************************!*\
   !*** ./node_modules/@material/material-color-utilities/score/score.js ***!
@@ -2729,11 +5381,10 @@ class SchemeAndroid {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Score": () => (/* binding */ Score)
+/* harmony export */   Score: () => (/* binding */ Score)
 /* harmony export */ });
-/* harmony import */ var _hct_cam16_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../hct/cam16.js */ "./node_modules/@material/material-color-utilities/hct/cam16.js");
-/* harmony import */ var _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/color_utils.js */ "./node_modules/@material/material-color-utilities/utils/color_utils.js");
-/* harmony import */ var _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/math_utils.js */ "./node_modules/@material/material-color-utilities/utils/math_utils.js");
+/* harmony import */ var _hct_hct_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../hct/hct.js */ "./node_modules/@material/material-color-utilities/hct/hct.js");
+/* harmony import */ var _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/math_utils.js */ "./node_modules/@material/material-color-utilities/utils/math_utils.js");
 /**
  * @license
  * Copyright 2021 Google LLC
@@ -2752,7 +5403,20 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
-
+const SCORE_OPTION_DEFAULTS = {
+    desired: 4,
+    fallbackColorARGB: 0xff4285f4,
+    filter: true, // Avoid unsuitable colors.
+};
+function compare(a, b) {
+    if (a.score > b.score) {
+        return -1;
+    }
+    else if (a.score < b.score) {
+        return 1;
+    }
+    return 0;
+}
 /**
  *  Given a large set of colors, remove colors that are unsuitable for a UI
  *  theme, and rank the rest based on suitability.
@@ -2769,116 +5433,376 @@ class Score {
      *
      * @param colorsToPopulation map with keys of colors and values of how often
      *     the color appears, usually from a source image.
+     * @param {ScoreOptions} options optional parameters.
      * @return Colors sorted by suitability for a UI theme. The most suitable
      *     color is the first item, the least suitable is the last. There will
      *     always be at least one color returned. If all the input colors
      *     were not suitable for a theme, a default fallback color will be
      *     provided, Google Blue.
      */
-    static score(colorsToPopulation, contentColor = false) {
-        // Determine the total count of all colors.
+    static score(colorsToPopulation, options) {
+        const { desired, fallbackColorARGB, filter } = { ...SCORE_OPTION_DEFAULTS, ...options };
+        // Get the HCT color for each Argb value, while finding the per hue count and
+        // total count.
+        const colorsHct = [];
+        const huePopulation = new Array(360).fill(0);
         let populationSum = 0;
-        for (const population of colorsToPopulation.values()) {
+        for (const [argb, population] of colorsToPopulation.entries()) {
+            const hct = _hct_hct_js__WEBPACK_IMPORTED_MODULE_0__.Hct.fromInt(argb);
+            colorsHct.push(hct);
+            const hue = Math.floor(hct.hue);
+            huePopulation[hue] += population;
             populationSum += population;
         }
-        // Turn the count of each color into a proportion by dividing by the total
-        // count. Also, fill a cache of CAM16 colors representing each color, and
-        // record the proportion of colors for each CAM16 hue.
-        const colorsToProportion = new Map();
-        const colorsToCam = new Map();
-        const hueProportions = new Array(360).fill(0);
-        for (const [color, population] of colorsToPopulation.entries()) {
-            const proportion = population / populationSum;
-            colorsToProportion.set(color, proportion);
-            const cam = _hct_cam16_js__WEBPACK_IMPORTED_MODULE_0__.Cam16.fromInt(color);
-            colorsToCam.set(color, cam);
-            const hue = Math.round(cam.hue);
-            hueProportions[hue] += proportion;
-        }
-        // Determine the proportion of the colors around each color, by summing the
-        // proportions around each color's hue.
-        const colorsToExcitedProportion = new Map();
-        for (const [color, cam] of colorsToCam.entries()) {
-            const hue = Math.round(cam.hue);
-            let excitedProportion = 0;
-            for (let i = (hue - 15); i < (hue + 15); i++) {
-                const neighborHue = _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_2__.sanitizeDegreesInt(i);
-                excitedProportion += hueProportions[neighborHue];
+        // Hues with more usage in neighboring 30 degree slice get a larger number.
+        const hueExcitedProportions = new Array(360).fill(0.0);
+        for (let hue = 0; hue < 360; hue++) {
+            const proportion = huePopulation[hue] / populationSum;
+            for (let i = hue - 14; i < hue + 16; i++) {
+                const neighborHue = _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_1__.sanitizeDegreesInt(i);
+                hueExcitedProportions[neighborHue] += proportion;
             }
-            colorsToExcitedProportion.set(color, excitedProportion);
         }
-        // Score the colors by their proportion, as well as how chromatic they are.
-        const colorsToScore = new Map();
-        for (const [color, cam] of colorsToCam.entries()) {
-            const proportion = colorsToExcitedProportion.get(color);
-            const proportionScore = proportion * 100.0 * Score.WEIGHT_PROPORTION;
-            const chromaWeight = cam.chroma < Score.TARGET_CHROMA ?
-                Score.WEIGHT_CHROMA_BELOW :
-                Score.WEIGHT_CHROMA_ABOVE;
-            const chromaScore = (cam.chroma - Score.TARGET_CHROMA) * chromaWeight;
-            const score = proportionScore + chromaScore;
-            colorsToScore.set(color, score);
-        }
-        // Remove colors that are unsuitable, ex. very dark or unchromatic colors.
-        // Also, remove colors that are very similar in hue.
-        const filteredColors = contentColor ?
-            Score.filterContent(colorsToCam) :
-            Score.filter(colorsToExcitedProportion, colorsToCam);
-        const dedupedColorsToScore = new Map();
-        for (const color of filteredColors) {
-            let duplicateHue = false;
-            const hue = colorsToCam.get(color).hue;
-            for (const [alreadyChosenColor,] of dedupedColorsToScore) {
-                const alreadyChosenHue = colorsToCam.get(alreadyChosenColor).hue;
-                if (_utils_math_utils_js__WEBPACK_IMPORTED_MODULE_2__.differenceDegrees(hue, alreadyChosenHue) < 15) {
-                    duplicateHue = true;
-                    break;
-                }
-            }
-            if (duplicateHue) {
+        // Scores each HCT color based on usage and chroma, while optionally
+        // filtering out values that do not have enough chroma or usage.
+        const scoredHct = new Array();
+        for (const hct of colorsHct) {
+            const hue = _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_1__.sanitizeDegreesInt(Math.round(hct.hue));
+            const proportion = hueExcitedProportions[hue];
+            if (filter && (hct.chroma < Score.CUTOFF_CHROMA || proportion <= Score.CUTOFF_EXCITED_PROPORTION)) {
                 continue;
             }
-            dedupedColorsToScore.set(color, colorsToScore.get(color));
+            const proportionScore = proportion * 100.0 * Score.WEIGHT_PROPORTION;
+            const chromaWeight = hct.chroma < Score.TARGET_CHROMA ? Score.WEIGHT_CHROMA_BELOW : Score.WEIGHT_CHROMA_ABOVE;
+            const chromaScore = (hct.chroma - Score.TARGET_CHROMA) * chromaWeight;
+            const score = proportionScore + chromaScore;
+            scoredHct.push({ hct, score });
         }
-        // Ensure the list of colors returned is sorted such that the first in the
-        // list is the most suitable, and the last is the least suitable.
-        const colorsByScoreDescending = Array.from(dedupedColorsToScore.entries());
-        colorsByScoreDescending.sort((first, second) => {
-            return second[1] - first[1];
-        });
-        const answer = colorsByScoreDescending.map((entry) => {
-            return entry[0];
-        });
-        // Ensure that at least one color is returned.
-        if (answer.length === 0) {
-            answer.push(0xff4285F4); // Google Blue
-        }
-        return answer;
-    }
-    static filter(colorsToExcitedProportion, colorsToCam) {
-        const filtered = new Array();
-        for (const [color, cam] of colorsToCam.entries()) {
-            const proportion = colorsToExcitedProportion.get(color);
-            if (cam.chroma >= Score.CUTOFF_CHROMA &&
-                _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_1__.lstarFromArgb(color) >= Score.CUTOFF_TONE &&
-                proportion >= Score.CUTOFF_EXCITED_PROPORTION) {
-                filtered.push(color);
+        // Sorted so that colors with higher scores come first.
+        scoredHct.sort(compare);
+        // Iterates through potential hue differences in degrees in order to select
+        // the colors with the largest distribution of hues possible. Starting at
+        // 90 degrees(maximum difference for 4 colors) then decreasing down to a
+        // 15 degree minimum.
+        const chosenColors = [];
+        for (let differenceDegrees = 90; differenceDegrees >= 15; differenceDegrees--) {
+            chosenColors.length = 0;
+            for (const { hct } of scoredHct) {
+                const duplicateHue = chosenColors.find(chosenHct => {
+                    return _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_1__.differenceDegrees(hct.hue, chosenHct.hue) < differenceDegrees;
+                });
+                if (!duplicateHue) {
+                    chosenColors.push(hct);
+                }
+                if (chosenColors.length >= desired)
+                    break;
             }
+            if (chosenColors.length >= desired)
+                break;
         }
-        return filtered;
-    }
-    static filterContent(colorsToCam) {
-        return Array.from(colorsToCam.keys());
+        const colors = [];
+        if (chosenColors.length === 0) {
+            colors.push(fallbackColorARGB);
+        }
+        for (const chosenHct of chosenColors) {
+            colors.push(chosenHct.toInt());
+        }
+        return colors;
     }
 }
-Score.TARGET_CHROMA = 48.0;
+Score.TARGET_CHROMA = 48.0; // A1 Chroma
 Score.WEIGHT_PROPORTION = 0.7;
 Score.WEIGHT_CHROMA_ABOVE = 0.3;
 Score.WEIGHT_CHROMA_BELOW = 0.1;
-Score.CUTOFF_CHROMA = 15.0;
-Score.CUTOFF_TONE = 10.0;
+Score.CUTOFF_CHROMA = 5.0;
 Score.CUTOFF_EXCITED_PROPORTION = 0.01;
 //# sourceMappingURL=score.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@material/material-color-utilities/temperature/temperature_cache.js":
+/*!******************************************************************************************!*\
+  !*** ./node_modules/@material/material-color-utilities/temperature/temperature_cache.js ***!
+  \******************************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   TemperatureCache: () => (/* binding */ TemperatureCache)
+/* harmony export */ });
+/* harmony import */ var _hct_hct_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../hct/hct.js */ "./node_modules/@material/material-color-utilities/hct/hct.js");
+/* harmony import */ var _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/color_utils.js */ "./node_modules/@material/material-color-utilities/utils/color_utils.js");
+/* harmony import */ var _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/math_utils.js */ "./node_modules/@material/material-color-utilities/utils/math_utils.js");
+/**
+ * @license
+ * Copyright 2023 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+// This file is automatically generated. Do not modify it.
+
+
+
+/**
+ * Design utilities using color temperature theory.
+ *
+ * Analogous colors, complementary color, and cache to efficiently, lazily,
+ * generate data for calculations when needed.
+ */
+class TemperatureCache {
+    constructor(input) {
+        this.input = input;
+        this.hctsByTempCache = [];
+        this.hctsByHueCache = [];
+        this.tempsByHctCache = new Map();
+        this.inputRelativeTemperatureCache = -1.0;
+        this.complementCache = null;
+    }
+    get hctsByTemp() {
+        if (this.hctsByTempCache.length > 0) {
+            return this.hctsByTempCache;
+        }
+        const hcts = this.hctsByHue.concat([this.input]);
+        const temperaturesByHct = this.tempsByHct;
+        hcts.sort((a, b) => temperaturesByHct.get(a) - temperaturesByHct.get(b));
+        this.hctsByTempCache = hcts;
+        return hcts;
+    }
+    get warmest() {
+        return this.hctsByTemp[this.hctsByTemp.length - 1];
+    }
+    get coldest() {
+        return this.hctsByTemp[0];
+    }
+    /**
+     * A set of colors with differing hues, equidistant in temperature.
+     *
+     * In art, this is usually described as a set of 5 colors on a color wheel
+     * divided into 12 sections. This method allows provision of either of those
+     * values.
+     *
+     * Behavior is undefined when [count] or [divisions] is 0.
+     * When divisions < count, colors repeat.
+     *
+     * [count] The number of colors to return, includes the input color.
+     * [divisions] The number of divisions on the color wheel.
+     */
+    analogous(count = 5, divisions = 12) {
+        const startHue = Math.round(this.input.hue);
+        const startHct = this.hctsByHue[startHue];
+        let lastTemp = this.relativeTemperature(startHct);
+        const allColors = [startHct];
+        let absoluteTotalTempDelta = 0.0;
+        for (let i = 0; i < 360; i++) {
+            const hue = _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_2__.sanitizeDegreesInt(startHue + i);
+            const hct = this.hctsByHue[hue];
+            const temp = this.relativeTemperature(hct);
+            const tempDelta = Math.abs(temp - lastTemp);
+            lastTemp = temp;
+            absoluteTotalTempDelta += tempDelta;
+        }
+        let hueAddend = 1;
+        const tempStep = absoluteTotalTempDelta / divisions;
+        let totalTempDelta = 0.0;
+        lastTemp = this.relativeTemperature(startHct);
+        while (allColors.length < divisions) {
+            const hue = _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_2__.sanitizeDegreesInt(startHue + hueAddend);
+            const hct = this.hctsByHue[hue];
+            const temp = this.relativeTemperature(hct);
+            const tempDelta = Math.abs(temp - lastTemp);
+            totalTempDelta += tempDelta;
+            const desiredTotalTempDeltaForIndex = allColors.length * tempStep;
+            let indexSatisfied = totalTempDelta >= desiredTotalTempDeltaForIndex;
+            let indexAddend = 1;
+            // Keep adding this hue to the answers until its temperature is
+            // insufficient. This ensures consistent behavior when there aren't
+            // [divisions] discrete steps between 0 and 360 in hue with [tempStep]
+            // delta in temperature between them.
+            //
+            // For example, white and black have no analogues: there are no other
+            // colors at T100/T0. Therefore, they should just be added to the array
+            // as answers.
+            while (indexSatisfied && allColors.length < divisions) {
+                allColors.push(hct);
+                const desiredTotalTempDeltaForIndex = ((allColors.length + indexAddend) * tempStep);
+                indexSatisfied = totalTempDelta >= desiredTotalTempDeltaForIndex;
+                indexAddend++;
+            }
+            lastTemp = temp;
+            hueAddend++;
+            if (hueAddend > 360) {
+                while (allColors.length < divisions) {
+                    allColors.push(hct);
+                }
+                break;
+            }
+        }
+        const answers = [this.input];
+        // First, generate analogues from rotating counter-clockwise.
+        const increaseHueCount = Math.floor((count - 1) / 2.0);
+        for (let i = 1; i < (increaseHueCount + 1); i++) {
+            let index = 0 - i;
+            while (index < 0) {
+                index = allColors.length + index;
+            }
+            if (index >= allColors.length) {
+                index = index % allColors.length;
+            }
+            answers.splice(0, 0, allColors[index]);
+        }
+        // Second, generate analogues from rotating clockwise.
+        const decreaseHueCount = count - increaseHueCount - 1;
+        for (let i = 1; i < (decreaseHueCount + 1); i++) {
+            let index = i;
+            while (index < 0) {
+                index = allColors.length + index;
+            }
+            if (index >= allColors.length) {
+                index = index % allColors.length;
+            }
+            answers.push(allColors[index]);
+        }
+        return answers;
+    }
+    /**
+     * A color that complements the input color aesthetically.
+     *
+     * In art, this is usually described as being across the color wheel.
+     * History of this shows intent as a color that is just as cool-warm as the
+     * input color is warm-cool.
+     */
+    get complement() {
+        if (this.complementCache != null) {
+            return this.complementCache;
+        }
+        const coldestHue = this.coldest.hue;
+        const coldestTemp = this.tempsByHct.get(this.coldest);
+        const warmestHue = this.warmest.hue;
+        const warmestTemp = this.tempsByHct.get(this.warmest);
+        const range = warmestTemp - coldestTemp;
+        const startHueIsColdestToWarmest = TemperatureCache.isBetween(this.input.hue, coldestHue, warmestHue);
+        const startHue = startHueIsColdestToWarmest ? warmestHue : coldestHue;
+        const endHue = startHueIsColdestToWarmest ? coldestHue : warmestHue;
+        const directionOfRotation = 1.0;
+        let smallestError = 1000.0;
+        let answer = this.hctsByHue[Math.round(this.input.hue)];
+        const complementRelativeTemp = 1.0 - this.inputRelativeTemperature;
+        // Find the color in the other section, closest to the inverse percentile
+        // of the input color. This is the complement.
+        for (let hueAddend = 0.0; hueAddend <= 360.0; hueAddend += 1.0) {
+            const hue = _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_2__.sanitizeDegreesDouble(startHue + directionOfRotation * hueAddend);
+            if (!TemperatureCache.isBetween(hue, startHue, endHue)) {
+                continue;
+            }
+            const possibleAnswer = this.hctsByHue[Math.round(hue)];
+            const relativeTemp = (this.tempsByHct.get(possibleAnswer) - coldestTemp) / range;
+            const error = Math.abs(complementRelativeTemp - relativeTemp);
+            if (error < smallestError) {
+                smallestError = error;
+                answer = possibleAnswer;
+            }
+        }
+        this.complementCache = answer;
+        return this.complementCache;
+    }
+    /**
+     * Temperature relative to all colors with the same chroma and tone.
+     * Value on a scale from 0 to 1.
+     */
+    relativeTemperature(hct) {
+        const range = this.tempsByHct.get(this.warmest) - this.tempsByHct.get(this.coldest);
+        const differenceFromColdest = this.tempsByHct.get(hct) - this.tempsByHct.get(this.coldest);
+        // Handle when there's no difference in temperature between warmest and
+        // coldest: for example, at T100, only one color is available, white.
+        if (range === 0.0) {
+            return 0.5;
+        }
+        return differenceFromColdest / range;
+    }
+    /** Relative temperature of the input color. See [relativeTemperature]. */
+    get inputRelativeTemperature() {
+        if (this.inputRelativeTemperatureCache >= 0.0) {
+            return this.inputRelativeTemperatureCache;
+        }
+        this.inputRelativeTemperatureCache = this.relativeTemperature(this.input);
+        return this.inputRelativeTemperatureCache;
+    }
+    /** A Map with keys of HCTs in [hctsByTemp], values of raw temperature. */
+    get tempsByHct() {
+        if (this.tempsByHctCache.size > 0) {
+            return this.tempsByHctCache;
+        }
+        const allHcts = this.hctsByHue.concat([this.input]);
+        const temperaturesByHct = new Map();
+        for (const e of allHcts) {
+            temperaturesByHct.set(e, TemperatureCache.rawTemperature(e));
+        }
+        this.tempsByHctCache = temperaturesByHct;
+        return temperaturesByHct;
+    }
+    /**
+     * HCTs for all hues, with the same chroma/tone as the input.
+     * Sorted ascending, hue 0 to 360.
+     */
+    get hctsByHue() {
+        if (this.hctsByHueCache.length > 0) {
+            return this.hctsByHueCache;
+        }
+        const hcts = [];
+        for (let hue = 0.0; hue <= 360.0; hue += 1.0) {
+            const colorAtHue = _hct_hct_js__WEBPACK_IMPORTED_MODULE_0__.Hct.from(hue, this.input.chroma, this.input.tone);
+            hcts.push(colorAtHue);
+        }
+        this.hctsByHueCache = hcts;
+        return this.hctsByHueCache;
+    }
+    /** Determines if an angle is between two other angles, rotating clockwise. */
+    static isBetween(angle, a, b) {
+        if (a < b) {
+            return a <= angle && angle <= b;
+        }
+        return a <= angle || angle <= b;
+    }
+    /**
+     * Value representing cool-warm factor of a color.
+     * Values below 0 are considered cool, above, warm.
+     *
+     * Color science has researched emotion and harmony, which art uses to select
+     * colors. Warm-cool is the foundation of analogous and complementary colors.
+     * See:
+     * - Li-Chen Ou's Chapter 19 in Handbook of Color Psychology (2015).
+     * - Josef Albers' Interaction of Color chapters 19 and 21.
+     *
+     * Implementation of Ou, Woodcock and Wright's algorithm, which uses
+     * L*a*b* / LCH color space.
+     * Return value has these properties:
+     * - Values below 0 are cool, above 0 are warm.
+     * - Lower bound: -0.52 - (chroma ^ 1.07 / 20). L*a*b* chroma is infinite.
+     *   Assuming max of 130 chroma, -9.66.
+     * - Upper bound: -0.52 + (chroma ^ 1.07 / 20). L*a*b* chroma is infinite.
+     *   Assuming max of 130 chroma, 8.61.
+     */
+    static rawTemperature(color) {
+        const lab = _utils_color_utils_js__WEBPACK_IMPORTED_MODULE_1__.labFromArgb(color.toInt());
+        const hue = _utils_math_utils_js__WEBPACK_IMPORTED_MODULE_2__.sanitizeDegreesDouble(Math.atan2(lab[2], lab[1]) * 180.0 / Math.PI);
+        const chroma = Math.sqrt((lab[1] * lab[1]) + (lab[2] * lab[2]));
+        const temperature = -0.5 +
+            0.02 * Math.pow(chroma, 1.07) *
+                Math.cos(_utils_math_utils_js__WEBPACK_IMPORTED_MODULE_2__.sanitizeDegreesDouble(hue - 50.0) * Math.PI / 180.0);
+        return temperature;
+    }
+}
+//# sourceMappingURL=temperature_cache.js.map
 
 /***/ }),
 
@@ -2890,26 +5814,26 @@ Score.CUTOFF_EXCITED_PROPORTION = 0.01;
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "alphaFromArgb": () => (/* binding */ alphaFromArgb),
-/* harmony export */   "argbFromLab": () => (/* binding */ argbFromLab),
-/* harmony export */   "argbFromLinrgb": () => (/* binding */ argbFromLinrgb),
-/* harmony export */   "argbFromLstar": () => (/* binding */ argbFromLstar),
-/* harmony export */   "argbFromRgb": () => (/* binding */ argbFromRgb),
-/* harmony export */   "argbFromRgba": () => (/* binding */ argbFromRgba),
-/* harmony export */   "argbFromXyz": () => (/* binding */ argbFromXyz),
-/* harmony export */   "blueFromArgb": () => (/* binding */ blueFromArgb),
-/* harmony export */   "delinearized": () => (/* binding */ delinearized),
-/* harmony export */   "greenFromArgb": () => (/* binding */ greenFromArgb),
-/* harmony export */   "isOpaque": () => (/* binding */ isOpaque),
-/* harmony export */   "labFromArgb": () => (/* binding */ labFromArgb),
-/* harmony export */   "linearized": () => (/* binding */ linearized),
-/* harmony export */   "lstarFromArgb": () => (/* binding */ lstarFromArgb),
-/* harmony export */   "lstarFromY": () => (/* binding */ lstarFromY),
-/* harmony export */   "redFromArgb": () => (/* binding */ redFromArgb),
-/* harmony export */   "rgbaFromArgb": () => (/* binding */ rgbaFromArgb),
-/* harmony export */   "whitePointD65": () => (/* binding */ whitePointD65),
-/* harmony export */   "xyzFromArgb": () => (/* binding */ xyzFromArgb),
-/* harmony export */   "yFromLstar": () => (/* binding */ yFromLstar)
+/* harmony export */   alphaFromArgb: () => (/* binding */ alphaFromArgb),
+/* harmony export */   argbFromLab: () => (/* binding */ argbFromLab),
+/* harmony export */   argbFromLinrgb: () => (/* binding */ argbFromLinrgb),
+/* harmony export */   argbFromLstar: () => (/* binding */ argbFromLstar),
+/* harmony export */   argbFromRgb: () => (/* binding */ argbFromRgb),
+/* harmony export */   argbFromRgba: () => (/* binding */ argbFromRgba),
+/* harmony export */   argbFromXyz: () => (/* binding */ argbFromXyz),
+/* harmony export */   blueFromArgb: () => (/* binding */ blueFromArgb),
+/* harmony export */   delinearized: () => (/* binding */ delinearized),
+/* harmony export */   greenFromArgb: () => (/* binding */ greenFromArgb),
+/* harmony export */   isOpaque: () => (/* binding */ isOpaque),
+/* harmony export */   labFromArgb: () => (/* binding */ labFromArgb),
+/* harmony export */   linearized: () => (/* binding */ linearized),
+/* harmony export */   lstarFromArgb: () => (/* binding */ lstarFromArgb),
+/* harmony export */   lstarFromY: () => (/* binding */ lstarFromY),
+/* harmony export */   redFromArgb: () => (/* binding */ redFromArgb),
+/* harmony export */   rgbaFromArgb: () => (/* binding */ rgbaFromArgb),
+/* harmony export */   whitePointD65: () => (/* binding */ whitePointD65),
+/* harmony export */   xyzFromArgb: () => (/* binding */ xyzFromArgb),
+/* harmony export */   yFromLstar: () => (/* binding */ yFromLstar)
 /* harmony export */ });
 /* harmony import */ var _math_utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./math_utils.js */ "./node_modules/@material/material-color-utilities/utils/math_utils.js");
 /**
@@ -3231,7 +6155,7 @@ function labInvf(ft) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "sourceColorFromImage": () => (/* binding */ sourceColorFromImage)
+/* harmony export */   sourceColorFromImage: () => (/* binding */ sourceColorFromImage)
 /* harmony export */ });
 /* harmony import */ var _quantize_quantizer_celebi_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../quantize/quantizer_celebi.js */ "./node_modules/@material/material-color-utilities/quantize/quantizer_celebi.js");
 /* harmony import */ var _score_score_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../score/score.js */ "./node_modules/@material/material-color-utilities/score/score.js");
@@ -3323,15 +6247,15 @@ async function sourceColorFromImage(image) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "clampDouble": () => (/* binding */ clampDouble),
-/* harmony export */   "clampInt": () => (/* binding */ clampInt),
-/* harmony export */   "differenceDegrees": () => (/* binding */ differenceDegrees),
-/* harmony export */   "lerp": () => (/* binding */ lerp),
-/* harmony export */   "matrixMultiply": () => (/* binding */ matrixMultiply),
-/* harmony export */   "rotationDirection": () => (/* binding */ rotationDirection),
-/* harmony export */   "sanitizeDegreesDouble": () => (/* binding */ sanitizeDegreesDouble),
-/* harmony export */   "sanitizeDegreesInt": () => (/* binding */ sanitizeDegreesInt),
-/* harmony export */   "signum": () => (/* binding */ signum)
+/* harmony export */   clampDouble: () => (/* binding */ clampDouble),
+/* harmony export */   clampInt: () => (/* binding */ clampInt),
+/* harmony export */   differenceDegrees: () => (/* binding */ differenceDegrees),
+/* harmony export */   lerp: () => (/* binding */ lerp),
+/* harmony export */   matrixMultiply: () => (/* binding */ matrixMultiply),
+/* harmony export */   rotationDirection: () => (/* binding */ rotationDirection),
+/* harmony export */   sanitizeDegreesDouble: () => (/* binding */ sanitizeDegreesDouble),
+/* harmony export */   sanitizeDegreesInt: () => (/* binding */ sanitizeDegreesInt),
+/* harmony export */   signum: () => (/* binding */ signum)
 /* harmony export */ });
 /**
  * @license
@@ -3478,8 +6402,8 @@ function matrixMultiply(row, matrix) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "argbFromHex": () => (/* binding */ argbFromHex),
-/* harmony export */   "hexFromArgb": () => (/* binding */ hexFromArgb)
+/* harmony export */   argbFromHex: () => (/* binding */ argbFromHex),
+/* harmony export */   hexFromArgb: () => (/* binding */ hexFromArgb)
 /* harmony export */ });
 /* harmony import */ var _color_utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./color_utils.js */ "./node_modules/@material/material-color-utilities/utils/color_utils.js");
 /**
@@ -3570,10 +6494,10 @@ function parseIntHex(value) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "applyTheme": () => (/* binding */ applyTheme),
-/* harmony export */   "customColor": () => (/* binding */ customColor),
-/* harmony export */   "themeFromImage": () => (/* binding */ themeFromImage),
-/* harmony export */   "themeFromSourceColor": () => (/* binding */ themeFromSourceColor)
+/* harmony export */   applyTheme: () => (/* binding */ applyTheme),
+/* harmony export */   customColor: () => (/* binding */ customColor),
+/* harmony export */   themeFromImage: () => (/* binding */ themeFromImage),
+/* harmony export */   themeFromSourceColor: () => (/* binding */ themeFromSourceColor)
 /* harmony export */ });
 /* harmony import */ var _blend_blend_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../blend/blend.js */ "./node_modules/@material/material-color-utilities/blend/blend.js");
 /* harmony import */ var _palettes_core_palette_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../palettes/core_palette.js */ "./node_modules/@material/material-color-utilities/palettes/core_palette.js");
@@ -3767,27 +6691,12 @@ function setSchemeProperties(target, scheme, suffix = '') {
 /******/ 	})();
 /******/ 	
 /************************************************************************/
-var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
-(() => {
-/*!**************************!*\
-  !*** ./webpack/entry.js ***!
-  \**************************/
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _material_material_color_utilities__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @material/material-color-utilities */ "./node_modules/@material/material-color-utilities/index.js");
-
-const img = new Image();
-const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-img.src = document.querySelector("#header_image").src;
-const theme = (0,_material_material_color_utilities__WEBPACK_IMPORTED_MODULE_0__.themeFromImage)(img);
-theme.then(function (result) {
-  (0,_material_material_color_utilities__WEBPACK_IMPORTED_MODULE_0__.applyTheme)(result, {
-    target: document.body,
-    dark: systemDark
-  });
-});
-})();
-
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module is referenced by other modules so it can't be inlined
+/******/ 	var __webpack_exports__ = __webpack_require__("./webpack/app.js");
+/******/ 	
 /******/ })()
 ;
 //# sourceMappingURL=bundle.js.map

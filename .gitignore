@@ -1,5 +1,13 @@
 _site
-.sass-cache
+.bundle
 .jekyll-cache
 .jekyll-metadata
-vendor
+.sass-cache
+.vscode
+*.code-workspace
+*.map
+*TEST*.md
+node_modules
+package-lock.json
+test.html
+_drafts/

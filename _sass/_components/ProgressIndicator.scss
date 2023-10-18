@@ -1,0 +1,29 @@
+// https://m3.material.io/components/progress-indicators/
+// 进度指示
+
+@property --JTM-C-ProgressIndicator-Deg {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.JTM-C-ProgressIndicator {
+  &[spec="circular"] {
+    // Firefox兼容
+    --JTM-C-ProgressIndicator-Deg: 270deg;
+
+    display: block;
+
+    width: 40px;
+    height: 40px;
+
+    margin: 4px;
+
+    border-radius: 100%;
+    border: 4px solid var(--md-sys-color-primary);
+
+    -webkit-mask: conic-gradient(#000 var(--JTM-C-ProgressIndicator-Deg), transparent 0deg);
+    animation: JTM-C-ProgressIndicator-Loop 1.5s cubic-bezier(0.35, 0.25, 0.25, 0.65) infinite;
+    mask: conic-gradient(#000 var(--JTM-C-ProgressIndicator-Deg), transparent 0deg);
+  }
+}

@@ -1,0 +1,324 @@
+// 代码
+
+code {
+  font-family: "Source Code Pro", monospace;
+  letter-spacing: 0;
+}
+
+.language-plaintext {
+  display: inline-block;
+
+  padding-inline: 3px;
+
+  color: var(--md-sys-color-on-tertiary);
+  line-height: 20px;
+  word-break: break-word;
+
+  border-radius: 4px;
+
+  background-color: var(--md-sys-color-tertiary);
+
+  -moz-user-select: all;
+  -webkit-user-select: all;
+  user-select: all;
+
+  &::selection {
+    color: var(--md-sys-color-tertiary);
+
+    background-color: var(--md-sys-color-on-tertiary);
+  }
+}
+
+div.highlighter-rouge {
+  @include body-large();
+
+  display: inline-block;
+
+  min-height: 46px;
+  width: 100%;
+
+  margin-block-end: 3px;
+  margin-block-start: 6px;
+
+  position: relative;
+
+  color: var(--md-ref-palette-neutral98);
+  word-break: break-word;
+
+  border-left: 2px solid var(--md-sys-color-outline);
+  border-radius: 10px;
+
+  background-color: var(--md-ref-palette-tertiary10);
+
+  overflow: hidden;
+
+  #highlighter-rouge-copycode {
+    @include material-symbols("content_copy", $line-height: 40px);
+
+    display: block;
+
+    margin-inline: 3px;
+    margin-block: 3px;
+
+    height: 40px;
+    width: 40px;
+
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    background-color: var(--md-ref-palette-tertiary30);
+
+    border-radius: 6px;
+
+    text-align: center;
+    opacity: 0;
+    cursor: pointer;
+    transition: var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard);
+  }
+
+  div.highlight {
+    pre.highlight {
+      margin: 0;
+
+      code {
+        display: block;
+
+        min-height: 46px;
+
+        line-height: 0;
+
+        .rouge-table {
+          width: 100%;
+
+          margin-inline: 0;
+
+          border-radius: 0;
+          border: none;
+
+          box-shadow: none;
+
+          .rouge-gutter {
+            padding-block: 11px;
+            padding-inline: 12px;
+
+            position: sticky;
+            left: 0;
+
+            outline: 2px solid var(--md-sys-color-outline);
+
+            background-color: var(--md-ref-palette-tertiary10);
+
+            .lineno {
+              @extend .disable-select;
+
+              margin: 0;
+
+              font-family: "Source Code Pro", monospace;
+              letter-spacing: 0;
+              line-height: 24px;
+              text-align: right;
+            }
+          }
+
+          .rouge-code {
+            padding-block: 11px;
+            padding-inline: 12px 46px;
+
+            border-left: none;
+
+            pre {
+              margin: 0;
+
+              font-family: "Source Code Pro", monospace;
+              letter-spacing: 0;
+              line-height: 24px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.highlight {
+  .w,
+  .nd {
+    // w: Specially highlighted whitespace
+    // nd: For decorators in languages such as Python or Java
+    color: var(--md-ref-palette-neutral98);
+  }
+
+  .err {
+    // Lexer errors
+    color: #cc4125;
+  }
+
+  .x,
+  .kp {
+    // x: Token for data not matched by a parser (e.g. HTML markup in PHP code)
+    // kp: Keywords that aren't really keywords
+    color: #ff502d;
+  }
+
+  .k {
+    // Any keyword
+    color: #ffd75f;
+  }
+
+  .kc {
+    // Keywords that are constants
+    color: #6894d9;
+  }
+
+  .kd,
+  .n,
+  .nf {
+    // kd: Keywords used for variable declaration (e.g. `var` in javascript)
+    // n: Variable/function names
+    // nf: Function names
+    color: #98d2ff;
+  }
+
+  .kn,
+  .nn {
+    // kn: Keywords used for namespace declarations
+    // nn: Token for namespaces
+    color: #6fa8dc;
+  }
+
+  .kr {
+    // Keywords which are reserved (such as `end` in Ruby)
+    color: #b76e94;
+  }
+
+  .kt {
+    // Keywords wich refer to a type id (such as `int` in C)
+    color: #8cb878;
+  }
+
+  .na {
+    // Attributes (in HTML for instance)
+    color: #9d87dc;
+  }
+
+  .nb {
+    // Builtin names which are available in the global namespace
+    color: #84b1f7;
+  }
+
+  .bp {
+    // Builtin names that are implicit (such as `self` in Ruby)
+    color: #8ac3cf;
+  }
+
+  .nc {
+    // For class declaration
+    color: #ffc382;
+  }
+
+  .nt {
+    // Tag mainly for markup such as XML or HTML
+    color: #8e9cff;
+  }
+
+  .no,
+  .nv,
+  .vc,
+  .vg,
+  .vi {
+    // no: For constants
+    // nv: Token for variables
+    // vc: Token for class variables (e.g. `@@var` in Ruby)
+    // vg: For global variables (such as `$LOAD_PATH` in Ruby)
+    // vi: Token for instance variables (such as `@var` in Ruby)
+    color: #7cbaf2;
+  }
+
+  .ne {
+    // Exceptions and errors (e.g. `ArgumentError` in Ruby)
+    color: #ff8b8b;
+  }
+
+  .py,
+  .nl,
+  .nx {
+    // py: Token for properties
+    // nl: For label names
+    // nx: For other names
+    color: #35b2b6;
+  }
+
+  .l,
+  .ld,
+  .sb,
+  .sc,
+  .sd,
+  .s2,
+  .se,
+  .si,
+  .sx,
+  .sr,
+  .s1,
+  .ss,
+  .m,
+  .mf,
+  .mh,
+  .mi,
+  .il,
+  .mo,
+  .mx,
+  .mb,
+  .g,
+  .gd,
+  .ge,
+  .gr,
+  .gh,
+  .gi,
+  .go,
+  .gp,
+  .gs,
+  .gu,
+  .gt,
+  .gl {
+    color: var(--md-ref-palette-neutral98);
+  }
+
+  .s {
+    // String literals
+    color: #ebd8a5;
+  }
+
+  .sh {
+    // For "heredoc" strings (e.g. in Ruby)
+    color: #ffe6a1;
+  }
+
+  .o,
+  .ow {
+    // o: Operators (commonly `+`, `-`, `/`, `*",
+    // ow: Word operators (e.g. `and",
+    color: #ff8f45;
+  }
+
+  .p {
+    // Punctuation which is not an operator
+    color: #d6d6d6;
+  }
+
+  .c,
+  .cm,
+  .c1,
+  .cs {
+    color: #474747;
+  }
+
+  .cp,
+  .cpf,
+  .ni {
+    // cp: Preprocessor comments such as `<% %>` in ERb
+    // cpf: Unknown
+    // ni: Token for entitites such as `&nbsp;` in HTML
+    color: #777777;
+  }
+}

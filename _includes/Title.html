@@ -1,0 +1,24 @@
+<!-- 大标题 -->
+<div class="JTM-S-Title">
+  <div id="JTM-S-Title-HeroContainer">
+    <span id="JTM-S-Title-HeroHeadline">{{ page.title }}</span>
+    {%- if page.description and page.description != "" -%}
+    <span id="JTM-S-Title-HeroSubtitle">{{ page.description }}</span>
+    {%- endif -%}
+  </div>
+  <div id="JTM-S-Title-Impression">
+    {%- if page.impression and page.impression != "" -%}
+    <!-- 头图 - 设置由文章提供 -->
+    {%- assign photograph = page.impression -%}
+    <!--  -->
+    {%- elsif site.impression -%}
+    <!-- 头图 - 设置由全局设定提供 -->
+    {%- assign photograph = site.impression -%}
+    <!--  -->
+    {%- else -%}
+    <!-- 头图 - 不设置头图 -->
+    {%- assign photograph = false -%} {%- endif -%} {%- if photograph != false -%}
+    <img src="{{ photograph }}" alt="{{ page.title }}" />
+    {%- endif -%}
+  </div>
+</div>

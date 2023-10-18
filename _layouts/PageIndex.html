@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+  {%- include Head.html -%}
+  <body class="JTM-Root" {%- if page.color -%} color="{{ page.color }}" {%- endif -%}>
+    {%- if page.permalink == "/404.html" -%} {%- include 404NotFound.html -%} {%- else -%}
+    <!--  -->
+    {%- include LoadingSplash.html -%}
+    <!--  -->
+    {%- include UniversalLayout.html -%}
+    <!-- 底部 Fab -->
+    {%- include CornerFAB.html -%} {%- endif -%}
+  </body>
+</html>

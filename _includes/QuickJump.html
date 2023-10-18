@@ -1,0 +1,24 @@
+<!-- 文章快捷跳转 -->
+<div class="JTM-S-QuickJump">
+  {%- if page.previous -%}
+  <a href="{{ page.previous.url }}">
+    <div class="JTM-C-Card" spec="clear" id="JTM-S-QuickJump-Previous">
+      <div class="JTM-C-Card-Supporting">
+        <p><span>west</span>上一篇</p>
+        <h3>{{ page.previous.title }}</h3>
+      </div>
+    </div>
+  </a>
+  {%- endif -%}
+  <!--  -->
+  {%- if page.next -%}
+  <a href="{{ page.next.url }}">
+    <div class="JTM-C-Card" spec="clear" id="JTM-S-QuickJump-Next">
+      <div class="JTM-C-Card-Supporting">
+        <p>下一篇<span>east</span></p>
+        <h3>{{ page.next.title }}</h3>
+      </div>
+    </div>
+  </a>
+  {%- endif -%}
+</div>

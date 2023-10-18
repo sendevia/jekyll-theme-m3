@@ -1,0 +1,13 @@
+.JTM-S-CornerFAB {
+  margin-block-end: 35px;
+  margin-inline-end: 30px;
+
+  position: fixed;
+  bottom: 0;
+  right: 0;
+
+  opacity: 0;
+  transition: var(--md-sys-motion-duration-medium4);
+  visibility: hidden;
+  z-index: 21;
+}

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'jekyll'
-gem "jekyll-sass-converter", "~> 2.0"
+gem "jekyll-sass-converter", "~> 3.0"
 group :jekyll_plugins do
   gem 'jekyll-feed'
   gem 'jekyll-paginate'
@@ -17,6 +17,5 @@ platforms :mingw, :x64_mingw, :mswin, :jruby do
 end
 
 gem 'wdm', :install_if => Gem.win_platform?
-
 
 gem 'webrick'

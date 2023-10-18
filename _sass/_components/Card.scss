@@ -1,0 +1,128 @@
+// https://m3.material.io/components/cards/
+// 卡片
+
+.JTM-C-Card {
+  display: flex;
+  flex-direction: column;
+
+  position: relative;
+
+  letter-spacing: 0;
+
+  overflow: hidden;
+  transition: var(--md-sys-motion-duration-medium4) var(--md-sys-motion-easing-standard);
+
+  img {
+    display: block;
+  }
+
+  .JTM-C-Card-Supporting {
+    pointer-events: none;
+
+    h3 {
+      font-family: "Google Sans";
+      line-height: 30px;
+    }
+  }
+
+  &[spec="clear"] {
+    border-radius: 24px;
+
+    background-color: var(--md-sys-color-surface-container-low);
+
+    cursor: pointer;
+
+    img {
+      height: 240px;
+      width: 100%;
+
+      object-fit: cover;
+      opacity: 0.8;
+      transition: var(--md-sys-motion-duration-medium4) var(--md-sys-motion-easing-standard);
+    }
+
+    .JTM-C-Card-Impression {
+      position: relative;
+
+      border-radius: 0 0 24px 24px;
+
+      background-color: var(--md-sys-color-inverse-primary);
+
+      overflow: hidden;
+    }
+
+    .JTM-C-Card-Supporting {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      margin: 20px;
+    }
+
+    ripple-effect {
+      background-color: var(--md-sys-color-on-primary);
+    }
+
+    &:hover {
+      color: var(--md-sys-color-on-primary);
+
+      background-color: var(--md-sys-color-primary);
+
+      img {
+        opacity: 1;
+      }
+    }
+
+    &:active {
+      border-radius: 44px;
+
+      box-shadow: 0 0 0 3px var(--md-sys-color-on-surface);
+      transition: 0.2s;
+    }
+  }
+
+  &[spec="focus"] {
+    height: 240px;
+
+    border-radius: 24px;
+
+    background-color: var(--md-sys-color-primary);
+
+    cursor: pointer;
+
+    img {
+      height: 100%;
+
+      object-fit: cover;
+      transition: 0.2s;
+    }
+
+    .JTM-C-Card-Supporting {
+      position: absolute;
+      bottom: 0;
+
+      margin: 20px;
+
+      color: var(--md-sys-color-on-primary);
+
+      transform: translateY(calc(100% + 20px));
+      transition: 0.4s;
+    }
+
+    ripple-effect {
+      background-color: var(--md-sys-color-on-primary);
+    }
+
+    &:hover {
+      img {
+        opacity: 0.5;
+
+        transition: opacity var(--md-sys-motion-duration-medium2);
+      }
+
+      .JTM-C-Card-Supporting {
+        transform: translateY(0%);
+      }
+    }
+  }
+}

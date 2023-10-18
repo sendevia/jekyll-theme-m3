@@ -1,0 +1,13 @@
+// 375px 适配
+
+@media screen and (max-width: 375px) {
+  #JTM-S-UniversalLayout-ContentFlow {
+    .JTM-S-Title {
+      #JTM-S-Title-HeroContainer {
+        #JTM-S-Title-HeroHeadline {
+          word-break: break-word;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,162 @@
+.JTM-S-Carousel {
+  width: 100%;
+
+  overflow: hidden;
+
+  #JTM-S-Carousel-PostsList {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+
+    height: 480px;
+
+    margin-block-start: 12px;
+    margin-inline: 6px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    img,
+    h2 {
+      pointer-events: none;
+    }
+
+    .JTM-S-Carousel-Control {
+      @include material-symbols($size: 18px);
+
+      height: calc(100% - 12px);
+      width: 60px;
+
+      margin-block: 6px;
+      margin-inline: 6px;
+      padding: 0;
+
+      position: absolute;
+
+      color: var(--md-sys-color-on-surface-variant);
+
+      border-radius: 100px;
+      border: none;
+
+      background-color: var(--md-sys-color-surface-variant);
+
+      cursor: pointer;
+      opacity: 0;
+      overflow: hidden;
+      z-index: 12;
+      transition: var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard);
+
+      &:nth-of-type(1) {
+        left: 0;
+      }
+
+      &:nth-of-type(2) {
+        right: 0;
+      }
+
+      &:hover,
+      &:focus {
+        opacity: 1;
+      }
+    }
+
+    .JTM-S-Carousel-PostItem {
+      height: 480px;
+      width: 100%;
+
+      position: relative;
+
+      border-radius: 36px;
+
+      background-color: var(--md-sys-color-surface-variant);
+
+      overflow: hidden;
+
+      #JTM-S-Carousel-PostImpression {
+        height: 100%;
+        width: 100%;
+
+        object-fit: cover;
+        transition: var(--md-sys-motion-duration-medium4) var(--md-sys-motion-easing-emphasized);
+      }
+
+      #JTM-S-Carousel-PostInfo {
+        padding-block: 20px;
+        padding-inline: 30px;
+
+        width: 100%;
+
+        position: absolute;
+        bottom: 0;
+
+        transform: translateY(100%);
+        transition: var(--md-sys-motion-duration-long1) var(--md-sys-motion-easing-emphasized);
+      }
+
+      &:hover {
+        #JTM-S-Carousel-PostImpression {
+          opacity: 0.5;
+        }
+
+        #JTM-S-Carousel-PostInfo {
+          transform: translateY(0%);
+        }
+      }
+
+      &:nth-of-type(1) {
+        width: 50%;
+      }
+
+      &:nth-of-type(2) {
+        width: 50%;
+      }
+
+      &:nth-of-type(3) {
+        width: 35%;
+      }
+
+      &:nth-of-type(4) {
+        width: 15%;
+
+        border-radius: 100px;
+
+        #JTM-S-Carousel-PostInfo {
+          display: none;
+        }
+      }
+
+      &:nth-of-type(n + 5) {
+        display: none;
+
+        width: 0;
+
+        margin: 0;
+      }
+    }
+
+    .JTM-S-Carousel-PostItem-Large {
+      #JTM-S-Carousel-PostImpression {
+        width: 50%;
+      }
+    }
+
+    .JTM-S-Carousel-PostItem-Medium {
+      #JTM-S-Carousel-PostImpression {
+        width: 35%;
+      }
+    }
+
+    .JTM-S-Carousel-PostItem-Small {
+      #JTM-S-Carousel-PostImpression {
+        width: 15%;
+
+        border-radius: 100px;
+      }
+
+      #JTM-S-Carousel-PostInfo {
+        display: none;
+      }
+    }
+  }
+}

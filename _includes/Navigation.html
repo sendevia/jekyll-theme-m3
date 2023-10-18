@@ -1,0 +1,119 @@
+<!-- 导航 - 导航栏 -->
+<div class="JTM-C-Navigation" spec="rail" dest="center">
+  <img id="JTM-C-Navigation-Hero" src="/assets/images/avatar.webp" alt="logo" />
+
+  {%- if page.toc -%}
+  <div id="JTM-C-Navigation-FAB">
+    <button class="JTM-C-FAB" spec="surface" size="normal">menu</button>
+  </div>
+  {%- endif -%}
+
+  <div id="JTM-C-Navigation-Destinations">
+    <a href="/">
+      <div id="JTM-C-Navigation-SegmentInactive">
+        <div id="JTM-C-Navigation-DestinationAccent">
+          <div id="JTM-C-Navigation-SegmentIcon">
+            <!-- https://fonts.google.com/icons?selected=Material+Icons&icon.set=Material+Symbols -->
+            <span>home</span>
+          </div>
+        </div>
+        <p id="JTM-C-Navigation-DestinationLabel">首页</p>
+      </div>
+    </a>
+
+    <a href="/posts">
+      <div id="JTM-C-Navigation-SegmentInactive">
+        <div id="JTM-C-Navigation-DestinationAccent">
+          <div id="JTM-C-Navigation-SegmentIcon">
+            <span>article</span>
+          </div>
+        </div>
+        <p id="JTM-C-Navigation-DestinationLabel">文章</p>
+      </div>
+    </a>
+
+    <!-- 列出有导航需求的页面 -->
+    {%- for s in site.pages -%} {%- if s.navigation and s.published == true -%}
+    <a href="{{ s.url }}">
+      <div id="JTM-C-Navigation-SegmentInactive">
+        <div id="JTM-C-Navigation-DestinationAccent">
+          <div id="JTM-C-Navigation-SegmentIcon">
+            <span>{{ s.segment_icon }}</span>
+          </div>
+        </div>
+        <p id="JTM-C-Navigation-DestinationLabel">{{ s.segment_title }}</p>
+      </div>
+    </a>
+    {%- endif -%}
+    <!--  -->
+    {%- endfor -%}
+  </div>
+</div>
+
+<!-- 导航 - 移动端顶栏 -->
+<div class="JTM-C-AppBar">
+  {%- if page.toc -%}
+  <button class="JTM-C-IconButton" id="JTM-C-AppBar-MenuIcon">menu</button>
+  {%- else -%}
+  <span></span>
+  {%- endif -%}
+  <div id="JTM-C-AppBar-DynamicTitle">
+    <span>{{ site.title }}</span>
+    <span>{{ page.title }}</span>
+  </div>
+  <button class="JTM-C-IconButton" id="JTM-C-AppBar-InfoIcon">info</button>
+</div>
+
+<!-- 导航 - 模态的页面信息 -->
+<dialog class="JTM-C-Dialog" id="JTM-C-Dialog-ModalTips" icon>
+  <div class="JTM-C-Dialog-ContentLayout">
+    <span class="JTM-C-Dialog-LeaderIcon">info</span>
+
+    <h3 class="JTM-C-Dialog-Headline">页面信息</h3>
+    <p class="JTM-C-Dialog-SupportingText">此处提供了有关这个页面的一些信息</p>
+
+    <div class="JTM-C-Dialog-SupportingList">
+      <!-- 日期 -->
+      {%- if page.date -%}
+      <div class="JTM-C-Dialog-TipItems">
+        <button class="JTM-C-IconButton" spec="tonal" disabled>calendar_month</button>
+        <p>发布于：{{ page.date | date: "%Y年%m月%d日" }}</p>
+      </div>
+      {%- endif -%}
+
+      <!-- 阅读时间 -->
+      {%- assign page_words = page.content | number_of_words: "auto" -%} {%- assign read_estimate = page_words | divided_by: 120 -%}
+      <div class="JTM-C-Dialog-TipItems">
+        <button class="JTM-C-IconButton" spec="tonal" disabled>schedule</button>
+        <p>估计阅读时间：{%- if read_estimate > 0 -%} {{ read_estimate }} {% else -%} 少于 1 {% endif -%}分钟</p>
+      </div>
+
+      <!-- 作者 -->
+      {%- if page.author -%}
+      <div class="JTM-C-Dialog-TipItems">
+        <button class="JTM-C-IconButton" spec="tonal" disabled>person</button>
+        <p>作者：{{ page.author }}</p>
+      </div>
+      {%- endif -%}
+
+      <!-- 目录分类 -->
+      {%- if page.categories.size > 0 -%}
+      <div class="JTM-C-Dialog-TipItems">
+        <button class="JTM-C-IconButton" spec="tonal" disabled>category</button>
+        <p>分类：{{ page.categories }}</p>
+      </div>
+      {%- endif -%}
+
+      <!-- 自定义的主题颜色 -->
+      {%- if page.color and page.color != "" -%}
+      <div class="JTM-C-Dialog-TipItems">
+        <button class="JTM-C-IconButton" spec="tonal" disabled>palette</button>
+        <p>主题颜色：{{ page.color }}</p>
+      </div>
+      {%- endif -%}
+    </div>
+  </div>
+  <div class="JTM-C-Dialog-Buttons">
+    <button class="JTM-C-CommonButton" spec="text" id="dialog-close">关闭</button>
+  </div>
+</dialog>

@@ -1,41 +1,49 @@
-baseurl: ""
-timezone: Asia/Shanghai
+version: "23.1016.0"
+
 title: "An awesome blog"
+baseurl: ""
+permalink: "/:title"
+locale: "zh_CN"
+timezone: "Asia/Shanghai"
 
-email: "me@sendevia.top"
-github: "https://github.com/Sendevia"
-twitter: "https://twitter.com/sendevia"
+author: "sendevia"
+mugshot: "/assets/images/avatar.webp"
+email: ""
+github: ""
 
-header_image: "/assets/images/102911375_p0.webp"
-
-plugins:
-  - jekyll-feed
-  - jekyll-paginate
-  - jekyll-seo-tag
-  - jekyll-sitemap
-  - jekyll-toc
-  - jemoji
+impression: "/assets/images/102911375_p0.webp"
 
 defaults:
   - scope:
+      path: "_pages"
+    values:
+      layout: "Page"
+      permalink: "/:basename"
+  - scope:
       path: "_posts"
     values:
-      layout: "Material3"
+      layout: "Post"
+      permalink: "/posts/:title"
       toc: true
 
 toc:
-  item_class: mnd-entry
-  item_prefix: mnd-
-  list_class: mnd-section
-  list_id:
+  item_class: "JTM-C-NavigationDrawer-Entry"
+  item_prefix: "JTM-C-NavigationDrawer-"
+  list_id: "JTM-C-NavigationDrawer-Section"
   max_level: 2
   ordered_list: false
 
-highlighter: "rouge"
 markdown: "kramdown"
 kramdown:
   input: "GFM"
   syntax_highlighter: "rouge"
+  syntax_highlighter_opts:
+    css_class: "highlight"
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true
+      start_line: 1
 
 webrick:
   headers:
@@ -59,4 +67,8 @@ exclude:
   - tsconfig.json
   - vendor/
   - webpack.config.js
+  - babel.config.js
   - webpack/
+
+include:
+  - _pages/

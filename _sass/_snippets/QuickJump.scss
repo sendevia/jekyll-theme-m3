@@ -1,0 +1,42 @@
+.JTM-S-QuickJump {
+  width: 100%;
+
+  padding-inline: 18px;
+
+  text-align: center;
+
+  a {
+    width: 50%;
+    min-width: 300px;
+
+    #JTM-S-QuickJump-Previous {
+      margin-inline-end: 3px;
+
+      .JTM-C-Card-Supporting {
+        align-items: self-start;
+
+        text-align: start;
+      }
+    }
+
+    #JTM-S-QuickJump-Next {
+      margin-inline-start: 3px;
+
+      .JTM-C-Card-Supporting {
+        align-items: flex-end;
+
+        text-align: end;
+      }
+    }
+  }
+
+  p {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+
+    span {
+      @include material-symbols($size: 18px);
+    }
+  }
+}
