@@ -25,11 +25,19 @@
     }
   }
 
-  .JTM-S-CornerFAB {
-    margin-block-end: 25px;
-    margin-inline-end: 20px;
+  .JTM-S-ScrollToTop {
+    #JTM-S-ScrollToTop-Desktop {
+      display: none;
+    }
 
-    bottom: 80px;
+    #JTM-S-ScrollToTop-Mobile {
+      display: block;
+
+      bottom: 80px;
+
+      margin-block-end: 25px;
+      margin-inline-end: 20px;
+    }
   }
 
   .JTM-C-Navigation {
@@ -48,22 +56,20 @@
   .JTM-C-NavigationDrawer {
     left: 0;
 
+    padding-block: 60px 8px;
+
     #JTM-C-NavigationDrawer-MenuCloseIcon {
       display: block;
 
-      position: absolute;
-      left: 3px;
+      position: fixed;
+      left: 4px;
       top: 12px;
+
+      z-index: 11;
     }
 
-    #JTM-C-NavigationDrawer-Section {
-      position: relative;
-      top: 60px;
-
-      height: calc(100% - 50px);
-
-      padding-block-end: 20px;
-      padding-inline: 10px;
+    &[show] {
+      padding-block: 54px 8px;
     }
   }
 
@@ -73,28 +79,26 @@
     visibility: visible;
   }
 
-  .JTM-S-WebsiteInformation {
+  #JTM-S-WebsiteInformation {
     display: none;
   }
 
   .JTM-S-QuickJump {
     a {
       width: 100%;
+    }
 
+    &#JTM-S-QuickJump-Pair a {
       #JTM-S-QuickJump-Previous {
-        margin-inline-end: 0;
         margin-block-end: 3px;
+        margin-inline-end: 0;
       }
 
       #JTM-S-QuickJump-Next {
-        margin-inline-start: 0;
         margin-block-start: 3px;
+        margin-inline-start: 0;
       }
     }
-  }
-
-  .JTM-S-Title {
-    margin: 0;
   }
 
   .JTM-S-UniversalLayout {
@@ -105,78 +109,111 @@
       grid-column: auto;
       grid-row: 1/2;
 
-      margin: 0;
-      padding: 75px 10px 120px;
+      padding-block: 115px 120px;
+      padding-inline: 12px;
 
-      .JTM-S-Title {
+      .JTM-S-Carousel {
+        height: calc(55vh - 64px - 80px);
+
+        margin: 0;
+
+        #JTM-S-Carousel-PostsList {
+          margin: 0;
+
+          .JTM-S-Carousel-PostItem #JTM-S-Carousel-PostInfo {
+            padding-block: 40px 20px;
+            padding-inline: 30px;
+
+            h1 {
+              @include typescale-style("headline-large");
+            }
+
+            h4 {
+              @include typescale-style("body-large");
+            }
+          }
+        }
+      }
+
+      .JTM-S-Header {
         flex-direction: column;
 
-        #JTM-S-Title-HeroContainer {
+        height: calc(55vh - 64px - 80px);
+
+        margin: 0;
+
+        #JTM-S-Header-HeroContainer {
           grid-column: span 2;
 
-          #JTM-S-Title-HeroHeadline {
-            @include display-medium();
+          padding: 5vw;
 
-            line-height: 45rem;
+          #JTM-S-Header-HeroHeadline {
+            @include typescale-style("display-large", $font-size: 10vw, $font-weight: 500, $line-height: 10vw);
+          }
+
+          #JTM-S-Header-HeroSubtitle {
+            @include typescale-style("display-small", $font-size: 20rem, $font-weight: 500, $line-height: 20rem);
           }
         }
 
-        #JTM-S-Title-Impression {
+        #JTM-S-Header-Impression {
           grid-column: span 2;
         }
       }
 
       #JTM-S-UniversalLayout-ContentFiller {
+        margin-block: 12px 6px;
+        margin-inline: 0;
         padding: 0 0 36px 0;
 
         background-color: transparent;
+      }
+
+      .JTM-S-QuickJump {
+        margin-inline: 0;
+      }
+
+      .JTM-S-Footer {
+        margin-inline: 0;
+
+        #JTM-S-Footer-Socialmedia {
+          justify-content: space-evenly;
+        }
       }
     }
   }
 
   .JTM-P-Index {
+    #JTM-P-Index-CardSet {
+      grid-template-columns: repeat(1, 1fr);
+
+      #JTM-P-Index-SummaryCard {
+        grid-column: span 1;
+      }
+    }
+  }
+
+  .JTM-P-Posts {
     align-items: center;
     flex-direction: column-reverse;
 
     width: 100%;
 
-    margin-block-start: 30px;
     margin-inline: 0;
     padding-block: 0;
 
-    .timeline {
-      .index-level1 {
-        align-items: center;
-      }
-
-      .index-level2 {
-        align-items: center;
-        flex-wrap: wrap;
-        justify-content: center;
+    #JTM-P-Posts-Timeline {
+      .JTM-P-Posts-Timeline-L2 {
+        grid-template-columns: repeat(1, 1fr);
 
         width: 100%;
-      }
 
-      .posts-card .posts-date-day {
-        left: unset;
-        right: 0;
+        #JTM-P-Posts-Timeline-PostCard .JTM-P-Posts-Timeline-DateDetail {
+          left: unset;
+          right: 0;
 
-        border-radius: 12px 20px 12px 12px;
-      }
-    }
-
-    .person-intro {
-      max-width: 360px;
-      min-width: unset;
-      width: 80vw;
-
-      margin: auto;
-
-      position: relative;
-      top: 0;
-
-      .section1 {
-        width: 100%;
+          border-radius: 12px 20px 12px 12px;
+        }
       }
     }
   }

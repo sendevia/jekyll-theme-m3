@@ -3,19 +3,17 @@
 
 .JTM-C-Dialog {
   &[open] {
-    @extend .disable-select;
+    @include JTM-E-UserSelect();
 
     max-width: 560px;
     min-width: 280px;
 
     padding: 24px;
 
-    background-color: var(--md-sys-color-surface);
-
-    letter-spacing: 0;
-
-    border-radius: 28px;
+    border-radius: var(--md-sys-shape-corner-extra-large);
     border: none;
+
+    background-color: var(--md-sys-color-surface);
 
     box-shadow: var(--md-sys-elevation-level3);
 
@@ -72,7 +70,7 @@
         align-items: center;
 
         .JTM-C-Dialog-LeaderIcon {
-          @include material-symbols($size: 24px);
+          @include material-symbols($size: 24);
 
           margin-bottom: 16px;
         }

@@ -1,0 +1,26 @@
+<div class="JTM-S-Carousel">
+  <div id="JTM-S-Carousel-PostsList" data-scroll="0">
+    <button class="JTM-S-Carousel-Control" id="JTM-S-Carousel-Prev">west</button>
+    {% assign featured_posts = site.posts | where: "featured", true | sort: 'date' | reverse %}
+    {% assign required_posts = 3 %}
+    {% assign total_featured_posts = featured_posts.size %}
+    {% for i in (0..required_posts) %}
+      {% assign post_index = i | modulo: total_featured_posts %}
+      {% assign post = featured_posts[post_index] %}
+      {% if post %}
+        <a class="JTM-S-Carousel-PostItem" href="{{ post.url | prepend: site.baseurl }}">
+          <span id="JTM-S-Carousel-PostImpression" style="background-image: url('{{ post.impression | default: site.impression }}');" />
+          <div id="JTM-S-Carousel-PostInfo">
+            <div class="JTM-S-Carousel-PostInfo-FeaturedTip">
+              <span id="JTM-S-Carousel-PostInfo-FeaturedTip-Icon">editor_choice</span>
+              <p id="JTM-S-Carousel-PostInfo-FeaturedTip-Description">精选文章</p>
+            </div>
+            <h1>{{ post.title }}</h1>
+            <h4>{{ post.description }}</h4>
+          </div>
+        </a>
+      {% endif %}
+    {% endfor %}
+    <button class="JTM-S-Carousel-Control" id="JTM-S-Carousel-Next">east</button>
+  </div>
+</div>

@@ -2,7 +2,7 @@
 // 移动端标题栏
 
 .JTM-C-AppBar {
-  @extend .disable-select;
+  @include JTM-E-UserSelect();
 
   display: flex;
   align-items: center;
@@ -11,15 +11,13 @@
   gap: 6px;
   justify-content: space-between;
 
+  position: fixed;
+  top: -64px;
+
   height: 64px;
   width: 100%;
 
   padding: 8px 4px;
-
-  position: fixed;
-  top: -64px;
-
-  letter-spacing: 0;
 
   overflow: hidden;
   transition: var(--md-sys-motion-duration-long1) var(--md-sys-motion-easing-standard);
@@ -35,7 +33,7 @@
   }
 
   #JTM-C-AppBar-DynamicTitle {
-    @include title-large();
+    @include typescale-style("title-large");
 
     display: flex;
     align-items: center;
@@ -48,11 +46,12 @@
     margin: auto;
 
     text-align: start;
+    text-transform: uppercase;
 
     span {
-      width: calc(100% - 100px);
-
       position: absolute;
+
+      width: calc(100% - 100px);
 
       line-height: 1;
       text-overflow: ellipsis;

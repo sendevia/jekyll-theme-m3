@@ -1,47 +1,55 @@
 // 操作覆盖层
 
-html,
-body {
-  .JTM-Root {
-    &[hide-top-app-bar="true"] {
-      .JTM-S-WebsiteInformation {
-        width: 40px !important;
-      }
+[JTM-O-OnScrollEvent="true"] {
+  .JTM-C-AppBar {
+    top: -64px;
 
-      @media screen and (max-width: 768px) {
-        .JTM-C-AppBar {
-          top: -64px;
+    transition: var(--md-sys-motion-duration-medium2);
+  }
+}
 
-          transition: var(--md-sys-motion-duration-medium2);
-        }
-      }
+[JTM-O-OnSiteLoaded="true"] {
+  .JTM-C-Navigation {
+    #JTM-C-Navigation-FAB {
+      opacity: 1;
     }
 
-    &[loaded] {
-      .JTM-S-LoadingSplash {
-        display: none;
-      }
+    #JTM-C-Navigation-Destinations {
+      opacity: 1;
     }
+  }
+  .JTM-S-LoadingSplash {
+    opacity: 0;
+  }
 
-    &[content-unfocused] {
-      .JTM-S-CornerFAB,
-      #JTM-S-UniversalLayout-ContentFlow {
-        filter: contrast(0.8);
-        pointer-events: none;
-      }
+  .JTM-S-UniversalLayout #JTM-S-UniversalLayout-ContentFlow {
+    padding-block-start: 0;
 
-      @media screen and (max-width: 768px) {
-        .JTM-C-Navigation,
-        .JTM-C-AppBar {
-          filter: contrast(0.8);
-          pointer-events: none;
-          transition: var(--md-sys-motion-duration-extra-long1) var(--md-sys-motion-easing-standard);
-        }
-      }
+    opacity: 1;
+
+    @media screen and (max-width: 768px) {
+      padding-block-start: 75px;
     }
+  }
+}
 
-    &[body-unfocused] {
+[JTM-O-ContentBlur] {
+  .JTM-S-ScrollToTop,
+  #JTM-S-UniversalLayout-ContentFlow {
+    filter: contrast(0.8);
+    pointer-events: none;
+  }
+
+  @media screen and (max-width: 768px) {
+    .JTM-C-Navigation,
+    .JTM-C-AppBar {
       filter: contrast(0.8);
+      pointer-events: none;
+      transition: var(--md-sys-motion-duration-extra-long1) var(--md-sys-motion-easing-standard);
+    }
   }
-  }
+}
+
+[JTM-O-BodyBlur] {
+  filter: contrast(0.8);
 }

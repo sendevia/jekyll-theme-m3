@@ -3,9 +3,9 @@
   flex-direction: column;
   justify-content: space-evenly;
 
-  padding: 5vw;
-
   height: 100%;
+
+  padding: 5vw;
 
   color: var(--md-sys-color-on-error-container);
 
@@ -44,7 +44,7 @@
       height: 120px;
       width: 120px;
 
-      border-radius: 12px;
+      border-radius: var(--md-sys-shape-corner-medium);
       outline: 2px solid var(--md-sys-color-outline);
 
       background-image: var(--via-svg-qrcode-rickroll);

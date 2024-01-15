@@ -1,0 +1,54 @@
+---
+title: "开源许可证"
+author: "sendevia"
+description: ""
+color:
+impression: ""
+toc: false
+navigation: true
+segment_icon: "package"
+segment_title: "许可"
+published: true
+---
+
+<div class="JTM-P-Licenses">
+  <table>
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>版本</th>
+        <th>源地址</th>
+        <th>许可证</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in site.data.licenses %}
+        <tr>
+          <td>{{ item.name }}</td>
+          <td>{{ item.version }}</td>
+          <td>
+            <a href="{{ item.repository }}" target="_blank">
+              <button
+                class="JTM-C-Chip"
+                spec="assist"
+                icon>
+                <span>open_in_new</span>
+                访问
+              </button>
+            </a>
+          </td>
+          <td>
+            <button
+              class="JTM-C-Chip"
+              spec="assist"
+              icon
+              disabled>
+              <span>balance</span>
+              {{ item.license }}
+            </button>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>

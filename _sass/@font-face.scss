@@ -1,13 +1,10 @@
-@font-face {
-  font-family: "Material Symbols Outlined";
-  font-style: normal;
-  font-weight: 100 700;
-  font-display: block;
-  src: url("/assets/fonts/MaterialSymbolsOutlined.woff2") format("woff2");
-}
+@import url("https://google-fonts.mirrors.sjtug.sjtu.edu.cn/css2?family=Noto+Sans+SC:wght@200..800&display=block");
+@import url("https://google-fonts.mirrors.sjtug.sjtu.edu.cn/css2?family=Plus+Jakarta+Sans:wght@200..800&display=block");
+@import url("https://google-fonts.mirrors.sjtug.sjtu.edu.cn/css2?family=Source+Code+Pro&display=block");
+@import url("https://google-fonts.mirrors.sjtug.sjtu.edu.cn/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
 
-@mixin material-symbols($name: "", $size: 24px, $font-size: $size, $line-height: 1) {
-  @extend .disable-select;
+@mixin material-symbols($name: "", $size: 24, $font-size: $size, $line-height: $size) {
+  @include JTM-E-UserSelect();
   content: $name;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -15,163 +12,28 @@
   display: inline-block;
   font-family: "Material Symbols Outlined";
   font-feature-settings: "liga";
-  font-size: $size;
+  font-size: #{$size}rem;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
-  line-height: $line-height;
+  line-height: #{$line-height}rem;
   text-rendering: optimizeLegibility;
   text-transform: none;
   white-space: nowrap;
   word-wrap: normal;
 }
 
-@mixin display-large(
-  $font-family: var(--md-sys-typescale-display-large-family),
-  $font-weight: var(--md-sys-typescale-display-large-weight),
-  $font-size: var(--md-sys-typescale-display-large-size)
+@mixin typescale-style(
+  $type-scale,
+  $font-family: var(--md-sys-typescale-#{$type-scale}-family),
+  $font-size: var(--md-sys-typescale-#{$type-scale}-size),
+  $font-weight: var(--md-sys-typescale-#{$type-scale}-weight),
+  $line-height: var(--md-sys-typescale-#{$type-scale}-line-height),
+  $letter-spacing: var(--md-sys-typescale-#{$type-scale}-letter-spacing)
 ) {
   font-family: $font-family;
-  font-weight: $font-weight;
   font-size: $font-size;
-}
-
-@mixin display-medium(
-  $font-family: var(--md-sys-typescale-display-medium-family),
-  $font-weight: var(--md-sys-typescale-display-medium-weight),
-  $font-size: var(--md-sys-typescale-display-medium-size)
-) {
-  font-family: $font-family;
   font-weight: $font-weight;
-  font-size: $font-size;
-}
-
-@mixin display-small(
-  $font-family: var(--md-sys-typescale-display-small-family),
-  $font-weight: var(--md-sys-typescale-display-small-weight),
-  $font-size: var(--md-sys-typescale-display-small-size)
-) {
-  font-family: $font-family;
-  font-weight: $font-weight;
-  font-size: $font-size;
-}
-
-@mixin headline-large(
-  $font-family: var(--md-sys-typescale-headline-large-family),
-  $font-weight: var(--md-sys-typescale-headline-large-weight),
-  $font-size: var(--md-sys-typescale-headline-large-size)
-) {
-  font-family: $font-family;
-  font-weight: $font-weight;
-  font-size: $font-size;
-}
-
-@mixin headline-medium(
-  $font-family: var(--md-sys-typescale-headline-medium-family),
-  $font-weight: var(--md-sys-typescale-headline-medium-weight),
-  $font-size: var(--md-sys-typescale-headline-medium-size)
-) {
-  font-family: $font-family;
-  font-weight: $font-weight;
-  font-size: $font-size;
-}
-
-@mixin headline-small(
-  $font-family: var(--md-sys-typescale-headline-small-family),
-  $font-weight: var(--md-sys-typescale-headline-small-weight),
-  $font-size: var(--md-sys-typescale-headline-small-size)
-) {
-  font-family: $font-family;
-  font-weight: $font-weight;
-  font-size: $font-size;
-}
-
-@mixin title-large(
-  $font-family: var(--md-sys-typescale-title-large-family),
-  $font-weight: var(--md-sys-typescale-title-large-weight),
-  $font-size: var(--md-sys-typescale-title-large-size)
-) {
-  font-family: $font-family;
-  font-weight: $font-weight;
-  font-size: $font-size;
-}
-
-@mixin title-medium(
-  $font-family: var(--md-sys-typescale-title-medium-family),
-  $font-weight: var(--md-sys-typescale-title-medium-weight),
-  $font-size: var(--md-sys-typescale-title-medium-size)
-) {
-  font-family: $font-family;
-  font-weight: $font-weight;
-  font-size: $font-size;
-}
-
-@mixin title-small(
-  $font-family: var(--md-sys-typescale-title-small-family),
-  $font-weight: var(--md-sys-typescale-title-small-weight),
-  $font-size: var(--md-sys-typescale-title-small-size)
-) {
-  font-family: $font-family;
-  font-weight: $font-weight;
-  font-size: $font-size;
-}
-
-@mixin body-large(
-  $font-family: var(--md-sys-typescale-body-large-family),
-  $font-weight: var(--md-sys-typescale-body-large-weight),
-  $font-size: var(--md-sys-typescale-body-large-size)
-) {
-  font-family: $font-family;
-  font-weight: $font-weight;
-  font-size: $font-size;
-}
-
-@mixin body-medium(
-  $font-family: var(--md-sys-typescale-body-medium-family),
-  $font-weight: var(--md-sys-typescale-body-medium-weight),
-  $font-size: var(--md-sys-typescale-body-medium-size)
-) {
-  font-family: $font-family;
-  font-weight: $font-weight;
-  font-size: $font-size;
-}
-
-@mixin body-small(
-  $font-family: var(--md-sys-typescale-body-small-family),
-  $font-weight: var(--md-sys-typescale-body-small-weight),
-  $font-size: var(--md-sys-typescale-body-small-size)
-) {
-  font-family: $font-family;
-  font-weight: $font-weight;
-  font-size: $font-size;
-}
-
-@mixin label-large(
-  $font-family: var(--md-sys-typescale-label-large-family),
-  $font-weight: var(--md-sys-typescale-label-large-weight),
-  $font-size: var(--md-sys-typescale-label-large-size)
-) {
-  font-family: $font-family;
-  font-weight: $font-weight;
-  font-size: $font-size;
-}
-
-@mixin label-medium(
-  $font-family: var(--md-sys-typescale-label-medium-family),
-  $font-weight: var(--md-sys-typescale-label-medium-weight),
-  $font-size: var(--md-sys-typescale-label-medium-size)
-) {
-  font-family: $font-family;
-  font-weight: $font-weight;
-  font-size: $font-size;
-}
-
-@mixin label-small(
-  $font-family: var(--md-sys-typescale-label-small-family),
-  $font-weight: var(--md-sys-typescale-label-small-weight),
-  $font-size: var(--md-sys-typescale-label-small-size)
-) {
-  font-family: $font-family;
-  font-weight: $font-weight;
-  font-size: $font-size;
+  line-height: $line-height;
+  letter-spacing: $letter-spacing;
 }

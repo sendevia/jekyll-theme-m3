@@ -1,0 +1,77 @@
+---
+author: sendevia
+---
+
+<div class="JTM-P-Index">
+  <div id="JTM-P-Index-CardSet">
+    {% assign latest_post = site.posts | first %}
+    <div id="JTM-P-Index-SummaryCard">
+      <div class="JTM-P-Index-SummaryTitle">
+        <span id="JTM-P-Index-SummaryTitle-Leader">fiber_new</span>
+        <div id="JTM-P-Index-SummaryTitle-TitleContainer">
+          <p class="JTM-P-Index-SummaryTitle-Date">{{ latest_post.date | date: "%y年%-m月%-d日" }}发布了文章</p>
+          <h2 class="JTM-P-Index-SummaryTitle-Content">{{ latest_post.title }}</h2>
+        </div>
+      </div>
+      <p class="JTM-P-Index-Summary">
+        {{ latest_post.content | strip_html | truncatewords: 42, "..." }}
+        <a id="JTM-P-Index-ReadMore" href="{{ latest_post.url }}">详细阅读</a>
+      </p>
+    </div>
+
+    <a href="/" class="JTM-P-Index-Card">
+      <div class="JTM-C-Card" spec="clear">
+        <div class="JTM-C-Card-Impression">
+          <span>grid_guides</span>
+        </div>
+        <div class="JTM-C-Card-Supporting">
+          <h3>卡片1</h3>
+        </div>
+      </div>
+    </a>
+
+    <a href="/" class="JTM-P-Index-Card">
+      <div class="JTM-C-Card" spec="clear">
+        <div class="JTM-C-Card-Impression">
+          <span>grid_guides</span>
+        </div>
+        <div class="JTM-C-Card-Supporting">
+          <h3>卡片2</h3>
+        </div>
+      </div>
+    </a>
+
+    <a href="/" class="JTM-P-Index-Card">
+      <div class="JTM-C-Card" spec="clear">
+        <div class="JTM-C-Card-Impression">
+          <span>grid_guides</span>
+        </div>
+        <div class="JTM-C-Card-Supporting">
+          <h3>卡片3</h3>
+        </div>
+      </div>
+    </a>
+
+    <a href="/" class="JTM-P-Index-Card">
+      <div class="JTM-C-Card" spec="clear">
+        <div class="JTM-C-Card-Impression">
+          <span>grid_guides</span>
+        </div>
+        <div class="JTM-C-Card-Supporting">
+          <h3>卡片4</h3>
+        </div>
+      </div>
+    </a>
+
+    <a href="/posts/" class="JTM-P-Index-Card">
+      <div class="JTM-C-Card" spec="clear">
+        <div class="JTM-C-Card-Impression">
+          <span>note_stack</span>
+        </div>
+        <div class="JTM-C-Card-Supporting">
+          <h3>还有更多...</h3>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>

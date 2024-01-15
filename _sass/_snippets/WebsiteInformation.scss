@@ -1,42 +1,10 @@
-.JTM-S-WebsiteInformation {
-  @extend .disable-select;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  height: max-content;
-  width: max-content;
-
-  margin-block-start: 24px;
-  margin-inline-end: 30px;
-
+#JTM-S-WebsiteInformation {
   position: fixed;
   right: 0;
 
-  border-radius: 100px;
+  margin-block-start: 24px;
+  margin-inline-end: calc(25% - 212px);
 
-  background-color: var(--md-sys-color-tertiary-container);
-
-  cursor: pointer;
   overflow: hidden;
-  transition: var(--md-sys-motion-duration-medium4) var(--md-sys-motion-easing-emphasized);
   z-index: 24;
-
-  #JTM-S-WebsiteInformation-Container {
-    display: flex;
-    align-items: center;
-
-    #JTM-S-WebsiteInformation-Text {
-      display: inline-block;
-
-      margin-inline-end: 12px;
-
-      line-height: 40px;
-      text-transform: uppercase;
-      white-space: nowrap;
-
-      pointer-events: none;
-    }
-  }
 }

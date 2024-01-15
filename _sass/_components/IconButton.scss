@@ -3,60 +3,58 @@
 
 .JTM-C-IconButton,
 button.JTM-C-IconButton {
-  @include material-symbols($size: 24px);
+  @include material-symbols($size: 24);
 
   display: flex;
   align-items: center;
   justify-content: center;
 
+  position: relative;
+
   height: 40px;
   width: 40px;
 
-  position: relative;
-
-  letter-spacing: 0;
-
-  border-radius: 100%;
+  border-radius: var(--md-sys-shape-corner-full);
   border: none;
 
   cursor: pointer;
   overflow: hidden;
-  transition: var(--md-sys-motion-duration-medium4);
+  transition: var(--md-sys-motion-duration-medium4) var(--md-sys-motion-easing-standard);
 
   &::after {
     content: "";
-
-    height: 100%;
-    width: 100%;
 
     position: absolute;
     left: 0;
     top: 0;
 
+    height: 100%;
+    width: 100%;
+
     opacity: 0;
-    transition: var(--md-sys-motion-duration-medium4);
+    transition: var(--md-sys-motion-duration-medium4) var(--md-sys-motion-easing-standard);
   }
 
   &:hover::after {
-    transition: var(--md-sys-motion-duration-short4);
     opacity: var(--md-sys-state-hover-state-layer-opacity);
+    transition: var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard);
   }
 
   &:focus::after {
-    transition: var(--md-sys-motion-duration-short4);
     opacity: var(--md-sys-state-focus-state-layer-opacity);
+    transition: var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard);
   }
 
   &:active::after {
-    transition: var(--md-sys-motion-duration-short4);
     opacity: var(--md-sys-state-pressed-state-layer-opacity);
+    transition: var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard);
   }
 
   &,
   &[spec="standard"] {
     color: var(--md-sys-color-on-surface-variant);
 
-    background: none;
+    background-color: transparent;
 
     &:hover::after,
     &:focus::after,

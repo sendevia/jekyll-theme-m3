@@ -1,13 +1,16 @@
 .JTM-S-QuickJump {
-  width: 100%;
-
-  padding-inline: 18px;
+  margin-block-end: 2vh;
+  margin-inline: calc(25% - 152px);
 
   text-align: center;
 
   a {
     width: 50%;
     min-width: 300px;
+
+    text-decoration: none;
+    vertical-align: top;
+    white-space: break-spaces;
 
     #JTM-S-QuickJump-Previous {
       margin-inline-end: 3px;
@@ -36,7 +39,11 @@
     gap: 3px;
 
     span {
-      @include material-symbols($size: 18px);
+      @include material-symbols($size: 18);
     }
+  }
+
+  &#JTM-S-QuickJump-Single a {
+    width: 100%;
   }
 }

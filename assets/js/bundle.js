@@ -15,11 +15,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app */ "./webpack/app.js");
 
+
 const openModal = () => {
   (0,_app__WEBPACK_IMPORTED_MODULE_0__.toggleDim)(true);
   _app__WEBPACK_IMPORTED_MODULE_0__.modalTips.style.animation = `JTM-C-Dialog-Show var(--md-sys-motion-duration-long1) var(--md-sys-motion-easing-emphasized) 1 normal both`;
   _app__WEBPACK_IMPORTED_MODULE_0__.modalTips.showModal();
 };
+
 const closeModal = () => {
   (0,_app__WEBPACK_IMPORTED_MODULE_0__.toggleDim)(false);
   _app__WEBPACK_IMPORTED_MODULE_0__.modalTips.style.animation = `JTM-C-Dialog-Close var(--md-sys-motion-duration-medium1) var(--md-sys-motion-easing-emphasized) 1 normal both`;
@@ -28,6 +30,7 @@ const closeModal = () => {
     _app__WEBPACK_IMPORTED_MODULE_0__.modalTips.style.animation = "";
   }, 400);
 };
+
 
 /***/ }),
 
@@ -39,141 +42,80 @@ const closeModal = () => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   errorPalette: () => (/* binding */ errorPalette),
 /* harmony export */   generateColorPalette: () => (/* binding */ generateColorPalette),
-/* harmony export */   generateImagePalette: () => (/* binding */ generateImagePalette),
-/* harmony export */   neutralPalette: () => (/* binding */ neutralPalette),
-/* harmony export */   neutralVariantPalette: () => (/* binding */ neutralVariantPalette),
-/* harmony export */   primaryPalette: () => (/* binding */ primaryPalette),
-/* harmony export */   secondaryPalette: () => (/* binding */ secondaryPalette),
-/* harmony export */   setPaletteProperty: () => (/* binding */ setPaletteProperty),
-/* harmony export */   tertiaryPalette: () => (/* binding */ tertiaryPalette)
+/* harmony export */   paletteProperty: () => (/* binding */ paletteProperty),
+/* harmony export */   setPaletteProperty: () => (/* binding */ setPaletteProperty)
 /* harmony export */ });
 /* harmony import */ var _material_material_color_utilities__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @material/material-color-utilities */ "./node_modules/@material/material-color-utilities/index.js");
-/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../app */ "./webpack/app.js");
 
 
+/**
+ * 调色板提供器
+ * @param {*} 生成调色板
+ * @returns
+ */
+function paletteProperty(source, key, append, tones) {
+  const palette = _material_material_color_utilities__WEBPACK_IMPORTED_MODULE_0__.CorePalette.of(source);
+  return {
+    rawPalette: {
+      [key]: palette[append],
+    },
+    tones: tones,
+  };
+}
 
 /**
  * 在DOM中设置调色板
- * @param {*} toneName 一个色调值列表
  * @param {*} paletteProvider 调色板提供器
  */
-function setPaletteProperty(toneName, paletteProvider) {
+function setPaletteProperty(paletteProvider) {
+  function updateVariables(variables) {
+    var style = document.createElement("style");
+    var cssVarsString = ":root {";
+    for (var key in variables) {
+      cssVarsString += `${key}: ${variables[key]};`;
+    }
+    cssVarsString += "}";
+    style.innerHTML = cssVarsString;
+    document.head.appendChild(style);
+  }
+
   for (const [key, palette] of Object.entries(paletteProvider.rawPalette)) {
+    var cssTokens = {};
     const paletteKey = key.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
-    for (const tone of toneName) {
+    for (const tone of paletteProvider.tones) {
       const token = `--md-ref-palette-${paletteKey}${tone}`;
       const color = (0,_material_material_color_utilities__WEBPACK_IMPORTED_MODULE_0__.hexFromArgb)(palette.tone(tone));
-      _app__WEBPACK_IMPORTED_MODULE_1__.themeRoot.style.setProperty(token, color);
+      cssTokens[token] = color;
     }
+    updateVariables(cssTokens);
   }
 }
-/**
- * 调色板提供器
- * @param {*} 生成primary调色板
- * @returns
- */
-function primaryPalette(source) {
-  const palette = _material_material_color_utilities__WEBPACK_IMPORTED_MODULE_0__.CorePalette.of(source);
-  return {
-    rawPalette: {
-      primary: palette.a1
-    }
-  };
-}
-/**
- * 调色板提供器
- * @param {*} 生成secondary调色板
- * @returns
- */
-function secondaryPalette(source) {
-  const palette = _material_material_color_utilities__WEBPACK_IMPORTED_MODULE_0__.CorePalette.of(source);
-  return {
-    rawPalette: {
-      secondary: palette.a2
-    }
-  };
-}
-/**
- * 调色板提供器
- * @param {*} 生成tertiary调色板
- * @returns
- */
-function tertiaryPalette(source) {
-  const palette = _material_material_color_utilities__WEBPACK_IMPORTED_MODULE_0__.CorePalette.of(source);
-  return {
-    rawPalette: {
-      tertiary: palette.a3
-    }
-  };
-}
-/**
- * 调色板提供器
- * @param {*} 生成neutral调色板
- * @returns
- */
-function neutralPalette(source) {
-  const palette = _material_material_color_utilities__WEBPACK_IMPORTED_MODULE_0__.CorePalette.of(source);
-  return {
-    rawPalette: {
-      neutral: palette.n1
-    }
-  };
-}
-/**
- * 调色板提供器
- * @param {*} 生成neutralVariant调色板
- * @returns
- */
-function neutralVariantPalette(source) {
-  const palette = _material_material_color_utilities__WEBPACK_IMPORTED_MODULE_0__.CorePalette.of(source);
-  return {
-    rawPalette: {
-      neutralVariant: palette.n2
-    }
-  };
-}
-/**
- * 调色板提供器
- * @param {*} 生成error调色板
- * @returns
- */
-function errorPalette(source) {
-  const palette = _material_material_color_utilities__WEBPACK_IMPORTED_MODULE_0__.CorePalette.of(source);
-  return {
-    rawPalette: {
-      error: palette.error
-    }
-  };
-}
-/**
- * 根据图片生成调色板
- * @param image 输入一张图片
- * @returns 返回一个完整的调色板
- */
-async function generateImagePalette(image) {
-  const source = await (0,_material_material_color_utilities__WEBPACK_IMPORTED_MODULE_0__.sourceColorFromImage)(image);
-  return generateColorPalette(source);
-}
+
 /**
  * 根据颜色生成调色板
  * @param argbColor 输入一个 argb 颜色
  */
 async function generateColorPalette(argbColor) {
-  const primaryTones = [10, 20, 30, 40, 80, 90, 100];
-  setPaletteProperty(primaryTones, primaryPalette(argbColor));
-  const secondaryTones = [10, 20, 30, 40, 80, 90, 100];
-  setPaletteProperty(secondaryTones, secondaryPalette(argbColor));
-  const tertiaryTones = [10, 20, 30, 40, 80, 90, 100];
-  setPaletteProperty(tertiaryTones, tertiaryPalette(argbColor));
-  const neutralTones = [0, 6, 10, 12, 17, 20, 22, 90, 92, 94, 95, 96, 98];
-  setPaletteProperty(neutralTones, neutralPalette(argbColor));
-  const neutralVariantTones = [30, 50, 60, 80, 90];
-  setPaletteProperty(neutralVariantTones, neutralVariantPalette(argbColor));
   const errorTones = [10, 20, 30, 40, 80, 90, 100];
-  setPaletteProperty(errorTones, errorPalette(argbColor));
+  setPaletteProperty(paletteProperty(argbColor, "error", "error", errorTones));
+
+  const neutralVariantTones = [30, 50, 60, 80, 90];
+  setPaletteProperty(paletteProperty(argbColor, "neutralVariant", "n2", neutralVariantTones));
+
+  const neutralTones = [0, 4, 6, 10, 12, 17, 20, 22, 24, 87, 90, 92, 94, 95, 96, 98, 100];
+  setPaletteProperty(paletteProperty(argbColor, "neutral", "n1", neutralTones));
+
+  const tertiaryTones = [10, 20, 30, 40, 80, 90, 100];
+  setPaletteProperty(paletteProperty(argbColor, "tertiary", "a3", tertiaryTones));
+
+  const secondaryTones = [10, 20, 30, 40, 80, 90, 100];
+  setPaletteProperty(paletteProperty(argbColor, "secondary", "a2", secondaryTones));
+
+  const primaryTones = [10, 20, 30, 40, 80, 90, 100];
+  setPaletteProperty(paletteProperty(argbColor, "primary", "a1", primaryTones));
 }
+
 
 /***/ }),
 
@@ -191,22 +133,25 @@ __webpack_require__.r(__webpack_exports__);
  * 添加涟漪效果
  * @param {selector} element
  */
-const ripple = element => {
-  element.addEventListener("mousedown", e => {
+const ripple = (element) => {
+  element.addEventListener("mousedown", (e) => {
     const x = e.offsetX;
     const y = e.offsetY;
     const d = Math.max(element.clientWidth, element.clientHeight);
-    const rippleC = document.createElement("ripple-effect");
+
+    const rippleC = document.createElement("JTM-E-Ripple");
     element.appendChild(rippleC);
-    rippleC.style.setProperty("--ripple-effect-x", x);
-    rippleC.style.setProperty("--ripple-effect-y", y);
-    rippleC.style.setProperty("--ripple-effect-d", d);
+
+    rippleC.style.setProperty("--JTM-E-Ripple-PosX", x);
+    rippleC.style.setProperty("--JTM-E-Ripple-PosY", y);
+    rippleC.style.setProperty("--JTM-E-Ripple-Diameter", d);
   });
   element.addEventListener("animationend", () => {
-    const rippleR = element.querySelector("ripple-effect");
+    const rippleR = element.querySelector("JTM-E-Ripple");
     element.removeChild(rippleR);
   });
 };
+
 
 /***/ }),
 
@@ -218,28 +163,35 @@ const ripple = element => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   addLoadScreen: () => (/* binding */ addLoadScreen),
+/* harmony export */   carouselControl: () => (/* binding */ carouselControl),
+/* harmony export */   carouselElement: () => (/* binding */ carouselElement),
+/* harmony export */   carouselPostList: () => (/* binding */ carouselPostList),
 /* harmony export */   contentContainer: () => (/* binding */ contentContainer),
-/* harmony export */   contentDrawerEntries: () => (/* binding */ contentDrawerEntries),
+/* harmony export */   contentDrawerH1Entries: () => (/* binding */ contentDrawerH1Entries),
+/* harmony export */   contentDrawerH2Entries: () => (/* binding */ contentDrawerH2Entries),
 /* harmony export */   contentDrawerMenuBtn: () => (/* binding */ contentDrawerMenuBtn),
 /* harmony export */   contentNavigation: () => (/* binding */ contentNavigation),
 /* harmony export */   contentNavigationDrawer: () => (/* binding */ contentNavigationDrawer),
 /* harmony export */   contentPhotograph: () => (/* binding */ contentPhotograph),
+/* harmony export */   createSnackbar: () => (/* binding */ createSnackbar),
 /* harmony export */   currentPage: () => (/* binding */ currentPage),
-/* harmony export */   cutsomThemeColor: () => (/* binding */ cutsomThemeColor),
+/* harmony export */   customThemeColor: () => (/* binding */ customThemeColor),
 /* harmony export */   handleLinkDelayRedirection: () => (/* binding */ handleLinkDelayRedirection),
 /* harmony export */   handleResize: () => (/* binding */ handleResize),
 /* harmony export */   handleScroll: () => (/* binding */ handleScroll),
 /* harmony export */   initModal: () => (/* binding */ initModal),
 /* harmony export */   linkElements: () => (/* binding */ linkElements),
 /* harmony export */   modalTips: () => (/* binding */ modalTips),
+/* harmony export */   randomRotationBullet: () => (/* binding */ randomRotationBullet),
 /* harmony export */   removeLoadScreen: () => (/* binding */ removeLoadScreen),
 /* harmony export */   rippleElements: () => (/* binding */ rippleElements),
+/* harmony export */   rotationListItemsBullet: () => (/* binding */ rotationListItemsBullet),
 /* harmony export */   scrollTopElements: () => (/* binding */ scrollTopElements),
-/* harmony export */   themeImageProvider: () => (/* binding */ themeImageProvider),
 /* harmony export */   themeRoot: () => (/* binding */ themeRoot),
 /* harmony export */   toggleDim: () => (/* binding */ toggleDim),
 /* harmony export */   toggleNavigationDrawer: () => (/* binding */ toggleNavigationDrawer),
-/* harmony export */   websiteInfomation: () => (/* binding */ websiteInfomation)
+/* harmony export */   updateSnackbarPositions: () => (/* binding */ updateSnackbarPositions)
 /* harmony export */ });
 /* harmony import */ var _shown__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./shown */ "./webpack/shown.js");
 /* harmony import */ var _loaded__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./loaded */ "./webpack/loaded.js");
@@ -252,13 +204,9 @@ __webpack_require__.r(__webpack_exports__);
 //常用常量配置
 ///////////////////
 /**
- * 需要被取色的图片
- */
-const themeImageProvider = new Image();
-/**
  * 需要以此生成调色盘的hex颜色
  */
-const cutsomThemeColor = document.body.getAttribute("color");
+const customThemeColor = document.body.getAttribute("color");
 /**
  * 主题根节点
  */
@@ -270,7 +218,7 @@ const contentContainer = document.querySelector("#JTM-S-UniversalLayout-ContentF
 /**
  * 文章头部印象图
  */
-const contentPhotograph = document.querySelector("#JTM-S-Title-Impression img");
+const contentPhotograph = document.querySelector("#JTM-S-Header-Impression img");
 /**
  * 页面导航
  */
@@ -280,13 +228,19 @@ const contentNavigation = document.querySelector(".JTM-C-Navigation");
  */
 const contentNavigationDrawer = document.querySelector(".JTM-C-NavigationDrawer");
 /**
- * 页面导航的目录元素
+ * 页面导航的一级目录元素
  */
-const contentDrawerEntries = contentNavigationDrawer ? contentNavigationDrawer.querySelectorAll(".JTM-C-NavigationDrawer-Entry") : [];
+const contentDrawerH1Entries = contentNavigationDrawer ? contentNavigationDrawer.querySelectorAll("details summary > a") : [];
+/**
+ * 页面导航的二级目录元素
+ */
+const contentDrawerH2Entries = contentNavigationDrawer ? contentNavigationDrawer.querySelectorAll("details > a") : [];
 /**
  * 选择控制页面导航开关的元素
  */
-const contentDrawerMenuBtn = contentNavigationDrawer ? document.querySelectorAll("#JTM-C-Navigation-FAB > button, #JTM-C-AppBar-MenuIcon, #JTM-C-NavigationDrawer-MenuCloseIcon") : [];
+const contentDrawerMenuBtn = contentNavigationDrawer
+  ? document.querySelectorAll("#JTM-C-Navigation-FAB > button, #JTM-C-AppBar-MenuIcon, #JTM-C-NavigationDrawer-MenuCloseIcon")
+  : [];
 /**
  * 页面加载中的闪屏
  */
@@ -306,7 +260,7 @@ const modalTips = document.querySelector("#JTM-C-Dialog-ModalTips");
 /**
  * 选择可以开启模态提示框的元素
  */
-const modalTipsIcon = document.querySelectorAll("body > div.JTM-S-WebsiteInformation, #JTM-C-AppBar-InfoIcon");
+const modalTipsIcon = document.querySelectorAll("#JTM-S-WebsiteInformation, #JTM-C-AppBar-InfoIcon");
 /**
  * 选择可以关闭模态提示框的元素
  */
@@ -314,19 +268,35 @@ const dialogBtnClose = document.querySelector("#dialog-close");
 /**
  * 选择点击后跳转到页面顶端的元素
  */
-const scrollTopElements = document.querySelectorAll(".JTM-S-CornerFAB");
+const scrollTopElements = document.querySelectorAll(".JTM-S-ScrollToTop");
 /**
  * 选择需要涟漪效果的元素
  */
-const rippleElements = document.querySelectorAll(`button, .JTM-C-Card[spec='clear'], .JTM-C-Card[spec='focus'], .JTM-C-NavigationDrawer a, #JTM-C-Navigation-DestinationAccent, .JTM-S-WebsiteInformation, .JTM-S-Carousel-PostItem`);
+const rippleElements = document.querySelectorAll(
+  `#JTM-S-UniversalLayout-ContentFiller[spec='article'] li a, #JTM-S-UniversalLayout-ContentFiller[spec='article'] p a, button, .JTM-C-Card[spec='clear'], .JTM-C-Card[spec='focus'], .JTM-C-NavigationDrawer a, #JTM-C-Navigation-DestinationAccent, .JTM-S-WebsiteInformation, .JTM-S-Carousel-PostItem`
+);
 /**
- * 选择页面右上角的网站信息
+ * 选择需要延迟跳转的a元素
  */
-const websiteInfomation = document.querySelector(".JTM-S-WebsiteInformation");
+const linkElements = document.querySelectorAll(
+  ".JTM-P-Index-Card, .JTM-S-Carousel-PostItem, #JTM-C-Navigation-Destinations a, #JTM-P-Posts-Timeline-PostCard a, .JTM-S-QuickJump a"
+);
 /**
- * 选择所有a元素
+ * Carousel元素
  */
-const linkElements = document.querySelectorAll("a");
+const carouselElement = document.querySelector(".JTM-S-Carousel");
+/**
+ * Carousel的控制按钮
+ */
+const carouselControl = carouselElement ? carouselElement.querySelectorAll(".JTM-S-Carousel-Control") : [];
+/**
+ * Carousel的文章列表
+ */
+const carouselPostList = carouselElement ? carouselElement.querySelector("#JTM-S-Carousel-PostsList") : [];
+/**
+ * 需要随机旋转的列表Bullet
+ */
+const rotationListItemsBullet = document.querySelectorAll("ul li");
 ////////////////////
 //常用常量配置结束
 ///////////////////
@@ -334,18 +304,19 @@ const linkElements = document.querySelectorAll("a");
 /**
  * 控制元素的状态
  * @contentNavigationDrawer show
- * @themeRoot content-unfocused
+ * @themeRoot JTM-O-ContentBlur
  * @param {boolean} state
  */
-const toggleNavigationDrawer = state => {
+const toggleNavigationDrawer = (state) => {
   contentNavigationDrawer.toggleAttribute("show", state);
-  themeRoot.toggleAttribute("content-unfocused", state);
+  themeRoot.toggleAttribute("JTM-O-ContentBlur", state);
 };
 /**
  * 控制根元素的状态
  * @param {boolean} state
  */
-const toggleDim = state => themeRoot.toggleAttribute("body-unfocused", state);
+const toggleDim = (state) => themeRoot.toggleAttribute("JTM-O-BodyBlur", state);
+
 let lastScrollY = 0;
 /**
  * 滚动事件
@@ -356,15 +327,14 @@ const handleScroll = () => {
   const scrollDirection = scrollY > lastScrollY ? "down" : "up";
   topAppBar.setAttribute("scroll", scrollY >= scrollThreshold ? "true" : "false");
   if (scrollDirection === "up") {
-    themeRoot.setAttribute("hide-top-app-bar", "false");
+    themeRoot.setAttribute("JTM-O-OnScrollEvent", "false");
   } else if (scrollDirection === "down" && scrollY >= 500) {
-    themeRoot.setAttribute("hide-top-app-bar", "true");
+    themeRoot.setAttribute("JTM-O-OnScrollEvent", "true");
   }
-  scrollTopElements.forEach(element => {
+  scrollTopElements.forEach((element) => {
     element.style.cssText = `
       opacity: ${scrollY >= 400 ? "1" : "0"};
       visibility: ${scrollY >= 400 ? "visible" : "hidden"};
-      animation: ${scrollY >= 400 ? "popOut var(--md-sys-motion-duration-long2) cubic-bezier(0.4, 1, 0.6, 0.6)" : ""}
     `;
   });
   lastScrollY = scrollY;
@@ -381,38 +351,147 @@ const handleResize = () => {
  * 链接跳转事件
  * @param {selector} link
  */
-const handleLinkDelayRedirection = link => {
-  link.addEventListener("click", e => {
+const handleLinkDelayRedirection = (link) => {
+  link.addEventListener("click", (e) => {
     e.preventDefault();
     const delay = 240;
-    setTimeout(() => {
-      window.location.href = link.getAttribute("href");
-    }, delay);
+    const target = link.getAttribute("target");
+
+    if (target === "_blank") {
+      window.open(link.getAttribute("href"));
+    } else {
+      addLoadScreen();
+      setTimeout(() => {
+        window.location.href = link.getAttribute("href");
+      }, delay);
+    }
   });
 };
-const handleKeyboardEvent = event => {
-  if (event.key === "Escape") {
-    event.preventDefault();
-    (0,_components_modal__WEBPACK_IMPORTED_MODULE_2__.closeModal)();
-  }
-};
-const handleClickOutside = event => {
-  if (event.target === modalTips) {
-    (0,_components_modal__WEBPACK_IMPORTED_MODULE_2__.closeModal)();
-  }
-};
+
+/**
+ * 初始化模态提示框
+ */
 const initModal = () => {
-  modalTipsIcon.forEach(element => element.addEventListener("click", _components_modal__WEBPACK_IMPORTED_MODULE_2__.openModal));
+  const handleKeyboardEvent = (event) => {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      (0,_components_modal__WEBPACK_IMPORTED_MODULE_2__.closeModal)();
+    }
+  };
+
+  const handleClickOutside = (event) => {
+    if (event.target === modalTips) {
+      (0,_components_modal__WEBPACK_IMPORTED_MODULE_2__.closeModal)();
+    }
+  };
+
+  modalTipsIcon.forEach((element) => element.addEventListener("click", _components_modal__WEBPACK_IMPORTED_MODULE_2__.openModal));
   dialogBtnClose.addEventListener("click", _components_modal__WEBPACK_IMPORTED_MODULE_2__.closeModal);
   modalTips.addEventListener("keydown", handleKeyboardEvent);
   modalTips.addEventListener("click", handleClickOutside);
 };
+
+/**
+ * 移除加载屏幕
+ */
 const removeLoadScreen = () => {
-  contentSplashScreen.style.animation = "fadeOut 0.4s forwards";
-  contentSplashScreen.addEventListener("animationend", () => {
-    themeRoot.setAttribute("loaded", true);
+  const delay = 450;
+  themeRoot.setAttribute("JTM-O-OnSiteLoaded", true);
+  setTimeout(() => {
+    contentSplashScreen.style.display = "none";
+  }, delay);
+};
+
+/**
+ * 增加加载屏幕
+ */
+const addLoadScreen = () => {
+  themeRoot.removeAttribute("JTM-O-OnSiteLoaded");
+};
+
+/**
+ * 随机旋转列表的Bullet
+ */
+const randomRotationBullet = () => {
+  const style = document.createElement("style");
+  document.head.appendChild(style);
+
+  rotationListItemsBullet.forEach((li, index) => {
+    const randomRotation = Math.floor(Math.random() * 360);
+    style.sheet.insertRule(`ul li:nth-child(${index + 1})::before { transform: rotate(${randomRotation}deg); }`, style.sheet.cssRules.length);
   });
 };
+
+var snackbars = [];
+/**
+ * 创建一个底部提示条
+ * @param {*} content
+ */
+function createSnackbar(content) {
+  var snackbar = document.createElement("div");
+  snackbar.className = "JTM-C-Snackbar";
+  snackbar.setAttribute("visible", "false");
+
+  var p = document.createElement("p");
+  p.id = "JTM-C-Snackbar-Supporting";
+  p.textContent = content;
+
+  var closeButton = document.createElement("button");
+  closeButton.textContent = "close";
+  closeButton.id = "JTM-C-Snackbar-Icon";
+  closeButton.className = "JTM-C-IconButton";
+  closeButton.onclick = function () {
+    snackbar.setAttribute("visible", "false");
+    setTimeout(function () {
+      snackbar.remove();
+      var index = snackbars.indexOf(snackbar);
+      if (index !== -1) {
+        snackbars.splice(index, 1);
+        updateSnackbarPositions();
+      }
+    }, 600);
+  };
+
+  snackbar.appendChild(p);
+  snackbar.appendChild(closeButton);
+  document.body.appendChild(snackbar);
+
+  setTimeout(() => {
+    snackbar.setAttribute("visible", "true");
+  }, 0);
+
+  snackbars.push(snackbar);
+  updateSnackbarPositions();
+
+  setTimeout(() => {
+    snackbar.setAttribute("visible", "false");
+    snackbar.addEventListener("transitionend", () => {
+      if (snackbar.getAttribute("visible") === "false") {
+        snackbar.remove();
+        var index = snackbars.indexOf(snackbar);
+        if (index !== -1) {
+          snackbars.splice(index, 1);
+          updateSnackbarPositions();
+        }
+      }
+    });
+  }, 5000);
+}
+
+/**
+ * 更新提示条位置
+ */
+function updateSnackbarPositions() {
+  var bottomValue = window.innerWidth >= 768 ? 10 : 90;
+
+  for (var i = snackbars.length - 1; i >= 0; i--) {
+    var snackbar = snackbars[i];
+    snackbar.style.bottom = bottomValue + "px";
+
+    bottomValue += snackbar.offsetHeight + 10;
+  }
+}
+
 
 /***/ }),
 
@@ -424,20 +503,41 @@ const removeLoadScreen = () => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_material_color_utilities__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @material/material-color-utilities */ "./node_modules/@material/material-color-utilities/index.js");
-/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app */ "./webpack/app.js");
-/* harmony import */ var _components_monet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./_components/monet */ "./webpack/_components/monet.js");
+/* harmony import */ var _components_monet__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./_components/monet */ "./webpack/_components/monet.js");
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app */ "./webpack/app.js");
+
 
 
 
 window.onload = () => {
-  (0,_app__WEBPACK_IMPORTED_MODULE_1__.removeLoadScreen)();
-  if (_app__WEBPACK_IMPORTED_MODULE_1__.cutsomThemeColor) {
-    (0,_components_monet__WEBPACK_IMPORTED_MODULE_2__.generateColorPalette)((0,_material_material_color_utilities__WEBPACK_IMPORTED_MODULE_0__.argbFromHex)(_app__WEBPACK_IMPORTED_MODULE_1__.cutsomThemeColor));
-  } else {
-    _app__WEBPACK_IMPORTED_MODULE_1__.themeImageProvider.src = _app__WEBPACK_IMPORTED_MODULE_1__.contentPhotograph.src;
-    (0,_components_monet__WEBPACK_IMPORTED_MODULE_2__.generateImagePalette)(_app__WEBPACK_IMPORTED_MODULE_1__.themeImageProvider);
+  (0,_app__WEBPACK_IMPORTED_MODULE_2__.randomRotationBullet)();
+
+  document.querySelectorAll("#JTM-S-UniversalLayout-ContentFiller > h1").forEach((h1) => {
+    h1.addEventListener("click", function () {
+      const anchorLink = this.id ? `#${this.id}` : "";
+
+      if (anchorLink) {
+        navigator.clipboard.writeText(window.location.href.split("#")[0] + anchorLink).then(() => (0,_app__WEBPACK_IMPORTED_MODULE_2__.createSnackbar)(`已将内容复制到剪贴板：${anchorLink}`));
+      }
+    });
+  });
+
+  var testButton = document.getElementById("JTM-P-Components-Snackbar-Test");
+  if (testButton) {
+    testButton.addEventListener("click", function () {
+      (0,_app__WEBPACK_IMPORTED_MODULE_2__.createSnackbar)(testButton.innerText);
+    });
   }
+
+  setTimeout(() => {
+    (0,_app__WEBPACK_IMPORTED_MODULE_2__.removeLoadScreen)();
+
+    if (_app__WEBPACK_IMPORTED_MODULE_2__.customThemeColor) {
+      (0,_components_monet__WEBPACK_IMPORTED_MODULE_1__.generateColorPalette)((0,_material_material_color_utilities__WEBPACK_IMPORTED_MODULE_0__.argbFromHex)(_app__WEBPACK_IMPORTED_MODULE_2__.customThemeColor));
+    }
+  }, 500);
 };
+
 
 /***/ }),
 
@@ -448,44 +548,91 @@ window.onload = () => {
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app */ "./webpack/app.js");
-/* harmony import */ var _components_ripple__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./_components/ripple */ "./webpack/_components/ripple.js");
+/* harmony import */ var _components_ripple__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./_components/ripple */ "./webpack/_components/ripple.js");
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app */ "./webpack/app.js");
+
 
 
 window.onpageshow = () => {
-  _app__WEBPACK_IMPORTED_MODULE_0__.contentNavigation.setAttribute("spec", window.innerWidth <= 768 ? "bar" : "rail");
+  _app__WEBPACK_IMPORTED_MODULE_1__.contentNavigation.setAttribute("spec", window.innerWidth <= 768 ? "bar" : "rail");
+
   try {
-    const activatedSegment = document.querySelector(`a[href="${_app__WEBPACK_IMPORTED_MODULE_0__.currentPage}"]`);
+    const activatedSegment = document.querySelector(`a[href="${_app__WEBPACK_IMPORTED_MODULE_1__.currentPage}"]`);
     const inactiveSegment = activatedSegment.querySelector("#JTM-C-Navigation-SegmentInactive");
     inactiveSegment.id = "JTM-C-Navigation-SegmentActive";
   } catch (err) {
-    document.querySelector(`a[href="/posts"] #JTM-C-Navigation-SegmentInactive`).id = "JTM-C-Navigation-SegmentActive";
+    document.querySelector(`a[href="/posts/"] #JTM-C-Navigation-SegmentInactive`).id = "JTM-C-Navigation-SegmentActive";
   }
-  _app__WEBPACK_IMPORTED_MODULE_0__.scrollTopElements.forEach(element => element.addEventListener("click", () => _app__WEBPACK_IMPORTED_MODULE_0__.contentContainer.scrollTo({
-    top: 0
-  })));
-  _app__WEBPACK_IMPORTED_MODULE_0__.rippleElements.forEach(_components_ripple__WEBPACK_IMPORTED_MODULE_1__.ripple);
-  _app__WEBPACK_IMPORTED_MODULE_0__.contentContainer.onscroll = _app__WEBPACK_IMPORTED_MODULE_0__.handleScroll;
-  window.onresize = _app__WEBPACK_IMPORTED_MODULE_0__.handleResize;
-  if (_app__WEBPACK_IMPORTED_MODULE_0__.contentNavigationDrawer) {
-    _app__WEBPACK_IMPORTED_MODULE_0__.contentDrawerMenuBtn.forEach(element => element.addEventListener("click", () => (0,_app__WEBPACK_IMPORTED_MODULE_0__.toggleNavigationDrawer)()));
-    _app__WEBPACK_IMPORTED_MODULE_0__.contentDrawerEntries.forEach(element => element.addEventListener("click", () => (0,_app__WEBPACK_IMPORTED_MODULE_0__.toggleNavigationDrawer)(false)));
-    document.addEventListener("click", event => {
+
+  _app__WEBPACK_IMPORTED_MODULE_1__.scrollTopElements.forEach((element) => element.addEventListener("click", () => _app__WEBPACK_IMPORTED_MODULE_1__.contentContainer.scrollTo({ top: 0 })));
+  _app__WEBPACK_IMPORTED_MODULE_1__.rippleElements.forEach(_components_ripple__WEBPACK_IMPORTED_MODULE_0__.ripple);
+  _app__WEBPACK_IMPORTED_MODULE_1__.contentContainer.onscroll = _app__WEBPACK_IMPORTED_MODULE_1__.handleScroll;
+  window.onresize = _app__WEBPACK_IMPORTED_MODULE_1__.handleResize;
+
+  if (_app__WEBPACK_IMPORTED_MODULE_1__.contentNavigationDrawer) {
+    _app__WEBPACK_IMPORTED_MODULE_1__.contentDrawerMenuBtn.forEach((element) => element.addEventListener("click", () => (0,_app__WEBPACK_IMPORTED_MODULE_1__.toggleNavigationDrawer)()));
+    _app__WEBPACK_IMPORTED_MODULE_1__.contentDrawerH1Entries.forEach((element) => {
+      element.addEventListener("click", () => {
+        const parentDetails = element.closest("details");
+        if (parentDetails) {
+          parentDetails.open = !parentDetails.open;
+        }
+      });
+    });
+    _app__WEBPACK_IMPORTED_MODULE_1__.contentDrawerH2Entries.forEach((element) => element.addEventListener("click", () => (0,_app__WEBPACK_IMPORTED_MODULE_1__.toggleNavigationDrawer)(false)));
+    document.addEventListener("click", (event) => {
       const isJTM_C_NavigationDrawer = event.target.closest(".JTM-C-NavigationDrawer");
       const isJTM_C_AppBar = event.target.closest(".JTM-C-AppBar");
       const isMAB = event.target.closest("#JTM-C-Navigation-FAB");
       if (!isJTM_C_NavigationDrawer && (window.matchMedia("(max-width: 768px)").matches ? !isJTM_C_AppBar : !isMAB)) {
-        (0,_app__WEBPACK_IMPORTED_MODULE_0__.toggleNavigationDrawer)(false);
+        (0,_app__WEBPACK_IMPORTED_MODULE_1__.toggleNavigationDrawer)(false);
       }
     });
   }
-  (0,_app__WEBPACK_IMPORTED_MODULE_0__.initModal)();
-  if (_app__WEBPACK_IMPORTED_MODULE_0__.websiteInfomation) {
-    const websiteInfomationWidth = _app__WEBPACK_IMPORTED_MODULE_0__.websiteInfomation.clientWidth;
-    _app__WEBPACK_IMPORTED_MODULE_0__.websiteInfomation.style.width = websiteInfomationWidth + "px";
+
+  (0,_app__WEBPACK_IMPORTED_MODULE_1__.initModal)();
+
+  _app__WEBPACK_IMPORTED_MODULE_1__.linkElements.forEach(_app__WEBPACK_IMPORTED_MODULE_1__.handleLinkDelayRedirection);
+
+  if (_app__WEBPACK_IMPORTED_MODULE_1__.carouselElement && _app__WEBPACK_IMPORTED_MODULE_1__.carouselPostList && _app__WEBPACK_IMPORTED_MODULE_1__.carouselControl.length === 2) {
+    var currentValue = 1;
+    _app__WEBPACK_IMPORTED_MODULE_1__.carouselPostList.setAttribute("data-scroll", currentValue);
+
+    function updateValue(direction) {
+      currentValue += direction;
+      if (currentValue > 3) {
+        currentValue = 1;
+      } else if (currentValue < 1) {
+        currentValue = 3;
+      }
+      _app__WEBPACK_IMPORTED_MODULE_1__.carouselPostList.setAttribute("data-scroll", currentValue);
+    }
+
+    _app__WEBPACK_IMPORTED_MODULE_1__.carouselControl[0].addEventListener("click", function () {
+      updateValue(-1);
+    });
+
+    _app__WEBPACK_IMPORTED_MODULE_1__.carouselControl[1].addEventListener("click", function () {
+      updateValue(1);
+    });
+
+    _app__WEBPACK_IMPORTED_MODULE_1__.carouselPostList.addEventListener("wheel", function (event) {
+      event.preventDefault();
+      updateValue(event.deltaY > 0 ? 1 : -1);
+    });
+
+    window.addEventListener(
+      "wheel",
+      function (event) {
+        if (event.target === _app__WEBPACK_IMPORTED_MODULE_1__.carouselPostList) {
+          event.preventDefault();
+        }
+      },
+      { passive: false }
+    );
   }
-  _app__WEBPACK_IMPORTED_MODULE_0__.linkElements.forEach(_app__WEBPACK_IMPORTED_MODULE_0__.handleLinkDelayRedirection);
 };
+
 
 /***/ }),
 

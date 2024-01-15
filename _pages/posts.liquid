@@ -1,0 +1,53 @@
+---
+title: Posts
+description: 全部文章
+author: sendevia
+color: "#c4518d"
+---
+
+<div class="JTM-P-Posts">
+  <div id="JTM-P-Posts-Timeline">
+    {% assign posts_by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+    {% for year in posts_by_year %}
+      <h1 id="JTM-P-Posts-Timeline-By-Year">{{ year.name }} 年的全部文章</h1>
+      <div class="JTM-P-Posts-Timeline-L1">
+        {% assign posts_by_month = year.items | group_by_exp: "post", "post.date | date: '%-m'" %}
+        {% for month in posts_by_month %}
+          <h3 id="JTM-P-Posts-Timeline-By-Month">到 {{ month.name }} 月了...</h3>
+          <div class="JTM-P-Posts-Timeline-L2">
+            {% assign posts_by_day = month.items | group_by_exp: "post", "post.date | date: '%-d'" %}
+            {% for day in posts_by_day %}
+              {% for post in day.items %}
+                <div id="JTM-P-Posts-Timeline-PostCard">
+                  <a href="{{ post.url }}">
+                    <div class="JTM-C-Card" spec="clear">
+                      <div class="JTM-C-Card-Impression">
+                        {% if post.impression and post.impression != "" %}
+                          {% assign photograph = post.impression %}
+                        {% elsif site.impression %}
+                          {% assign photograph = site.impression %}
+                        {% else %}
+                          {% assign photograph = false %}
+                        {% endif %}
+                        {% if photograph != false %}
+                          <img src="{{ photograph }}" alt="{{ post.title }}的封面" />
+                        {% endif %}
+                      </div>
+                      <div class="JTM-C-Card-Supporting">
+                        <h3>{{ post.title }}</h3>
+                        {% if post.description %}
+                          <p>{{ post.description }}</p>
+                        {% endif %}
+                        <p id="JTM-C-Card-Supporting-Weaken">发布于{{ year.name }}年{{ month.name }}月{{ day.name }}日</p>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              {% endfor %}
+            {% endfor %}
+          </div>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+</div>

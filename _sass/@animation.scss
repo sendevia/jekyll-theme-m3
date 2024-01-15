@@ -26,16 +26,16 @@
 
 @keyframes ripple {
   from {
-    height: calc(var(--ripple-effect-d) * 0.5px);
-    width: calc(var(--ripple-effect-d) * 0.5px);
+    height: calc(var(--JTM-E-Ripple-Diameter) * 0.5px);
+    width: calc(var(--JTM-E-Ripple-Diameter) * 0.5px);
 
     filter: blur(5px);
     opacity: 0.5;
   }
 
   to {
-    height: calc(var(--ripple-effect-d) * 2px);
-    width: calc(var(--ripple-effect-d) * 2px);
+    height: calc(var(--JTM-E-Ripple-Diameter) * 2px);
+    width: calc(var(--JTM-E-Ripple-Diameter) * 2px);
 
     filter: blur(0);
     opacity: 0;

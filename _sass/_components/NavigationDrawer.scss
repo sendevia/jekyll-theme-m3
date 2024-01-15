@@ -5,113 +5,122 @@
   align-items: flex-start;
   flex-direction: column;
 
-  height: 100%;
-  width: 10px;
-
   position: fixed;
   top: 0;
   left: 80px;
 
-  letter-spacing: 0;
-  white-space: nowrap;
+  height: 100%;
+  width: 20px;
+
+  padding-block: 16px 8px;
 
   border-left: 1px solid var(--md-sys-color-surface-container-high);
-  border-radius: 0 12px 12px 0;
+  border-radius: var(--md-sys-shape-corner-large-end);
 
-  background-color: var(--md-sys-color-surface-container-low);
+  background-color: var(--md-sys-color-surface-container);
 
   opacity: 0;
-  transition: visibility var(--md-sys-motion-duration-medium2), opacity 0.29s,
-    width var(--md-sys-motion-duration-medium4) var(--md-sys-motion-easing-emphasized),
-    height var(--md-sys-motion-duration-medium4) var(--md-sys-motion-easing-emphasized),
-    top var(--md-sys-motion-duration-medium4) var(--md-sys-motion-easing-emphasized);
+  overflow: auto;
+  transition: padding-block var(--md-sys-motion-duration-medium2), visibility var(--md-sys-motion-duration-medium2),
+    opacity var(--md-sys-motion-duration-short4), width var(--md-sys-motion-duration-medium4) var(--md-sys-motion-easing-emphasized);
   visibility: hidden;
   z-index: 21;
+
+  a {
+    text-decoration: none;
+  }
 
   #JTM-C-NavigationDrawer-MenuCloseIcon {
     display: none;
   }
 
-  #JTM-C-NavigationDrawer-Section {
-    padding: 10px;
+  details {
+    @include typescale-style("title-small");
 
-    overflow: auto;
+    display: block;
+    width: 100%;
 
-    &::-webkit-scrollbar {
-      width: 2px;
+    margin: 0;
+    padding: 0px 8px;
+
+    summary {
+      @include JTM-E-UserSelect(none);
+
+      display: flex;
+
+      a {
+        padding: 0 18px;
+
+        font-weight: 600;
+        line-height: 48px;
+
+        &:hover {
+          font-weight: 700;
+
+          background-color: var(--md-sys-color-secondary-container);
+        }
+
+        &:active {
+          font-weight: 500;
+        }
+      }
+
+      &#JTM-C-NavigationDrawer-Item-Expandable {
+        a::after {
+          @include material-symbols("expand_more", $size: 18);
+        }
+      }
+    }
+
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      position: relative;
+
+      width: 100%;
+
+      color: var(--md-sys-color-on-surface);
+      white-space: nowrap;
+
+      border-radius: var(--md-sys-shape-corner-extra-large);
+
+      opacity: 0;
+      overflow: hidden;
+      transition: var(--md-sys-motion-duration-short4);
+
+      &:hover {
+        background-color: var(--md-sys-color-surface-container-high);
+      }
+    }
+
+    & > a {
+      padding: 12px 24px;
+    }
+
+    &[open] {
+      summary#JTM-C-NavigationDrawer-Item-Expandable a::after {
+        @include material-symbols("expand_less", $size: 18);
+      }
     }
   }
 
   &[show] {
+    padding-block: 8px;
+
     width: 240px;
 
     opacity: 1;
-    transition: visibility 0.01s, opacity 0.29s, width var(--md-sys-motion-duration-medium4) var(--md-sys-motion-easing-emphasized),
-      height var(--md-sys-motion-duration-medium4) var(--md-sys-motion-easing-emphasized),
-      top var(--md-sys-motion-duration-medium4) var(--md-sys-motion-easing-emphasized);
+    transition: padding-block var(--md-sys-motion-duration-medium2), visibility var(--md-sys-motion-duration-short1),
+      opacity var(--md-sys-motion-duration-medium4) var(--md-sys-motion-easing-emphasized),
+      width var(--md-sys-motion-duration-medium1) var(--md-sys-motion-easing-emphasized);
     visibility: visible;
-  }
 
-  a,
-  p {
-    display: block;
+    a {
+      white-space: normal;
 
-    width: 100%;
-
-    margin: 0;
-    padding: 0px 8px 0px 16px;
-
-    line-height: 48px;
-    text-overflow: ellipsis;
-  }
-
-  & > ul > li > a {
-    font-weight: bold;
-  }
-
-  ul {
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-
-    width: 100%;
-
-    margin: 0;
-    padding: 0;
-
-    list-style: none;
-
-    .JTM-C-NavigationDrawer-Entry {
-      width: 100%;
+      opacity: 1;
     }
-
-    .JTM-C-NavigationDrawer-h1 {
-      a:hover {
-        background-color: var(--md-sys-color-secondary-container);
-      }
-    }
-
-    .JTM-C-NavigationDrawer-h2 {
-      padding: 0px 8px 0px 20px;
-
-      a:hover {
-        padding: 0px 8px 0px 24px;
-
-        background-color: var(--md-sys-color-secondary-container);
-      }
-    }
-
-    & > li > a {
-      position: relative;
-
-      border-radius: 100px;
-
-      overflow: hidden;
-      transition: 0.2s;
-    }
-  }
-
-  li::before {
-    display: none;
   }
 }

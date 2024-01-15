@@ -2,8 +2,8 @@
 // 面包屑
 
 button.JTM-C-Chip {
-  @include label-large();
-  @extend .disable-select;
+  @include JTM-E-UserSelect(none);
+  @include typescale-style("label-large");
 
   display: flex;
   align-items: center;
@@ -11,17 +11,16 @@ button.JTM-C-Chip {
   flex-wrap: nowrap;
   justify-content: center;
 
+  position: relative;
+
   height: 32px;
   width: max-content;
 
   padding-inline: 16px;
 
-  position: relative;
-
   color: var(--md-sys-color-on-surface);
-  letter-spacing: 0;
 
-  border-radius: 8px;
+  border-radius: var(--md-sys-shape-corner-small);
   border: 1px solid var(--md-sys-color-outline);
 
   background: none;
@@ -29,22 +28,20 @@ button.JTM-C-Chip {
   box-shadow: none;
   cursor: pointer;
   overflow: hidden;
-  transition: var(--md-sys-motion-duration-medium4);
+  transition: var(--md-sys-motion-duration-medium4) var(--md-sys-motion-easing-standard);
 
   &[icon] {
     gap: 8px;
 
-    padding-inline-start: 8px;
-    padding-inline-end: 16px;
+    padding-inline: 8px 16px;
 
     span {
-      @include material-symbols($size: 18px);
+      @include material-symbols($size: 18);
 
       height: 18px;
       width: 18px;
 
       color: var(--md-sys-color-primary);
-      line-height: 18px;
     }
   }
 
@@ -59,27 +56,27 @@ button.JTM-C-Chip {
     width: 100%;
 
     opacity: 0;
-    transition: var(--md-sys-motion-duration-medium4);
+    transition: var(--md-sys-motion-duration-medium4) var(--md-sys-motion-easing-standard);
   }
 
   &:hover::after {
     background-color: var(--md-sys-color-on-surface);
 
-    transition: var(--md-sys-motion-duration-short4);
+    transition: var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard);
     opacity: var(--md-sys-state-hover-state-layer-opacity);
   }
 
   &:focus::after {
     background-color: var(--md-sys-color-on-surface);
 
-    transition: var(--md-sys-motion-duration-short4);
+    transition: var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard);
     opacity: var(--md-sys-state-focus-state-layer-opacity);
   }
 
   &:active::after {
     background-color: var(--md-sys-color-on-surface);
 
-    transition: var(--md-sys-motion-duration-short4);
+    transition: var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard);
     opacity: var(--md-sys-state-pressed-state-layer-opacity);
   }
 
@@ -94,16 +91,19 @@ button.JTM-C-Chip {
 
     &:hover::after {
       background-color: var(--md-sys-color-on-surface);
+
       box-shadow: var(--md-sys-elevation-level2);
     }
 
     &:focus::after {
       background-color: var(--md-sys-color-on-surface);
+
       box-shadow: var(--md-sys-elevation-level1);
     }
 
     &:active::after {
       background-color: var(--md-sys-color-on-surface);
+
       box-shadow: var(--md-sys-elevation-level1);
     }
   }

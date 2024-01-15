@@ -1,0 +1,51 @@
+.JTM-S-Header {
+  height: 540px;
+
+  margin-block: 12px;
+  margin-inline: calc(25% - 152px);
+
+  word-break: break-word;
+
+  #JTM-S-Header-HeroContainer {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+    justify-content: center;
+
+    height: 100%;
+
+    padding: 54px;
+
+    color: var(--md-sys-color-on-secondary-container);
+
+    border-radius: var(--md-sys-shape-corner-medium);
+    border: 1px solid var(--md-sys-color-outline-variant);
+
+    background-blend-mode: overlay;
+    background: center/cover no-repeat var(--md-sys-color-secondary-container);
+
+    overflow: hidden;
+    transition: var(--md-sys-motion-duration-extra-long4) var(--md-sys-motion-easing-standard);
+
+    @media (prefers-color-scheme: dark) {
+      background-blend-mode: soft-light;
+    }
+
+    #JTM-S-Header-HeroHeadline {
+      @include typescale-style("display-large", $font-size: 90rem, $font-weight: 700, $line-height: 90rem);
+
+      width: 100%;
+
+      transition: var(--md-sys-motion-duration-short1) var(--md-sys-motion-easing-standard);
+    }
+
+    #JTM-S-Header-HeroSubtitle {
+      @include typescale-style("headline-large", $font-size: 22rem, $line-height: 22rem);
+
+      width: 100%;
+
+      transition: var(--md-sys-motion-duration-short1) var(--md-sys-motion-easing-standard);
+    }
+  }
+}

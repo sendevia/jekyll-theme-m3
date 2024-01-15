@@ -1,37 +1,31 @@
-version: "23.1016.0"
+version: "24.0115.0"
 
-title: "An awesome blog"
+title: "Example Website Name"
+description: "Contrary to common opinion, less is more. Only by concentrating on the few important and vital things, and refusing to worry over the mass of trivial ones, can we find happiness."
 baseurl: ""
-permalink: "/:title"
 locale: "zh_CN"
 timezone: "Asia/Shanghai"
 
 author: "sendevia"
 mugshot: "/assets/images/avatar.webp"
-email: ""
-github: ""
 
-impression: "/assets/images/102911375_p0.webp"
+color: "#39c5bb"
+impression: "/assets/images/96333231_p0.webp"
 
 defaults:
   - scope:
+      path: ""
+    values:
+      layout: "default"
+  - scope:
       path: "_pages"
     values:
-      layout: "Page"
-      permalink: "/:basename"
+      permalink: "/:basename.html"
   - scope:
       path: "_posts"
     values:
-      layout: "Post"
       permalink: "/posts/:title"
       toc: true
-
-toc:
-  item_class: "JTM-C-NavigationDrawer-Entry"
-  item_prefix: "JTM-C-NavigationDrawer-"
-  list_id: "JTM-C-NavigationDrawer-Section"
-  max_level: 2
-  ordered_list: false
 
 markdown: "kramdown"
 kramdown:

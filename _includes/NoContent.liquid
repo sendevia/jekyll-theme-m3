@@ -1,0 +1,7 @@
+{% assign page_words = page.content | number_of_words: "auto" %}
+{% if page_words == 0 %}
+  <div class="JTM-S-NoContent">
+    <h1>咕咕咕...这里还啥都没有呢，待会再来看看吧</h1>
+    <span>sentiment_stressed</span>
+  </div>
+{% endif %}

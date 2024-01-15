@@ -6,15 +6,21 @@
   gap: 12px;
   justify-content: space-around;
 
-  width: 100%;
+  margin-block: 18px;
+  margin-inline: calc(25% - 152px);
 
-  margin-block-start: 18px;
-  padding-inline: 12px;
+  color: var(--md-sys-color-on-surface-variant);
+
+  a {
+    text-decoration: none;
+  }
 
   #JTM-S-Footer-Descriptions {
+    display: flex;
     flex-grow: 1;
+    flex-direction: column;
 
-    padding-inline-start: 24px;
+    padding-inline-start: 12px;
 
     h3 {
       letter-spacing: 0.2px;
@@ -28,6 +34,10 @@
     flex-grow: 1;
     flex-wrap: wrap;
     gap: 6px;
-    justify-content: start;
+    justify-content: flex-end;
+
+    .JTM-C-CommonButton {
+      text-transform: capitalize;
+    }
   }
 }

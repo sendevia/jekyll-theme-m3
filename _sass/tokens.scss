@@ -1,0 +1,153 @@
+:root {
+  // Color
+  --md-ref-palette-primary10: #00201e;
+  --md-ref-palette-primary20: #003734;
+  --md-ref-palette-primary30: #00504b;
+  --md-ref-palette-primary40: #006a64;
+  --md-ref-palette-primary80: #50dbd0;
+  --md-ref-palette-primary90: #71f7ec;
+  --md-ref-palette-primary100: #ffffff;
+  --md-ref-palette-secondary10: #051f1d;
+  --md-ref-palette-secondary20: #1c3532;
+  --md-ref-palette-secondary30: #324b49;
+  --md-ref-palette-secondary40: #4a6360;
+  --md-ref-palette-secondary80: #b0ccc8;
+  --md-ref-palette-secondary90: #cce8e4;
+  --md-ref-palette-secondary100: #ffffff;
+  --md-ref-palette-tertiary10: #001d33;
+  --md-ref-palette-tertiary20: #18324a;
+  --md-ref-palette-tertiary30: #304962;
+  --md-ref-palette-tertiary40: #48617a;
+  --md-ref-palette-tertiary80: #afc9e7;
+  --md-ref-palette-tertiary90: #cfe5ff;
+  --md-ref-palette-tertiary100: #ffffff;
+  --md-ref-palette-neutral0: #000000;
+  --md-ref-palette-neutral4: #0b0f0e;
+  --md-ref-palette-neutral6: #101414;
+  --md-ref-palette-neutral10: #191c1c;
+  --md-ref-palette-neutral12: #1d2020;
+  --md-ref-palette-neutral17: #272b2a;
+  --md-ref-palette-neutral20: #2d3130;
+  --md-ref-palette-neutral22: #323535;
+  --md-ref-palette-neutral24: #363a39;
+  --md-ref-palette-neutral87: #d8dbd9;
+  --md-ref-palette-neutral90: #e0e3e2;
+  --md-ref-palette-neutral92: #e6e9e7;
+  --md-ref-palette-neutral94: #eceeed;
+  --md-ref-palette-neutral95: #eff1f0;
+  --md-ref-palette-neutral96: #f2f4f3;
+  --md-ref-palette-neutral98: #f7faf8;
+  --md-ref-palette-neutral100: #ffffff;
+  --md-ref-palette-neutral-variant30: #3f4947;
+  --md-ref-palette-neutral-variant50: #6f7977;
+  --md-ref-palette-neutral-variant60: #899391;
+  --md-ref-palette-neutral-variant80: #bec9c6;
+  --md-ref-palette-neutral-variant90: #dae5e2;
+  --md-ref-palette-error10: #410002;
+  --md-ref-palette-error20: #690005;
+  --md-ref-palette-error30: #93000a;
+  --md-ref-palette-error40: #ba1a1a;
+  --md-ref-palette-error80: #ffb4ab;
+  --md-ref-palette-error90: #ffdad6;
+  --md-ref-palette-error100: #ffffff;
+
+  // Elevation
+  --md-sys-elevation-level1-dark: 0px 1px 3px 1px rgba(0, 0, 0, 0.15), 0px 1px 2px rgba(0, 0, 0, 0.3);
+  --md-sys-elevation-level2-dark: 0px 2px 6px 2px rgba(0, 0, 0, 0.15), 0px 1px 2px rgba(0, 0, 0, 0.3);
+  --md-sys-elevation-level3-dark: 0px 4px 8px 3px rgba(0, 0, 0, 0.15), 0px 1px 3px rgba(0, 0, 0, 0.3);
+  --md-sys-elevation-level4-dark: 0px 6px 10px 4px rgba(0, 0, 0, 0.15), 0px 2px 3px rgba(0, 0, 0, 0.3);
+  --md-sys-elevation-level5-dark: 0px 8px 12px 6px rgba(0, 0, 0, 0.15), 0px 4px 4px rgba(0, 0, 0, 0.3);
+  --md-sys-elevation-level1-light: 0px 1px 2px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+  --md-sys-elevation-level2-light: 0px 1px 2px rgba(0, 0, 0, 0.3), 0px 2px 6px 2px rgba(0, 0, 0, 0.15);
+  --md-sys-elevation-level3-light: 0px 4px 8px 3px rgba(0, 0, 0, 0.15), 0px 1px 3px rgba(0, 0, 0, 0.3);
+  --md-sys-elevation-level4-light: 0px 6px 10px 4px rgba(0, 0, 0, 0.15), 0px 2px 3px rgba(0, 0, 0, 0.3);
+  --md-sys-elevation-level5-light: 0px 8px 12px 6px rgba(0, 0, 0, 0.15), 0px 4px 4px rgba(0, 0, 0, 0.3);
+
+  // Motion
+  --md-sys-motion-duration-short1: 50ms;
+  --md-sys-motion-duration-short2: 100ms;
+  --md-sys-motion-duration-short3: 150ms;
+  --md-sys-motion-duration-short4: 200ms;
+  --md-sys-motion-duration-medium1: 250ms;
+  --md-sys-motion-duration-medium2: 300ms;
+  --md-sys-motion-duration-medium3: 350ms;
+  --md-sys-motion-duration-medium4: 400ms;
+  --md-sys-motion-duration-long1: 450ms;
+  --md-sys-motion-duration-long2: 500ms;
+  --md-sys-motion-duration-long3: 550ms;
+  --md-sys-motion-duration-long4: 600ms;
+  --md-sys-motion-duration-extra-long1: 700ms;
+  --md-sys-motion-duration-extra-long2: 800ms;
+  --md-sys-motion-duration-extra-long3: 900ms;
+  --md-sys-motion-duration-extra-long4: 1000ms;
+  --md-sys-motion-easing-liner: cubic-bezier(0, 0, 1, 1);
+  --md-sys-motion-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+  --md-sys-motion-easing-standard-accelerate: cubic-bezier(0.3, 0, 1, 1);
+  --md-sys-motion-easing-standard-decelerate: cubic-bezier(0, 0, 0, 1);
+  --md-sys-motion-easing-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --md-sys-motion-easing-emphasized-accelerate: cubic-bezier(0.3, 0, 0.8, 0.15);
+  --md-sys-motion-easing-emphasized-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --md-sys-motion-easing-legacy: cubic-bezier(0.4, 0, 0.2, 1);
+  --md-sys-motion-easing-legacy-accelerate: cubic-bezier(0.4, 0, 1, 1);
+  --md-sys-motion-easing-legacy-decelerate: cubic-bezier(0, 0, 0.2, 1);
+  --md-sys-motion-path: var(--md-sys-motion-easing-liner);
+
+  // Shape
+  --md-sys-shape-corner-full: 100%;
+  --md-sys-shape-corner-extra-large: 28px;
+  --md-sys-shape-corner-extra-large-top: 28px 28px 0 0;
+  --md-sys-shape-corner-extra-large-bottom: 0 0 28px 28px;
+  --md-sys-shape-corner-extra-large-start: 28px 0 0 28px;
+  --md-sys-shape-corner-extra-large-end: 0 28px 28px 0;
+  --md-sys-shape-corner-large: 16px;
+  --md-sys-shape-corner-large-top: 16px 16px 0 0;
+  --md-sys-shape-corner-large-bottom: 0 0 16px 16px;
+  --md-sys-shape-corner-large-start: 16px 0 0 16px;
+  --md-sys-shape-corner-large-end: 0 16px 16px 0;
+  --md-sys-shape-corner-medium: 12px;
+  --md-sys-shape-corner-medium-top: 12px 12px 0 0;
+  --md-sys-shape-corner-medium-bottom: 0 0 12px 12px;
+  --md-sys-shape-corner-medium-start: 12px 0 0 12px;
+  --md-sys-shape-corner-medium-end: 0 12px 12px 0;
+  --md-sys-shape-corner-small: 8px;
+  --md-sys-shape-corner-extra-small: 4px;
+  --md-sys-shape-corner-extra-small-top: 4px 4px 0 0;
+  --md-sys-shape-corner-none: 0;
+
+  // Typography
+  $level1-font-family: "Plus Jakarta Sans", "Noto Sans SC", sans-serif;
+  $level2-font-family: "Plus Jakarta Sans", "Noto Sans SC", sans-serif;
+
+  @mixin typescale($name, $family, $weight, $size, $tracking, $line-height) {
+    --md-sys-typescale-#{$name}-family: #{$family};
+    --md-sys-typescale-#{$name}-weight: #{$weight};
+    --md-sys-typescale-#{$name}-size: #{$size}rem;
+    --md-sys-typescale-#{$name}-letter-spacing: #{$tracking}rem;
+    --md-sys-typescale-#{$name}-line-height: #{$line-height}rem;
+  }
+
+  @include typescale("display-large", $level1-font-family, 400, 57, -0.25, 64);
+  @include typescale("display-medium", $level1-font-family, 400, 45, 0, 52);
+  @include typescale("display-small", $level1-font-family, 400, 36, 0, 44);
+
+  @include typescale("headline-large", $level1-font-family, 400, 32, 0, 40);
+  @include typescale("headline-medium", $level1-font-family, 400, 28, 0, 36);
+  @include typescale("headline-small", $level1-font-family, 400, 24, 0, 32);
+
+  @include typescale("title-large", $level1-font-family, 400, 22, 0, 28);
+  @include typescale("title-medium", $level2-font-family, 500, 16, 0.15, 24);
+  @include typescale("title-small", $level2-font-family, 500, 14, 0.1, 20);
+
+  @include typescale("body-large", $level2-font-family, 400, 16, 0.5, 24);
+  @include typescale("body-medium", $level2-font-family, 400, 14, 0.25, 20);
+  @include typescale("body-small", $level2-font-family, 400, 12, 0.4, 16);
+
+  @include typescale("label-large", $level2-font-family, 500, 14, 0.1, 20);
+  @include typescale("label-medium", $level2-font-family, 500, 12, 0.5, 16);
+  @include typescale("label-small", $level2-font-family, 500, 11, 0.5, 16);
+
+  --md-sys-state-dragged-state-layer-opacity: 0.16;
+  --md-sys-state-focus-state-layer-opacity: 0.12;
+  --md-sys-state-hover-state-layer-opacity: 0.08;
+  --md-sys-state-pressed-state-layer-opacity: 0.12;
+}

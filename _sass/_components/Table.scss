@@ -4,18 +4,16 @@ table {
   display: inline-block;
 
   max-width: max-content;
-  width: calc(100% - 24px);
-
-  margin-inline-start: 12px;
+  width: 100%;
 
   border-collapse: collapse;
-  border-radius: 24px;
+  border-radius: var(--md-sys-shape-corner-extra-large);
 
   box-shadow: 0 0 0 1px var(--md-sys-color-outline);
   overflow: auto;
 
   caption {
-    @include title-medium($font-weight: bold);
+    @include typescale-style("title-medium", $font-weight: 700);
 
     padding: 16px 0;
 
@@ -27,7 +25,7 @@ table {
   }
 
   thead {
-    @include body-large();
+    @include typescale-style("body-large", $font-weight: 700);
 
     white-space: nowrap;
 
@@ -37,8 +35,6 @@ table {
 
         padding: 16px 24px;
 
-        font-weight: 500;
-        letter-spacing: 0.5px;
         text-transform: capitalize;
 
         border-left: 1px solid var(--md-sys-color-outline);
@@ -72,7 +68,11 @@ table {
   }
 
   tbody {
-    @include body-large();
+    @include typescale-style("body-large");
+
+    img {
+      max-width: 375px;
+    }
 
     tr {
       vertical-align: top;
