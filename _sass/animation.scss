@@ -1,0 +1,42 @@
+// 动画
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes popOut {
+  0% {
+    transform: scale(0);
+  }
+
+  40% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes search-results-container-show {
+  0% {
+    visibility: hidden;
+  }
+
+  1% {
+    visibility: visible;
+    opacity: 0;
+  }
+
+  100% {
+    height: calc(100% - 68px);
+
+    opacity: 1;
+  }
+}

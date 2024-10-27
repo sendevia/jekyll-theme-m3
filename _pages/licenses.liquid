@@ -7,48 +7,42 @@ impression: ""
 toc: false
 navigation: true
 segment_icon: "package"
-segment_title: "许可"
+segment_title: "开源许可"
 published: true
 ---
 
-<div class="JTM-P-Licenses">
-  <table>
-    <thead>
+<h3>以下是本网站所使用的库和字体</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>名称</th>
+      <th>许可证</th>
+      <th>源地址</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in site.data.licenses %}
       <tr>
-        <th>名称</th>
-        <th>版本</th>
-        <th>源地址</th>
-        <th>许可证</th>
+        <td>{{ item.name }}</td>
+        <td>
+          <md-chip-set>
+            <md-assist-chip label="{{ item.license }}">
+              <md-icon slot="icon">balance</md-icon>
+            </md-assist-chip>
+          </md-chip-set>
+        </td>
+        <td>
+          <md-chip-set>
+            <md-assist-chip
+              label="访问"
+              href="{{ item.repository }}"
+              target="_blank">
+              <md-icon slot="icon">open_in_new</md-icon>
+            </md-assist-chip>
+          </md-chip-set>
+        </td>
       </tr>
-    </thead>
-    <tbody>
-      {% for item in site.data.licenses %}
-        <tr>
-          <td>{{ item.name }}</td>
-          <td>{{ item.version }}</td>
-          <td>
-            <a href="{{ item.repository }}" target="_blank">
-              <button
-                class="JTM-C-Chip"
-                spec="assist"
-                icon>
-                <span>open_in_new</span>
-                访问
-              </button>
-            </a>
-          </td>
-          <td>
-            <button
-              class="JTM-C-Chip"
-              spec="assist"
-              icon
-              disabled>
-              <span>balance</span>
-              {{ item.license }}
-            </button>
-          </td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
+    {% endfor %}
+  </tbody>
+</table>

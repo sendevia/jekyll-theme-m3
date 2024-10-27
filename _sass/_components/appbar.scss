@@ -1,0 +1,93 @@
+@use "sass:meta";
+@use "mixin";
+
+// https://m3.material.io/components/top-app-bar/
+
+.appbar {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 6px;
+  justify-content: space-between;
+
+  position: fixed;
+  top: -64px;
+
+  height: 64px;
+  width: 100%;
+
+  padding: 8px 4px;
+
+  background-color: var(--md-sys-color-surface-container-low);
+
+  opacity: 0;
+  overflow: hidden;
+  transition: var(--md-sys-motion-duration-long1) var(--md-sys-motion-easing-standard);
+  visibility: hidden;
+  z-index: 4;
+
+  #appbar-dynamic-title {
+    @include mixin.typescale-style("title-large");
+
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: center;
+
+    height: 100%;
+
+    margin: auto;
+
+    text-align: start;
+    text-transform: uppercase;
+
+    span {
+      position: absolute;
+
+      width: calc(100% - 100px);
+
+      line-height: 1;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      overflow: hidden;
+      transition: var(--md-sys-motion-duration-medium4) var(--md-sys-motion-easing-emphasized);
+
+      &:nth-child(1) {
+        transform: translateY(0px);
+        opacity: 1;
+      }
+
+      &:nth-child(2) {
+        transform: translateY(45px);
+        opacity: 0;
+      }
+    }
+  }
+
+  &[scroll="true"] {
+    background-color: var(--md-sys-color-surface-container-high);
+
+    #appbar-dynamic-title {
+      span {
+        &:nth-child(1) {
+          transform: translateY(-45px);
+          opacity: 0;
+        }
+
+        &:nth-child(2) {
+          transform: translateY(0px);
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 840px) {
+    top: 0;
+
+    visibility: visible;
+  }
+}

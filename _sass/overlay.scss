@@ -1,0 +1,83 @@
+// 操作覆盖层
+
+[o-increasescroll="true"] {
+  .appbar {
+    top: -64px;
+
+    transition: var(--md-sys-motion-duration-medium2);
+  }
+}
+
+[o-onload] {
+  .appbar {
+    opacity: 1;
+  }
+
+  .navigation {
+    #navigation-fab {
+      opacity: 1;
+    }
+
+    #navigation-destinations {
+      opacity: 1;
+    }
+  }
+
+  .loading-splash {
+    opacity: 0;
+  }
+
+  .main-layout #main-layout-content-flow {
+    opacity: 1;
+    transform: translateY(0px) scale(1);
+  }
+}
+
+[o-showsearch] {
+  #default-header-webinfo {
+    display: none;
+  }
+  .main-layout {
+    #main-layout-content-flow {
+      filter: brightness(0.5);
+    }
+  }
+
+  #main-layout-scrolltop {
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
+
+  @media screen and (max-width: 768px) {
+    .navigation[spec="bar"],
+    .appbar {
+      filter: brightness(0.5);
+    }
+  }
+}
+
+[o-showdrawer="true"] {
+  .main-layout {
+    .navigation {
+      #navigation-drawer {
+        opacity: 1;
+        transform: translateX(0);
+        transition: background-color var(--md-sys-motion-duration-extra-long1) var(--md-sys-motion-easing-standard),
+          padding-block var(--md-sys-motion-duration-medium2) var(--md-sys-motion-duration-short1), visibility var(--md-sys-motion-duration-short1),
+          opacity var(--md-sys-motion-duration-medium4) var(--md-sys-motion-easing-emphasized),
+          transform var(--md-sys-motion-duration-medium1) var(--md-sys-motion-easing-emphasized);
+        visibility: visible;
+
+        #navigation-drawer-container {
+          details a {
+            opacity: 1;
+          }
+        }
+      }
+
+      &[spec="rail"] {
+        background-color: var(--md-sys-color-surface-container);
+      }
+    }
+  }
+}

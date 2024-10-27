@@ -1,0 +1,28 @@
+{% if page.previous %}
+  <a
+    href="{{ page.previous.url }}"
+    class="main-layout-quicklinks"
+    spec="previous">
+    <div class="card" spec="clear">
+      <md-ripple></md-ripple>
+      <div class="card-supporting">
+        <p>上一篇</p>
+        <h3>{{ page.previous.title }}</h3>
+      </div>
+    </div>
+  </a>
+{% endif %}
+{% if page.next %}
+  <a
+    href="{{ page.next.url }}"
+    class="main-layout-quicklinks"
+    spec="next">
+    <div class="card" spec="clear">
+      <md-ripple></md-ripple>
+      <div class="card-supporting">
+        <p>下一篇</p>
+        <h3>{{ page.next.title }}</h3>
+      </div>
+    </div>
+  </a>
+{% endif %}

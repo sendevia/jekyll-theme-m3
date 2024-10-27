@@ -1,0 +1,19 @@
+---
+layout: none
+---
+[
+  {% for article in site.posts reversed -%}
+    {
+      "title"       : "{{ article.title | escape }}",
+      "description" : "{{ article.description | default: site.description }}",
+      "author"      : "{{ site.data.authors[article.author].name | default: site.author.name }}",
+      "category"    : "{{ article.categories }}",
+      "tags"        : "{{ article.tags | join: ', ' }}",
+      "date"        : "{{ article.date }}",
+      "impression"  : "{{ article.impression | default: site.impression }}",
+      "url"         : "{{ article.url }}",
+      "id"          : "{{ forloop.index }}"
+    }
+    {%- unless forloop.last -%},{% endunless %}
+  {%- endfor %}
+]

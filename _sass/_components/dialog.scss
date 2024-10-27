@@ -1,0 +1,46 @@
+@use "mixin";
+
+// https://m3.material.io/components/dialogs/
+
+#modal-dialog-content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 12px;
+
+  #modal-dialog-leader-icon {
+    @include mixin.material-symbols($size: 24);
+  }
+
+  #modal-dialog-headline {
+    margin-inline: 10px;
+
+    h3 {
+      margin-block-end: 6px;
+
+      color: var(--md-sys-color-on-surface);
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    p {
+      text-align: center;
+    }
+  }
+
+  #modal-dialog-supporting-list {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+
+    width: 100%;
+
+    .modal-dialog-tip-items {
+      display: grid;
+      align-items: center;
+      gap: 12px;
+      grid-template-columns: auto auto;
+    }
+  }
+}

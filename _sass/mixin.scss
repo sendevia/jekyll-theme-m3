@@ -1,0 +1,41 @@
+@mixin typescale-style(
+  $type-scale,
+  $font-family: var(--md-sys-typescale-#{$type-scale}-family),
+  $font-size: var(--md-sys-typescale-#{$type-scale}-size),
+  $font-weight: var(--md-sys-typescale-#{$type-scale}-weight),
+  $line-height: var(--md-sys-typescale-#{$type-scale}-line-height),
+  $letter-spacing: var(--md-sys-typescale-#{$type-scale}-letter-spacing)
+) {
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  letter-spacing: $letter-spacing;
+}
+
+@mixin typescale($name, $family, $weight, $size, $tracking, $line-height) {
+  --md-sys-typescale-#{$name}-family: #{$family};
+  --md-sys-typescale-#{$name}-weight: #{$weight};
+  --md-sys-typescale-#{$name}-size: #{$size}rem;
+  --md-sys-typescale-#{$name}-letter-spacing: #{$tracking}rem;
+  --md-sys-typescale-#{$name}-line-height: #{$line-height}rem;
+}
+
+@mixin material-symbols($name: "", $size: 24, $font-size: $size, $line-height: $size) {
+  content: $name;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  direction: ltr;
+  display: inline-block;
+  font-family: "Material Symbols Outlined";
+  font-feature-settings: "liga";
+  font-size: #{$size}rem;
+  font-style: normal;
+  font-weight: normal;
+  letter-spacing: normal;
+  line-height: #{$line-height}rem;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  white-space: nowrap;
+  word-wrap: normal;
+}

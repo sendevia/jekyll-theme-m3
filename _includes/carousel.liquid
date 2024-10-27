@@ -1,0 +1,22 @@
+<div class="carousel">
+  <div id="carousel-container" data-scroll="0">
+    <button class="carousel-control">west</button>
+    {% assign featured_posts = site.posts | where: "featured", true | sort: 'date' | reverse %}
+    {% assign required_posts = 2 %}
+    {% assign total_featured_posts = featured_posts.size %}
+    {% for i in (0..required_posts) %}
+      {% assign post_index = i | modulo: total_featured_posts %}
+      {% assign post = featured_posts[post_index] %}
+      {% if post %}
+        <a class="carousel-article" href="{{ post.url | prepend: site.baseurl }}">
+          <span class="carousel-article-impression" style="background-image: url('{{ post.impression | default: site.impression }}');" />
+          <div class="carousel-article-info">
+            <h1>{{ post.title }}</h1>
+            <h4>{{ post.description }}</h4>
+          </div>
+        </a>
+      {% endif %}
+    {% endfor %}
+    <button class="carousel-control">east</button>
+  </div>
+</div>

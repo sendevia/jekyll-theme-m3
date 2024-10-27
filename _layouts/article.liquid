@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang }}">
+  {% if page.permalink == "/404.html" %}
+    {% include head.liquid no_javascript = true %}
+    {% include notfound.liquid %}
+    {% break %}
+  {% else %}
+    {% include head.liquid %}
+  {% endif %}
+
+  <body class="theme-root" color="{{ page.color | default: site.color }}">
+    {% include loading-splash.liquid %}
+
+    {% if page_words == 0 %}
+      {% assign layout_type = "blank" %}
+    {% else %}
+      {% assign layout_type = "article" %}
+    {% endif %}
+
+    <div class="main-layout" spec="{{ layout_type }}">
+      {% include navigation.liquid fab = false %}
+
+      <div id="main-layout-content-flow">
+        <div id="main-layout-search">
+          <div id="main-layout-search-input-box">
+            <span>search</span>
+            <form>
+              <input type="text" placeholder="输入内容以检索" />
+            </form>
+          </div>
+          <div id="main-layout-search-results-container"></div>
+        </div>
+
+        {% include header.liquid %}
+
+        <div id="main-layout-content-filler">
+          <section>
+            {% include content.liquid %}
+          </section>
+          <section></section>
+        </div>
+
+        {% if page.previous or page.next %}
+          {% include quickjump.liquid %}
+        {% endif %}
+
+        {% include scroll-to-top.liquid %}
+
+        <hr spec="wave" />
+
+        {% include footer.liquid %}
+      </div>
+    </div>
+
+  </body>
+
+  <md-dialog>
+    <div slot="content" id="modal-dialog-content">
+      <md-icon>help</md-icon>
+
+      <div id="modal-dialog-headline">
+        <h3>{{ page.title | default: site.title }}</h3>
+        {% if page.description and page.description != "" %}
+          <p>{{ page.description }}</p>
+        {% endif %}
+      </div>
+
+      <div id="modal-dialog-supporting-list">
+        {% if page.date %}
+          <div class="modal-dialog-tip-items">
+            <md-icon>calendar_month</md-icon>
+            <p>发布于：{{ page.date | date: "%Y年%-m月%-d日" }}</p>
+          </div>
+        {% endif %}
+
+        <div class="modal-dialog-tip-items">
+          <md-icon>schedule</md-icon>
+          <p>估计阅读时间：
+            {% if read_estimate > 0 %}
+              {{ read_estimate }}
+            {% else %}
+              少于 1
+            {% endif %}分钟</p>
+        </div>
+
+        <div class="modal-dialog-tip-items">
+          <md-icon>person</md-icon>
+          <p>作者：{{ site.data.authors[page.author].name | default: site.author.name }}</p>
+        </div>
+
+        {% if page.categories.size > 0 %}
+          <div class="modal-dialog-tip-items">
+            <md-icon>category</md-icon>
+            <p>分类：{{ page.categories }}</p>
+          </div>
+        {% endif %}
+
+        <div class="modal-dialog-tip-items">
+          <md-icon>palette</md-icon>
+          <p>主题颜色：{{ page.color | default: site.color }}</p>
+        </div>
+      </div>
+    </div>
+    <div slot="actions">
+      <md-text-button>关闭</md-text-button>
+    </div>
+  </md-dialog>
+</html>

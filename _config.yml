@@ -1,22 +1,25 @@
-version: "24.0115.0"
+version: "24.1027.0(1)"
 
-title: "Example Website Name"
-description: "Contrary to common opinion, less is more. Only by concentrating on the few important and vital things, and refusing to worry over the mass of trivial ones, can we find happiness."
+title: "Jekylmt"
+description: "A lightweight jekyll theme based on Material 3."
 baseurl: ""
-locale: "zh_CN"
 timezone: "Asia/Shanghai"
 
-author: "sendevia"
-mugshot: "/assets/images/avatar.webp"
+author:
+  name: "sendevia"
+  mugshot: "/assets/images/avatar.webp"
+  introduction: "(o゜▽゜)o☆"
+  website: "https://sendevia.top"
 
-color: "#39c5bb"
+color: "#39C5BB"
 impression: "/assets/images/96333231_p0.webp"
 
 defaults:
   - scope:
       path: ""
     values:
-      layout: "default"
+      layout: "article"
+      published: true
   - scope:
       path: "_pages"
     values:
@@ -33,15 +36,68 @@ kramdown:
   syntax_highlighter: "rouge"
   syntax_highlighter_opts:
     css_class: "highlight"
-    span:
-      line_numbers: false
-    block:
-      line_numbers: true
-      start_line: 1
+    line_numbers: false
 
 webrick:
   headers:
     Cache-Control: "must-revalidate"
+
+sass:
+  style: "compressed"
+  sass_dir: "_sass"
+  sourcemap: "always"
+
+jekyll-spaceship:
+  processors:
+    - table-processor
+    - mathjax-processor
+    - plantuml-processor
+    - mermaid-processor
+    - polyfill-processor
+    - element-processor
+  mathjax-processor:
+    src:
+      - https://polyfill.io/v3/polyfill.min.js?features=es6
+      - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+    config:
+      tex:
+        inlineMath:
+          - ["$", "$"]
+          - ['\(', '\)']
+        displayMath:
+          - ["$$", "$$"]
+          - ['\[', '\]']
+      svg:
+        fontCache: "global"
+      options:
+        enableMenu: false
+    optimize:
+      enabled: true
+      include: []
+      exclude: []
+  plantuml-processor:
+    mode: "default"
+    css:
+      class: "plantuml"
+    syntax:
+      code: "plantuml!"
+      custom: ["@startuml", "@enduml"]
+    src: "https://www.plantuml.com/plantuml/svg/"
+  mermaid-processor:
+    mode: "default"
+    css:
+      class: "mermaid"
+    syntax:
+      code: "mermaid!"
+      custom: ["@startmermaid", "@endmermaid"]
+    config:
+      theme: "default"
+    src: "https://mermaid.ink/svg/"
+  element-processor:
+    css:
+      - img:
+          props:
+            loading: "lazy"
 
 exclude:
   - .gitignore

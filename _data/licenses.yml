@@ -1,59 +1,43 @@
-- name: "jekyll-theme-m3"
+- name: jekyll-theme-m3
   license: MIT
   repository: https://github.com/Sendevia/jekyll-theme-m3
-  version: latest
 
-- name: "@material/material-color-utilities"
+- name: material-color-utilities
   license: Apache-2.0
   repository: https://github.com/material-foundation/material-color-utilities
-  version: 0.2.7
 
-- name: webpack
-  license: MIT
-  repository: https://github.com/webpack/webpack
-  version: 5.88.1
+- name: material-web
+  license: Apache-2.0
+  repository: https://github.com/material-components/material-web
 
 - name: jekyll
   license: MIT
   repository: https://github.com/jekyll/jekyll
-  version: 4.3.2
-
-- name: jekyll-loading-lazy
-  license: MIT
-  repository: https://github.com/gildesmarais/jekyll-loading-lazy
-  version: 0.1.1
 
 - name: jekyll-seo-tag
   license: MIT
   repository: https://github.com/jekyll/jekyll-seo-tag
-  version: 2.8.0
 
 - name: jekyll-sitemap
   license: MIT
   repository: https://github.com/jekyll/jekyll-sitemap
-  version: 1.4.0
 
-- name: jemoji
+- name: jekyll-spaceship
   license: MIT
-  repository: https://github.com/jekyll/jemoji
-  version: 0.13.0
+  repository: https://github.com/jeffreytse/jekyll-spaceship
+
+- name: "simple-jekyll-search"
+  license: MIT
+  repository: https://github.com/christian-fei/Simple-Jekyll-Search
 
 - name: Plus Jakarta Sans
   license: Open Font License
   repository: https://fonts.google.com/specimen/Plus+Jakarta+Sans
-  version: latest
 
 - name: Source Code Pro
   license: Open Font License
   repository: https://fonts.google.com/specimen/Source+Code+Pro
-  version: latest
 
 - name: Noto Sans SC
   license: Open Font License
   repository: https://fonts.google.com/noto/specimen/Noto+Sans+SC
-  version: latest
-
-- name: Material Symbols
-  license: Apache-2.0
-  repository: https://github.com/google/material-design-icons
-  version: latest

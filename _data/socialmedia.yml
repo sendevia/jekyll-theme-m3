@@ -1,4 +1,11 @@
-email: ""
-facebook: ""
-github: ""
-x: ""
+- name: Bilibili
+  link: https://space.bilibili.com/84041790
+  icon: smart_display
+
+- name: Email
+  link: mailto:me@sendevia.top
+  icon: alternate_email
+
+- name: Github
+  link: https://github.com/Sendevia
+  icon: code

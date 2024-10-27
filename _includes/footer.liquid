@@ -1,0 +1,29 @@
+<footer class="main-layout-footer">
+  <div id="main-layout-footer-description">
+    <div id="main-layout-footer-description-topic">
+      <img src="/assets/images/avatar.webp" alt="logo" />
+      <div>
+        <h3>{{ page.title | default: site.title }}</h3>
+        <p>来自 {{ site.title }}</p>
+      </div>
+    </div>
+    <div id="main-layout-footer-description-theme">
+      <p>使用
+        <a href="https://github.com/Sendevia/jekylmt" target="_blank">Jekylmt</a>
+        主题
+      </p>
+      <a href="https://github.com/Sendevia/sendevia.page.jekyll/releases/tag/{{site.version}}" target="_blank">
+        版本：{{ site.version }}</a>
+      <p>构建日期：{{ site.time | date: "%a_%Y%m%d_%H%M(%z)" }}</p>
+    </div>
+  </div>
+  <div id="main-layout-footer-social-media">
+    {% for item in site.data.socialmedia %}
+      <md-icon-button href="{{ item.link }}" target="_blank">
+        <md-icon>
+          {{ item.icon }}
+        </md-icon>
+      </md-icon-button>
+    {% endfor %}
+  </div>
+</footer>

@@ -1,77 +1,116 @@
 ---
-author: sendevia
+author: "sendevia"
+layout: "feed"
 ---
 
-<div class="JTM-P-Index">
-  <div id="JTM-P-Index-CardSet">
-    {% assign latest_post = site.posts | first %}
-    <div id="JTM-P-Index-SummaryCard">
-      <div class="JTM-P-Index-SummaryTitle">
-        <span id="JTM-P-Index-SummaryTitle-Leader">fiber_new</span>
-        <div id="JTM-P-Index-SummaryTitle-TitleContainer">
-          <p class="JTM-P-Index-SummaryTitle-Date">{{ latest_post.date | date: "%y年%-m月%-d日" }}发布了文章</p>
-          <h2 class="JTM-P-Index-SummaryTitle-Content">{{ latest_post.title }}</h2>
+<div
+  class="card"
+  spec="feed"
+  size="large">
+  <md-ripple></md-ripple>
+
+  {% assign latest_post = site.posts | first %}
+  {% assign article_by_author = site.data.authors[latest_post.author] | default: site.author %}
+
+  <a href="{{ latest_post.url }}">
+    <div class="card-impression">
+      <div class="impression-image">
+        <img
+          src="{{ latest_post.impression | default: site.impression }}"
+          alt="{{ latest_post.title }}"
+          class="impression-image" />
+      </div>
+
+      <div class="impression-title">
+        <div class="author-mugshot">
+          <img src="{{ article_by_author.mugshot }}" alt="mugshot" />
+          <span>person_edit</span>
+        </div>
+
+        <div class="article-title">
+          <h4>{{ latest_post.title }}</h4>
+          <h6>{{ article_by_author.name }} · {{ latest_post.date | date: "%Y年%-m月%-d日" }} 发布</h6>
         </div>
       </div>
-      <p class="JTM-P-Index-Summary">
-        {{ latest_post.content | strip_html | truncatewords: 42, "..." }}
-        <a id="JTM-P-Index-ReadMore" href="{{ latest_post.url }}">详细阅读</a>
-      </p>
     </div>
 
-    <a href="/" class="JTM-P-Index-Card">
-      <div class="JTM-C-Card" spec="clear">
-        <div class="JTM-C-Card-Impression">
-          <span>grid_guides</span>
-        </div>
-        <div class="JTM-C-Card-Supporting">
-          <h3>卡片1</h3>
-        </div>
-      </div>
-    </a>
+    <div class="card-supporting">
+      <h4>{{ latest_post.description }}</h4>
+    </div>
+  </a>
 
-    <a href="/" class="JTM-P-Index-Card">
-      <div class="JTM-C-Card" spec="clear">
-        <div class="JTM-C-Card-Impression">
-          <span>grid_guides</span>
-        </div>
-        <div class="JTM-C-Card-Supporting">
-          <h3>卡片2</h3>
-        </div>
-      </div>
-    </a>
+  <div class="card-action">
+    <div>
+      <p>{{ latest_post.categories | default: "未分类" }}</p>
+    {% comment %} <p>{{ latest_post.tags }}</p> {% endcomment %}
+    </div>
 
-    <a href="/" class="JTM-P-Index-Card">
-      <div class="JTM-C-Card" spec="clear">
-        <div class="JTM-C-Card-Impression">
-          <span>grid_guides</span>
-        </div>
-        <div class="JTM-C-Card-Supporting">
-          <h3>卡片3</h3>
-        </div>
-      </div>
-    </a>
-
-    <a href="/" class="JTM-P-Index-Card">
-      <div class="JTM-C-Card" spec="clear">
-        <div class="JTM-C-Card-Impression">
-          <span>grid_guides</span>
-        </div>
-        <div class="JTM-C-Card-Supporting">
-          <h3>卡片4</h3>
-        </div>
-      </div>
-    </a>
-
-    <a href="/posts/" class="JTM-P-Index-Card">
-      <div class="JTM-C-Card" spec="clear">
-        <div class="JTM-C-Card-Impression">
-          <span>note_stack</span>
-        </div>
-        <div class="JTM-C-Card-Supporting">
-          <h3>还有更多...</h3>
-        </div>
-      </div>
-    </a>
+    <div>
+      <md-icon-button>
+        <md-icon>favorite</md-icon>
+      </md-icon-button>
+      <md-filled-button href="{{ latest_post.url }}">详细阅读文章</md-filled-button>
+    </div>
   </div>
 </div>
+
+<div
+  class="card"
+  spec="feed"
+  size="small"
+  color="blue">
+
+  <md-ripple></md-ripple>
+
+  <a href="/posts/关于这个主题的一些事">
+    <div class="card-supporting">
+      <h5>了解这个 Jekyll 主题</h5>
+    </div>
+  </a>
+
+  <div class="card-action">
+    <md-icon-button href="/posts/关于这个主题的一些事">
+      <md-icon>chevron_right</md-icon>
+    </md-icon-button>
+  </div>
+</div>
+
+{% for post in site.posts offset: 1 %}
+  {% assign article_by_author = site.data.authors[post.author] | default: site.author %}
+
+  <div
+    class="card"
+    spec="feed"
+    size="medium">
+
+    <md-ripple></md-ripple>
+
+    <a href="{{ post.url }}">
+      <div class="card-impression">
+        <div class="impression-image">
+          <img src="{{ post.impression | default: site.impression }}" alt="{{ post.title }}" />
+        </div>
+
+        <div class="impression-title">
+          <div class="article-title">
+            <h4>{{ post.title }}</h4>
+            <h6>{{ article_by_author.name }} · {{ post.date | date: "%Y年%-m月%-d日" }} 发布</h6>
+          </div>
+          <h5>{{ post.description }}</h5>
+        </div>
+      </div>
+    </a>
+
+    <div class="card-action">
+      <p>{{ post.categories | default: "未分类" }}</p>
+      <div>
+        <md-icon-button>
+          <md-icon>favorite</md-icon>
+        </md-icon-button>
+        <md-filled-icon-button href="{{ post.url }}">
+          <md-icon>open_in_new</md-icon>
+        </md-filled-icon-button>
+      </div>
+    </div>
+  </div>
+{% endfor %}

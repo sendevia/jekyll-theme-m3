@@ -1,0 +1,22 @@
+<head>
+  {% if include.no_javascript != true %}
+    <script
+      type="application/javascript"
+      src="/assets/js/bundle.js?v={{ site.version }}"
+      defer />
+  {% endif %}
+  <link rel="stylesheet" href="/assets/css/style.css?v={{ site.version }}">
+  <link
+    rel="shortcut icon"
+    href="/assets/images/favicon.ico"
+    type="image/x-icon">
+  <meta charset="utf-8">
+  <meta name="revised" content="sendevia">
+  <meta name="description" content="一个博客">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="sendevia">
+  <title>{{ page.title | default: site.title }}</title>
+  {% seo %}
+</head>
+{% assign page_words = page.content | number_of_words: "auto" %}
+{% assign read_estimate = page_words | divided_by: 120 %}

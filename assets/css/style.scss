@@ -1,3 +1,6 @@
 ---
 ---
-@import "main";
+
+@use "sass:meta";
+
+@include meta.load-css("main");

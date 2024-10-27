@@ -7,6 +7,7 @@ _site
 *.code-workspace
 *.map
 *TEST*.md
+*test/
 node_modules
 package-lock.json
 test.html

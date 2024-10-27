@@ -1,0 +1,509 @@
+@use "mixin";
+
+// code
+
+code,
+figure.highlight {
+  @include mixin.typescale-style("body-large", $font-family: Source Code Pro);
+}
+
+div.highlight,
+figure.highlight {
+  position: relative;
+
+  margin-block: 0px;
+
+  div.blockcopy {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    gap: 4px;
+
+    position: absolute;
+    right: 0px;
+    top: 0px;
+
+    margin: 4px;
+
+    color: #161b22;
+
+    cursor: pointer;
+    opacity: 0.6;
+    transition: var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard);
+    z-index: 1;
+
+    span {
+      @include mixin.material-symbols("content_copy", $line-height: 40);
+
+      height: 40px;
+      width: 40px;
+
+      text-align: center;
+
+      border-radius: var(--md-sys-shape-corner-small);
+
+      transition: var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard);
+    }
+
+    p {
+      display: flex;
+      align-items: center;
+
+      height: 40px;
+
+      padding: 4px 12px;
+
+      word-break: keep-all;
+
+      background-color: #c9d1d9;
+
+      border-radius: var(--md-sys-shape-corner-small);
+
+      clip-path: circle(0% at 100% 50%);
+      opacity: 0px;
+      overflow: hidden;
+      transition: var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-emphasized);
+    }
+
+    &:hover {
+      opacity: 1;
+
+      span {
+        background-color: #c9d1d9;
+      }
+
+      p {
+        clip-path: circle(150% at 100% 50%);
+
+        opacity: 1;
+      }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      color: #f6f8fa;
+
+      p {
+        background-color: #24292f;
+      }
+
+      &:hover span {
+        background-color: #24292f;
+      }
+    }
+  }
+}
+
+div.highlighter-rouge pre,
+figure.highlight pre {
+  display: inline-block;
+
+  margin: 0px;
+  padding-block: 12px;
+  padding-inline: 16px 50px;
+
+  min-height: 46px;
+  width: 100%;
+
+  color: #24292f;
+  vertical-align: middle;
+  word-break: break-word;
+
+  border-radius: var(--md-sys-shape-corner-medium);
+
+  background-color: #f6f8fa;
+
+  @media (prefers-color-scheme: dark) {
+    color: #c9d1d9;
+
+    background-color: #161b22;
+  }
+}
+
+code.language-plaintext {
+  padding-inline: 4px;
+
+  color: var(--md-sys-color-inverse-surface);
+  text-indent: initial;
+  word-break: break-word;
+
+  border-radius: var(--md-sys-shape-corner-small);
+
+  background-color: var(--md-sys-color-inverse-on-surface);
+
+  overflow: hidden;
+
+  &::selection {
+    color: var(--md-sys-color-on-tertiary);
+
+    background-color: var(--md-sys-color-tertiary);
+  }
+}
+
+.highlight,
+figure code {
+  .k,
+  .kd,
+  .kn,
+  .kp,
+  .kr,
+  .kt,
+  .kv {
+    color: #cf222e;
+  }
+
+  .gr {
+    color: #f6f8fa;
+  }
+
+  .gd {
+    color: #82071e;
+    background-color: #ffebe9;
+  }
+
+  .nb {
+    color: #953800;
+  }
+
+  .nc {
+    color: #953800;
+  }
+
+  .no {
+    color: #953800;
+  }
+
+  .nn {
+    color: #953800;
+  }
+
+  .sr {
+    color: #116329;
+  }
+
+  .na {
+    color: #116329;
+  }
+
+  .nt {
+    color: #116329;
+  }
+
+  .gi {
+    color: #116329;
+    background-color: #dafbe1;
+  }
+
+  .ges {
+    font-weight: bold;
+    font-style: italic;
+  }
+
+  .kc {
+    color: #0550ae;
+  }
+
+  .l,
+  .ld,
+  .m,
+  .mb,
+  .mf,
+  .mh,
+  .mi,
+  .il,
+  .mo,
+  .mx {
+    color: #0550ae;
+  }
+
+  .sb {
+    color: #0550ae;
+  }
+
+  .bp {
+    color: #0550ae;
+  }
+
+  .ne {
+    color: #0550ae;
+  }
+
+  .nl {
+    color: #0550ae;
+  }
+
+  .py {
+    color: #0550ae;
+  }
+
+  .nv,
+  .vc,
+  .vg,
+  .vi,
+  .vm {
+    color: #0550ae;
+  }
+
+  .o,
+  .ow {
+    color: #0550ae;
+  }
+
+  .gh {
+    color: #0550ae;
+    font-weight: bold;
+  }
+
+  .gu {
+    color: #0550ae;
+    font-weight: bold;
+  }
+
+  .s,
+  .sa,
+  .sc,
+  .dl,
+  .sd,
+  .s2,
+  .se,
+  .sh,
+  .sx,
+  .s1,
+  .ss {
+    color: #0a3069;
+  }
+
+  .nd {
+    color: #8250df;
+  }
+
+  .nf,
+  .fm {
+    color: #8250df;
+  }
+
+  .err {
+    color: #f6f8fa;
+    background-color: #82071e;
+  }
+
+  .c,
+  .ch,
+  .cd,
+  .cm,
+  .cp,
+  .cpf,
+  .c1,
+  .cs {
+    color: #6e7781;
+  }
+
+  .gl {
+    color: #6e7781;
+  }
+
+  .gt {
+    color: #6e7781;
+  }
+
+  .ni {
+    color: #24292f;
+  }
+
+  .si {
+    color: #24292f;
+  }
+
+  .ge {
+    color: #24292f;
+    font-style: italic;
+  }
+
+  .gs {
+    color: #24292f;
+    font-weight: bold;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .k,
+    .kd,
+    .kn,
+    .kp,
+    .kr,
+    .kt,
+    .kv {
+      color: #ff7b72;
+    }
+
+    .gr {
+      color: #f0f6fc;
+    }
+
+    .gd {
+      color: #ffdcd7;
+      background-color: #67060c;
+    }
+
+    .nb {
+      color: #ffa657;
+    }
+
+    .nc {
+      color: #ffa657;
+    }
+
+    .no {
+      color: #ffa657;
+    }
+
+    .nn {
+      color: #ffa657;
+    }
+
+    .sr {
+      color: #7ee787;
+    }
+
+    .na {
+      color: #7ee787;
+    }
+
+    .nt {
+      color: #7ee787;
+    }
+
+    .gi {
+      color: #aff5b4;
+      background-color: #033a16;
+    }
+
+    .ges {
+      font-weight: bold;
+      font-style: italic;
+    }
+
+    .kc {
+      color: #79c0ff;
+    }
+
+    .l,
+    .ld,
+    .m,
+    .mb,
+    .mf,
+    .mh,
+    .mi,
+    .il,
+    .mo,
+    .mx {
+      color: #79c0ff;
+    }
+
+    .sb {
+      color: #79c0ff;
+    }
+
+    .bp {
+      color: #79c0ff;
+    }
+
+    .ne {
+      color: #79c0ff;
+    }
+
+    .nl {
+      color: #79c0ff;
+    }
+
+    .py {
+      color: #79c0ff;
+    }
+
+    .nv,
+    .vc,
+    .vg,
+    .vi,
+    .vm {
+      color: #79c0ff;
+    }
+
+    .o,
+    .ow {
+      color: #79c0ff;
+    }
+
+    .gh {
+      color: #1f6feb;
+      font-weight: bold;
+    }
+
+    .gu {
+      color: #1f6feb;
+      font-weight: bold;
+    }
+
+    .s,
+    .sa,
+    .sc,
+    .dl,
+    .sd,
+    .s2,
+    .se,
+    .sh,
+    .sx,
+    .s1,
+    .ss {
+      color: #a5d6ff;
+    }
+
+    .nd {
+      color: #d2a8ff;
+    }
+
+    .nf,
+    .fm {
+      color: #d2a8ff;
+    }
+
+    .err {
+      color: #f0f6fc;
+      background-color: #8e1519;
+    }
+
+    .c,
+    .ch,
+    .cd,
+    .cm,
+    .cp,
+    .cpf,
+    .c1,
+    .cs {
+      color: #8b949e;
+    }
+
+    .gl {
+      color: #8b949e;
+    }
+
+    .gt {
+      color: #8b949e;
+    }
+
+    .ni {
+      color: #c9d1d9;
+    }
+
+    .si {
+      color: #c9d1d9;
+    }
+
+    .ge {
+      color: #c9d1d9;
+      font-style: italic;
+    }
+
+    .gs {
+      color: #c9d1d9;
+      font-weight: bold;
+    }
+  }
+}

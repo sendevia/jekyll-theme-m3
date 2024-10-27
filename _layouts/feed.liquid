@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang }}">
+  {% if page.permalink == "/404.html" %}
+    {% include head.liquid no_javascript = true %}
+    {% include notfound.liquid %}
+    {% break %}
+  {% else %}
+    {% include head.liquid %}
+  {% endif %}
+
+  <body class="theme-root" color="{{ latest_post.color | default: site.color }}">
+    {% include loading-splash.liquid %}
+
+    {% if page_words == 0 %}
+      {% assign layout_type = "blank" %}
+    {% else %}
+      {% assign layout_type = "feed" %}
+    {% endif %}
+
+    <div class="main-layout" spec="{{ layout_type }}">
+      {% include navigation.liquid fab = false %}
+
+      <div id="main-layout-content-flow">
+        <h1>欢迎来到 {{ site.title }}！</h1>
+        <h6>{{ site.description }}</h6>
+
+        <img src="/assets/images/avatar.webp" alt="{{ site.author.name }}">
+
+        <div id="main-layout-search">
+          <div id="main-layout-search-input-box">
+            <span>search</span>
+            <form>
+              <input type="text" placeholder="输入内容以检索" />
+            </form>
+          </div>
+          <div id="main-layout-search-results-container"></div>
+        </div>
+
+        <div id="main-layout-content-filler">
+          {% include content.liquid %}
+        </div>
+
+        {% include scroll-to-top.liquid %}
+
+        <hr spec="wave" />
+
+        {% include footer.liquid %}
+      </div>
+    </div>
+
+  </body>
+</html>
